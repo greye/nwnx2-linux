@@ -2756,6 +2756,7 @@ static int NWScript_GetPositionFromLocation(lua_State *L)
 	StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lLocation);
 	VM_ExecuteCommand(223, 1);
 	Vector *vRetVal = (Vector *)lua_newuserdata(L, sizeof(Vector));
+	StackPopVector(vRetVal);
 	luaL_getmetatable(L, VECTOR);
   lua_setmetatable(L, -2);
   return 1;
