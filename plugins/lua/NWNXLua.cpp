@@ -58,12 +58,12 @@ bool CNWNXLua::OnCreate(gline *config, const char *LogDir)
 	LuaInstance=lua_open();
 	luaL_openlibs(LuaInstance);
 	LuaInt_DefineConstants(LuaInstance);
-  LUA_InitNWScript(LuaInstance);
+	LUA_InitNWScript(LuaInstance);
 	luaL_dostring(LuaInstance, "print(\"NWNX Lua Initialized\")\n");
 
 	char *preload = (char*)((*nwnxConfig)[confKey]["preload"].c_str());
 	event_method = (char*)((*nwnxConfig)[confKey]["eventListener"].c_str());
-  token_method = (char*)((*nwnxConfig)[confKey]["tokenListener"].c_str());
+	token_method = (char*)((*nwnxConfig)[confKey]["tokenListener"].c_str());
 	sco_method = (char*)((*nwnxConfig)[confKey]["sco"].c_str());
 	rco_method = (char*)((*nwnxConfig)[confKey]["rco"].c_str());
   
@@ -85,7 +85,7 @@ bool CNWNXLua::OnCreate(gline *config, const char *LogDir)
 	{
 		Log(0, "Event Listener: %s\n", event_method);
 	}
-  if (strlen(token_method) > 0)
+	if (strlen(token_method) > 0)
 	{
 		Log(0, "Token Listener: %s\n", token_method);
 	}
@@ -120,24 +120,24 @@ void CNWNXLua::Event(char *value)
 	const char* event = strtok(value, ":");
 	const char* oid  = strtok(NULL, ":");
   
-  lua_getglobal(LuaInstance, event_method);  /* function to be called */
-  lua_pushstring(LuaInstance, event);   /* push 1st argument */
-  lua_pushinteger(LuaInstance, strtol(oid,NULL,16));   /* push 2nd argument */
-  
-  if (lua_pcall(LuaInstance, 2, 0, 0) != 0)
-    Log(0, "error running event %s on Object 0x%x : %s\n", event, oid, lua_tostring(LuaInstance, -1));
-  lua_pop(LuaInstance, lua_gettop(LuaInstance));
+	lua_getglobal(LuaInstance, event_method);  /* function to be called */
+	lua_pushstring(LuaInstance, event);   /* push 1st argument */
+	lua_pushinteger(LuaInstance, strtol(oid,NULL,16));   /* push 2nd argument */
+	
+	if (lua_pcall(LuaInstance, 2, 0, 0) != 0)
+		Log(0, "error running event %s on Object 0x%x : %s\n", event, oid, lua_tostring(LuaInstance, -1));
+	lua_pop(LuaInstance, lua_gettop(LuaInstance));
 }
 
 void CNWNXLua::Token(char *value)
 {
 	//Changed to call directly token listener
 	if(token_method == NULL) return;
-  lua_getglobal(LuaInstance, token_method);  /* function to be called */
-  lua_pushstring(LuaInstance, (const char*)value);   /* push 1st argument */
-  if (lua_pcall(LuaInstance, 1, 0, 0) != 0)
-    Log(0, "error running token %s : %s\n", value, lua_tostring(LuaInstance, -1));
-  lua_pop(LuaInstance, lua_gettop(LuaInstance));
+	lua_getglobal(LuaInstance, token_method);  /* function to be called */
+	lua_pushstring(LuaInstance, (const char*)value);   /* push 1st argument */
+	if (lua_pcall(LuaInstance, 1, 0, 0) != 0)
+		Log(0, "error running token %s : %s\n", value, lua_tostring(LuaInstance, -1));
+	lua_pop(LuaInstance, lua_gettop(LuaInstance));
 }
 
 char *CNWNXLua::Eval(char *value)
@@ -184,26 +184,36 @@ char* CNWNXLua::OnRequest (char *gameObject, char* Request, char* Parameters)
 {
 	Log(2,"(S) Request: \"%s\"\n",Request);
 	Log(3,"(S) Params:  \"%s\"\n",Parameters);
-  // set OBJECT_SELF
+	// set OBJECT_SELF
 	lua_setIntConst(LuaInstance, "OBJECT_SELF", GetObjectSelf());
 	
-  if (strncmp(Request, "TOKEN", 5) == 0) 	
-	{
+	if (strncmp(Request, "TOKEN", 5) == 0) {
 		Token(Parameters);
 		return NULL;
-	}
-  
-  if (strncmp(Request, "EVENT", 5) == 0) 	
-	{
+	} else if (strncmp(Request, "EVENT", 5) == 0) {
 		Event(Parameters);
 		return NULL;
-	}
-	else if(strncmp(Request, "EVAL", 4) == 0)
-	{
+	} else if(strncmp(Request, "EVAL", 4) == 0) {
 		return Eval(Parameters);
+	} else if (strncmp(Request, "PUSHSTR", 7) == 0) {
+		lua_pushstring(LuaInstance, Parameters);
+		return 0;
+	} else if (strncmp(Request, "PUSHINT", 7) == 0) {
+		lua_pushinteger(LuaInstance, strtol(Parameters, 0, 16));
+		return 0;
+	} else if (strncmp(Request, "PUSHNUM", 7) == 0) {
+		lua_pushnumber(LuaInstance, strtod(Parameters, 0));
+		return 0;
+	} else if (strncmp(Request, "CALL", 4) == 0) {
+		char *callee = strtok(Parameters, "!");
+		int nargs = strtol(strtok(0, "!"), 0, 10);
+		int nret = strtol(strtok(0, "!"), 0, 10);
+
+		return Call(callee, nargs, nret);
 	}
 	return NULL;
 }
+
 bool CNWNXLua::OnRelease ()
 {
 	int nKBytes = lua_gc(LuaInstance, LUA_GCCOUNT, 0); 
@@ -221,7 +231,7 @@ int CNWNXLua::WriteSCO(char* database, char* key, char* player, int flags, unsig
 	lua_pushstring(LuaInstance, player);
 	lua_pushlstring(LuaInstance, (const char*)pData, (size_t)size);
 	if (lua_pcall(LuaInstance, 3, 0, 0) != 0) //SCO
-    Log(0, "error running sco function %s : %s", sco_method,lua_tostring(LuaInstance, -1));
+	Log(0, "error running sco function %s : %s", sco_method,lua_tostring(LuaInstance, -1));
 	return 1;
 }
 
@@ -249,6 +259,36 @@ unsigned char* CNWNXLua::ReadSCO(char* database, char* key, char* player, int* a
 	}
 	lua_pop(LuaInstance, 1);
 	return (unsigned char*)buf;
+}
+
+char *CNWNXLua::Call(char *callee, int nargs, int nret)
+{
+	char *buf = 0;
+	char copy[128] = { 0 };
+	strcpy(copy, callee);
+
+	char *item = strtok(copy, ".");
+	lua_getglobal(LuaInstance, item);
+
+	while ((item = strtok(0, ".")) != 0) {
+		lua_getfield(LuaInstance, -1, item);
+		lua_remove(LuaInstance, -2);
+	}
+	lua_insert(LuaInstance, -nargs - 1);
+
+	if (lua_pcall(LuaInstance, nargs, nret, 0) != 0) {
+		Log(0, "Error calling function %s : %s\n", callee, lua_tostring(LuaInstance, -1));
+	} else if (nret > 0) { // FIXME: add support for multiple values
+		unsigned int len = 0;
+		const char *ptr = lua_tolstring(LuaInstance, -1, &len);
+		buf = (char *) calloc(len + 1, sizeof(*buf));
+		
+		memset(buf, 0, len + 1);
+		memcpy(buf, ptr, len);
+	}
+	lua_pop(LuaInstance, lua_gettop(LuaInstance));
+
+	return buf;
 }
 
 /*

@@ -45,21 +45,21 @@ public:
         //unsigned long OnRequestObject (char *gameObject, char* Request);
 	bool OnRelease();
 	void Event(char *value);
-  void Token(char *value);
+	void Token(char *value);
 	char *Eval(char *value);
+	char *Call(char *callee, int nargs, int nret);
 	int WriteSCO(char* database, char* key, char* player, int flags, unsigned char * pData, int size);
 	unsigned char* ReadSCO(char* database, char* key, char* player, int* arg4, int* size);
+
+private:
 
 	bool bHooked;
 	lua_State *LuaInstance;
 	//int nError;
 
-  char *rco_method;
+	char *rco_method;
 	char *sco_method;
-  char *event_method;
-  char *token_method;
-
-private:
-
+	char *event_method;
+	char *token_method;
 };
 #endif
