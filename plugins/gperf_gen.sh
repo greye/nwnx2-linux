@@ -3,10 +3,11 @@
 V=$1
 K=$2
 L=$3
+DIR=$4
 
 gperf -L ANSI-C -tCG -m 10 -K name -H ${V}CommandHash \
 	-N ${V}CommandLookup -W ${V}CommandList \
-	"${V}Cmds.gperf" --output-file="gperf.out"
+	"$DIR/${V}Cmds.gperf" --output-file="gperf.out"
 
 sed -i 's/\<\(\(MIN\|MAX\)_\(WORD_LENGTH\|HASH_VALUE\)\|TOTAL_KEYWORDS\)\>/NWNX_'$K'_'$L'CMD_\1/g' \
 	"gperf.out" || rm -f "gperf.out"

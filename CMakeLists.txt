@@ -47,9 +47,10 @@ function(add_module target)
 endfunction()
 
 function(add_gperf_target gperf v k l)
+	include_directories(${CMAKE_CURRENT_BINARY_DIR})
 	add_custom_command(
 		OUTPUT "${gperf}.h"
-		COMMAND ${PROJECT_SOURCE_DIR}/plugins/gperf_gen.sh "${v}" "${k}" "${l}"
+		COMMAND ${PROJECT_SOURCE_DIR}/plugins/gperf_gen.sh "${v}" "${k}" "${l}" `dirname ${CMAKE_CURRENT_LIST_FILE}`
 		DEPENDS ${PROJECT_SOURCE_DIR}/plugins/gperf_gen.sh "${gperf}.gperf"
 	)
 endfunction()
