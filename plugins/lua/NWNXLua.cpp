@@ -44,10 +44,11 @@ CNWNXLua::~CNWNXLua()
 
 bool CNWNXLua::OnCreate(gline *config, const char *LogDir)
 {
-	char log[128];
+	char log[1024];
 	struct stat statbuf;
 	int i = 0;
-	sprintf(log, "%s/nwnx_lua.txt", LogDir);
+	snprintf(log, sizeof(log), "%s/nwnx_lua.txt", LogDir);
+	log[sizeof(log) - 1] = '\0';
 
 	// call the base class function
 	if (!CNWNXBase::OnCreate(config,log))
@@ -123,7 +124,7 @@ void CNWNXLua::Event(char *value)
 	lua_getglobal(LuaInstance, event_method);  /* function to be called */
 	lua_pushstring(LuaInstance, event);   /* push 1st argument */
 	lua_pushinteger(LuaInstance, strtol(oid,NULL,16));   /* push 2nd argument */
-	
+
 	if (lua_pcall(LuaInstance, 2, 0, 0) != 0)
 		Log(0, "error running event %s on Object 0x%x : %s\n", event, oid, lua_tostring(LuaInstance, -1));
 	lua_pop(LuaInstance, lua_gettop(LuaInstance));
@@ -264,8 +265,9 @@ unsigned char* CNWNXLua::ReadSCO(char* database, char* key, char* player, int* a
 char *CNWNXLua::Call(char *callee, int nargs, int nret)
 {
 	char *buf = 0;
-	char copy[128] = { 0 };
-	strcpy(copy, callee);
+	char copy[1024];
+	strncpy(copy, callee, sizeof(copy) - 1);
+	copy[sizeof(copy) - 1] = '\0';
 
 	char *item = strtok(copy, ".");
 	lua_getglobal(LuaInstance, item);
@@ -279,21 +281,15 @@ char *CNWNXLua::Call(char *callee, int nargs, int nret)
 	if (lua_pcall(LuaInstance, nargs, nret, 0) != 0) {
 		Log(0, "Error calling function %s : %s\n", callee, lua_tostring(LuaInstance, -1));
 	} else if (nret > 0) { // FIXME: add support for multiple values
-		unsigned int len = 0;
+		size_t len = 0;
 		const char *ptr = lua_tolstring(LuaInstance, -1, &len);
-		buf = (char *) calloc(len + 1, sizeof(*buf));
-		
-		memset(buf, 0, len + 1);
-		memcpy(buf, ptr, len);
+		if (len > 0) {
+			buf = (char *) malloc(len + 1);
+			memcpy(buf, ptr, len);
+			buf[len] = '\0';
+		}
 	}
 	lua_pop(LuaInstance, lua_gettop(LuaInstance));
 
 	return buf;
 }
-
-/*
-unsigned long CNWNXLua::OnRequestObject (char *gameObject, char* Request)
-{
-	return OBJECT_INVALID;
-}
-*/
