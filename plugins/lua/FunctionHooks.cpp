@@ -112,15 +112,9 @@ int StackPopFloat(float *buf)
 
 int StackPopString(char **buf)
 {
-	CExoString *str = (CExoString *) malloc(sizeof(CExoString));
-	str->Text = NULL;
-	str->Length = 0;
-	int retval = CVirtualMachine_StackPopString(*g_pVirtualMachine, str);
-	if (!str->Text)
-		*buf = (char *)"";//aggiunto cast by Daniele Paroli
-	else
-		*buf = str->Text;
-	free(str);
+	CExoString str = { (char *) "", 0 };
+	int retval = CVirtualMachine_StackPopString(*g_pVirtualMachine, &str);
+	*buf = str.Text;
 	return retval;
 }
 
@@ -289,9 +283,9 @@ FindHookRCO (unsigned long sa = 0)
 
 int HookFunctions()
 {
-	/*dword CExoNetInternal_StoreMessage = 
+	/*dword CExoNetInternal_StoreMessage =
 	if(CExoNetInternal_StoreMessage) d_redirect (CExoNetInternal_StoreMessage, (unsigned long)StoreMessage, d_ret_code_sm, 9);*/
-	
+
 	*(dword*)&CNWVirtualMachineCommands_ExecuteCommand = asmhelp.FindFunctionBySignature("55 89 E5 8B 4D 0C 56 81 F9 ** ** 00 00 53 8B 75 08 7F 3D 8B 56 0C"); //0x082319C0
 
 	*(dword*)&CVirtualMachine_StackPopInteger = asmhelp.FindFunctionBySignature("55 89 E5 57 56 53 83 EC 0C 8B 4D 08 8D 81 70 01 00 00 89 45 F0 8B B9 70 01 00 00 85 FF 7E 0D 4F"); //0x08262988
