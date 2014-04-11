@@ -355,4 +355,3 @@ void InitConstants()
 {
 	*(dword*)&g_pVirtualMachine = 0x0832F1EC;
 }
-
