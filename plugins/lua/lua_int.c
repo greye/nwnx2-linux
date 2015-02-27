@@ -56,6 +56,11 @@ lua_nwn_pushvector(lua_State *L) {
 	return vec;
 }
 
+static CScriptLocation *
+lua_nwn_checkloc(lua_State *L, int index) {
+	return (CScriptLocation *) lua_checklightnwndata(L, index, LOCATION);
+}
+
 static int NWScript_Random(lua_State *L)
 {
 	int nMaxInteger = luaL_checkint(L, 1);
@@ -268,7 +273,7 @@ static int NWScript_ActionRandomWalk(lua_State *L)
 
 static int NWScript_ActionMoveToLocation(lua_State *L)
 {
-	void *lDestination = luaL_checklightnwndata(L, 1, LOCATION);
+	void *lDestination = lua_nwn_checkloc(L, 1);
 	int bRun = luaL_optboolean (L, 2, FALSE);
 
 	StackPushInteger(bRun);
@@ -1899,7 +1904,7 @@ static int NWScript_SetLocalLocation(lua_State *L)
 {
 	dword oObject = luaL_checkint(L, 1);
 	char *sVarName = (char *)luaL_checkstring(L, 2);
-	void *lValue = luaL_checklightnwndata(L, 3, LOCATION);
+	void *lValue = lua_nwn_checkloc(L, 3);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lValue);
 	StackPushString(sVarName);
@@ -2645,7 +2650,7 @@ static int NWScript_GetLocation(lua_State *L)
 
 static int NWScript_ActionJumpToLocation(lua_State *L)
 {
-	void *lLocation = luaL_checklightnwndata(L, 1, LOCATION);
+	void *lLocation = lua_nwn_checkloc(L, 1);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lLocation);
 	VM_ExecuteCommand(214, 1);
@@ -2672,7 +2677,7 @@ static int NWScript_ApplyEffectAtLocation(lua_State *L)
 {
 	int nDurationType = luaL_checkint(L, 1);
 	void *eEffect = luaL_checklightnwndata(L, 2, EFFECT);
-	void *lLocation = luaL_checklightnwndata(L, 3, LOCATION);
+	void *lLocation = lua_nwn_checkloc(L, 3);
 	double fDuration = luaL_optnumber(L, 4, 0.0);
 
 	StackPushFloat(fDuration);
@@ -2756,8 +2761,7 @@ static int NWScript_GetSpellTargetLocation(lua_State *L)
 
 static int NWScript_GetPositionFromLocation(lua_State *L)
 {
-	CScriptLocation *loc =
-		(CScriptLocation *) luaL_checklightnwndata(L, 1, LOCATION);
+	CScriptLocation *loc = lua_nwn_checkloc(L, 1);
 	Vector *vec = lua_nwn_pushvector(L);
 	vec->X = loc->X;
 	vec->Y = loc->Y;
@@ -2768,8 +2772,7 @@ static int NWScript_GetPositionFromLocation(lua_State *L)
 
 static int NWScript_GetAreaFromLocation(lua_State *L)
 {
-	CScriptLocation *loc =
-		(CScriptLocation *) luaL_checklightnwndata(L, 1, LOCATION);
+	CScriptLocation *loc = lua_nwn_checkloc(L, 1);
 	lua_pushinteger(L, loc->AreaID);
 
 	return 1;
@@ -2777,10 +2780,9 @@ static int NWScript_GetAreaFromLocation(lua_State *L)
 
 static int NWScript_GetFacingFromLocation(lua_State *L)
 {
-	CScriptLocation *loc =
-		(CScriptLocation *) luaL_checklightnwndata(L, 1, LOCATION);
-
+	CScriptLocation *loc = lua_nwn_checkloc(L, 1);
 	lua_pushnumber(L, loc->OrientationX);
+
 	return 1;
 }
 
@@ -2788,7 +2790,7 @@ static int NWScript_GetNearestCreatureToLocation(lua_State *L)
 {
 	int nFirstCriteriaType = luaL_checkint(L, 1);
 	int nFirstCriteriaValue = luaL_checkint(L, 2);
-	void *lLocation = luaL_checklightnwndata(L, 3, LOCATION);
+	void *lLocation = lua_nwn_checkloc(L, 3);
 	int nNth = luaL_optint(L, 4, 1);
 	int nSecondCriteriaType = luaL_optint(L, 5, -1);
 	int nSecondCriteriaValue = luaL_optint(L, 6, -1);
@@ -2829,7 +2831,7 @@ static int NWScript_GetNearestObject(lua_State *L)
 static int NWScript_GetNearestObjectToLocation(lua_State *L)
 {
 	int nObjectType = luaL_checkint(L, 1);
-	void *lLocation = luaL_checklightnwndata(L, 2, LOCATION);
+	void *lLocation = lua_nwn_checkloc(L, 2);
 	int nNth = luaL_optint(L, 3, 1);
 
 	StackPushInteger(nNth);
@@ -2909,7 +2911,7 @@ static int NWScript_StringToFloat(lua_State *L)
 static int NWScript_ActionCastSpellAtLocation(lua_State *L)
 {
 	int nSpell = luaL_checkint(L, 1);
-	void *lTargetLocation = luaL_checklightnwndata(L, 2, LOCATION);
+	void *lTargetLocation = lua_nwn_checkloc(L, 2);
 	int nMetaMagic = luaL_optint(L, 3, METAMAGIC_ANY);
 	int bCheat = luaL_optboolean(L, 4, FALSE);
 	int nProjectilePathType = luaL_optint(L, 5, PROJECTILE_PATH_TYPE_DEFAULT);
@@ -3025,7 +3027,7 @@ static int NWScript_CreateObject(lua_State *L)
 {
 	int nObjectType = luaL_checkint(L, 1);
 	char *sTemplate = (char *)luaL_checkstring(L, 2);
-	void *lLocation = luaL_checklightnwndata(L, 3, LOCATION);
+	void *lLocation = lua_nwn_checkloc(L, 3);
 	int bUseAppearAnimation = luaL_optboolean(L, 4, FALSE);
 	char *sNewTag = (char *)luaL_optstring(L, 5, "");
 
@@ -3648,8 +3650,8 @@ static int NWScript_GetEncounterDifficulty(lua_State *L)
 
 static int NWScript_GetDistanceBetweenLocations(lua_State *L)
 {
-	void *lLocationA = luaL_checklightnwndata(L, 1, LOCATION);
-	void *lLocationB = luaL_checklightnwndata(L, 2, LOCATION);
+	void *lLocationA = lua_nwn_checkloc(L, 1);
+	void *lLocationB = lua_nwn_checkloc(L, 2);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lLocationB);
 	StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lLocationA);
@@ -3813,7 +3815,7 @@ static int NWScript_ActionUseTalentOnObject(lua_State *L)
 static int NWScript_ActionUseTalentAtLocation(lua_State *L)
 {
 	void *tChosenTalent = luaL_checklightnwndata(L, 1, TALENT);
-	void *lTargetLocation = luaL_checklightnwndata(L, 2, LOCATION);
+	void *lTargetLocation = lua_nwn_checkloc(L, 2);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lTargetLocation);
 	StackPushEngineStructure(ENGINE_STRUCTURE_TALENT, tChosenTalent);
@@ -3847,7 +3849,7 @@ static int NWScript_GetIsPlayableRacialType(lua_State *L)
 
 static int NWScript_JumpToLocation(lua_State *L)
 {
-	void *lDestination = luaL_checklightnwndata(L, 1, LOCATION);
+	void *lDestination = lua_nwn_checkloc(L, 1);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lDestination);
 	VM_ExecuteCommand(313, 1);
@@ -4387,7 +4389,7 @@ static int NWScript_GetIsTalentValid(lua_State *L)
 
 static int NWScript_ActionMoveAwayFromLocation(lua_State *L)
 {
-	void *lMoveAwayFrom = luaL_checklightnwndata(L, 1, LOCATION);
+	void *lMoveAwayFrom = lua_nwn_checkloc(L, 1);
 	int bRun = luaL_optboolean(L, 2, FALSE);
 	double fMoveAwayRange = luaL_optnumber(L, 3, 40.0);
 
@@ -4660,7 +4662,7 @@ static int NWScript_GetNextFactionMember(lua_State *L)
 
 static int NWScript_ActionForceMoveToLocation(lua_State *L)
 {
-	void *lDestination = luaL_checklightnwndata(L, 1, LOCATION);
+	void *lDestination = lua_nwn_checkloc(L, 1);
 	int bRun = luaL_optboolean(L, 2, FALSE);
 	double fTimeout = luaL_optnumber(L, 3, 30.0);
 
@@ -5129,7 +5131,7 @@ static int NWScript_GetLastSpellHarmful(lua_State *L)
 static int NWScript_EventActivateItem(lua_State *L)
 {
 	dword oItem = luaL_checkint(L, 1);
-	void *lTarget = luaL_checklightnwndata(L, 2, LOCATION);
+	void *lTarget = lua_nwn_checkloc(L, 2);
 	dword oTarget = luaL_optint(L, 3, OBJECT_INVALID);
 
 	StackPushObject(oTarget);
@@ -5779,7 +5781,7 @@ static int NWScript_GetCreatureSize(lua_State *L)
 
 static int NWScript_EffectDisappearAppear(lua_State *L)
 {
-	void *lLocation = luaL_checklightnwndata(L, 1, LOCATION);
+	void *lLocation = lua_nwn_checkloc(L, 1);
 	int nAnimation = luaL_optint(L, 2, 1);
 
 	StackPushInteger(nAnimation);
@@ -6047,7 +6049,7 @@ static int NWScript_ActionCastFakeSpellAtObject(lua_State *L)
 static int NWScript_ActionCastFakeSpellAtLocation(lua_State *L)
 {
 	int nSpell = luaL_checkint(L, 1);
-	void *lTarget = luaL_checklightnwndata(L, 2, LOCATION);
+	void *lTarget = lua_nwn_checkloc(L, 2);
 	int nProjectilePathType = luaL_optint(L, 3, PROJECTILE_PATH_TYPE_DEFAULT);
 
 	StackPushInteger(nProjectilePathType);
@@ -6178,7 +6180,7 @@ static int NWScript_GetGameDifficulty(lua_State *L)
 
 static int NWScript_SetTileMainLightColor(lua_State *L)
 {
-	void *lTileLocation = luaL_checklightnwndata(L, 1, LOCATION);
+	void *lTileLocation = lua_nwn_checkloc(L, 1);
 	int nMainLight1Color = luaL_checkint(L, 2);
 	int nMainLight2Color = luaL_checkint(L, 3);
 
@@ -6191,7 +6193,7 @@ static int NWScript_SetTileMainLightColor(lua_State *L)
 
 static int NWScript_SetTileSourceLightColor(lua_State *L)
 {
-	void *lTileLocation = luaL_checklightnwndata(L, 1, LOCATION);
+	void *lTileLocation = lua_nwn_checkloc(L, 1);
 	int nSourceLight1Color = luaL_checkint(L, 2);
 	int nSourceLight2Color = luaL_checkint(L, 3);
 
@@ -6213,7 +6215,7 @@ static int NWScript_RecomputeStaticLighting(lua_State *L)
 
 static int NWScript_GetTileMainLight1Color(lua_State *L)
 {
-	void *lTile = luaL_checklightnwndata(L, 1, LOCATION);
+	void *lTile = lua_nwn_checkloc(L, 1);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lTile);
 	VM_ExecuteCommand(517, 1);
@@ -6225,7 +6227,7 @@ static int NWScript_GetTileMainLight1Color(lua_State *L)
 
 static int NWScript_GetTileMainLight2Color(lua_State *L)
 {
-	void *lTile = luaL_checklightnwndata(L, 1, LOCATION);
+	void *lTile = lua_nwn_checkloc(L, 1);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lTile);
 	VM_ExecuteCommand(518, 1);
@@ -6237,7 +6239,7 @@ static int NWScript_GetTileMainLight2Color(lua_State *L)
 
 static int NWScript_GetTileSourceLight1Color(lua_State *L)
 {
-	void *lTile = luaL_checklightnwndata(L, 1, LOCATION);
+	void *lTile = lua_nwn_checkloc(L, 1);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lTile);
 	VM_ExecuteCommand(519, 1);
@@ -6249,7 +6251,7 @@ static int NWScript_GetTileSourceLight1Color(lua_State *L)
 
 static int NWScript_GetTileSourceLight2Color(lua_State *L)
 {
-	void *lTile = luaL_checklightnwndata(L, 1, LOCATION);
+	void *lTile = lua_nwn_checkloc(L, 1);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lTile);
 	VM_ExecuteCommand(520, 1);
@@ -7088,7 +7090,7 @@ static int NWScript_SetCampaignLocation(lua_State *L)
 {
 	char *sCampaignName = (char *)luaL_checkstring(L, 1);
 	char *sVarName = (char *)luaL_checkstring(L, 2);
-	void *locLocation = luaL_checklightnwndata(L, 3, LOCATION);
+	void *locLocation = lua_nwn_checkloc(L, 3);
 	dword oPlayer = luaL_optint(L, 4, OBJECT_INVALID);
 
 	StackPushObject(oPlayer);
@@ -7207,7 +7209,7 @@ static int NWScript_GetCampaignString(lua_State *L)
 static int NWScript_CopyObject(lua_State *L)
 {
 	dword oSource = luaL_checkint(L, 1);
-	void *locLocation = luaL_checklightnwndata(L, 2, LOCATION);
+	void *locLocation = lua_nwn_checkloc(L, 2);
 	dword oOwner  = luaL_optint(L, 3, OBJECT_INVALID);
 	char *sNewTag  = (char *)luaL_optstring(L, 4, "");
 
@@ -7257,7 +7259,7 @@ static int NWScript_RetrieveCampaignObject(lua_State *L)
 {
 	char *sCampaignName = (char *)luaL_checkstring(L, 1);
 	char *sVarName = (char *)luaL_checkstring(L, 2);
-	void *locLocation = luaL_checklightnwndata(L, 3, LOCATION);
+	void *locLocation = lua_nwn_checkloc(L, 3);
 	dword oOwner  = luaL_optint(L, 4, OBJECT_INVALID);
 	dword oPlayer = luaL_optint(L, 5, OBJECT_INVALID);
 
@@ -9715,7 +9717,7 @@ static int NWScript_SetTrapDetectDC(lua_State *L)
 static int NWScript_CreateTrapAtLocation(lua_State *L)
 {
 	int nTrapType = luaL_checkint(L, 1);
-	void *lLocation = luaL_checklightnwndata(L, 2, LOCATION);
+	void *lLocation = lua_nwn_checkloc(L, 2);
 	double fSize = luaL_optnumber(L, 3, 2.0);
 	char *sTag = (char *)luaL_optstring(L, 4, "");
 	int nFaction = luaL_optint(L, 5, STANDARD_FACTION_HOSTILE);
@@ -11102,31 +11104,31 @@ int luaopen_vector(lua_State *L)
 
 static int location_get_x(lua_State *L)
 {
-	CScriptLocation *ptr = (CScriptLocation *)luaL_checklightnwndata(L, 1, LOCATION);
+	CScriptLocation *ptr = lua_nwn_checkloc(L, 1);
 	lua_pushnumber(L, ptr->X);
 	return 1;
 }
 static int location_get_y(lua_State *L)
 {
-	CScriptLocation *ptr = (CScriptLocation *)luaL_checklightnwndata(L, 1, LOCATION);
+	CScriptLocation *ptr = lua_nwn_checkloc(L, 1);
 	lua_pushnumber(L, ptr->Y);
 	return 1;
 }
 static int location_get_z(lua_State *L)
 {
-	CScriptLocation *ptr = (CScriptLocation *)luaL_checklightnwndata(L, 1, LOCATION);
+	CScriptLocation *ptr = lua_nwn_checkloc(L, 1);
 	lua_pushnumber(L, ptr->Z);
 	return 1;
 }
 static int location_get_area_id(lua_State *L)
 {
-	CScriptLocation *ptr = (CScriptLocation *)luaL_checklightnwndata(L, 1, LOCATION);
+	CScriptLocation *ptr = lua_nwn_checkloc(L, 1);
 	lua_pushinteger(L, ptr->AreaID);
 	return 1;
 }
 static int location_get_facing(lua_State *L)
 {
-	CScriptLocation *ptr = (CScriptLocation *)luaL_checklightnwndata(L, 1, LOCATION);
+	CScriptLocation *ptr = lua_nwn_checkloc(L, 1);
 	lua_pushnumber(L, ptr->OrientationX);
 	return 1;
 }
