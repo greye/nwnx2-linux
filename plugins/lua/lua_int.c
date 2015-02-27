@@ -17,13 +17,15 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  ***************************************************************************/
 
-#include <stdlib.h>
 #include "FunctionHooks.h"
 #include "NWNStructures.h"
 #include "nwscript.h"
-#include "lua.h"
-#include "lualib.h"
-#include "lauxlib.h"
+
+#include <lua.h>
+#include <lualib.h>
+#include <lauxlib.h>
+#include <math.h>
+#include <stdlib.h>
 
 static int luaL_checkboolean(lua_State *L, int narg) {
   int d = lua_toboolean(L, narg);
@@ -44,7 +46,16 @@ static void *luaL_checklightnwndata(lua_State *L, int index, const char *tname)
   return pt;
 }
 
-// Start NWN Functions
+static Vector *
+lua_nwn_pushvector(lua_State *L) {
+	Vector *vec = (Vector *) lua_newuserdata(L, sizeof(*vec));
+
+	luaL_getmetatable(L, VECTOR);
+	lua_setmetatable(L, -2);
+
+	return vec;
+}
+
 static int NWScript_Random(lua_State *L)
 {
 	int nMaxInteger = luaL_checkint(L, 1);
@@ -328,10 +339,10 @@ static int NWScript_GetPosition(lua_State *L)
 
 	StackPushObject(oTarget);
 	VM_ExecuteCommand(27, 1);
-	Vector *vRetVal = (Vector *)lua_newuserdata(L, sizeof(Vector));
-	StackPopVector(vRetVal);
-	luaL_getmetatable(L, VECTOR);
-  lua_setmetatable(L, -2);
+
+	Vector *vec = lua_nwn_pushvector(L);
+	StackPopVector(vec);
+
 	return 1;
 }
 
@@ -1302,13 +1313,11 @@ static int NWScript_d100(lua_State *L)
 
 static int NWScript_VectorMagnitude(lua_State *L)
 {
-	Vector *vVector = (Vector *)luaL_checkudata(L, 1, VECTOR);
+	Vector *vec = (Vector *) luaL_checkudata(L, 1, VECTOR);
+	double len = sqrt(vec->X * vec->X + vec->Y * vec->Y + vec->Z * vec->Z);
 
-	StackPushVector(*vVector);
-	VM_ExecuteCommand(104, 1);
-	float fRetVal;
-	StackPopFloat(&fRetVal);
-	lua_pushnumber(L, fRetVal);
+	lua_pushnumber(L, len);
+
 	return 1;
 }
 
@@ -1695,14 +1704,13 @@ static int NWScript_ActionTakeItem(lua_State *L)
 
 static int NWScript_VectorNormalize(lua_State *L)
 {
-	Vector *vVector = (Vector *)luaL_checkudata(L, 1, VECTOR);
+	Vector *vec = (Vector *) luaL_checkudata(L, 1, VECTOR);
+	double invLen = 1 / sqrt(vec->X * vec->X + vec->Y * vec->Y + vec->Z * vec->Z);
+	Vector *norm = lua_nwn_pushvector(L);
+	norm->X = vec->X * invLen;
+	norm->Y = vec->Y * invLen;
+	norm->Z = vec->Z * invLen;
 
-	StackPushVector(*vVector);
-	VM_ExecuteCommand(137, 1);
-	Vector *vRetVal = (Vector *)lua_newuserdata(L, sizeof(Vector));
-	StackPopVector(vRetVal);
-	luaL_getmetatable(L, VECTOR);
-  lua_setmetatable(L, -2);
 	return 1;
 }
 
@@ -1773,14 +1781,11 @@ static int NWScript_Vector(lua_State *L)
 	double y = luaL_optnumber(L, 2, 0.0);
 	double z = luaL_optnumber(L, 3, 0.0);
 
-	StackPushFloat(z);
-	StackPushFloat(y);
-	StackPushFloat(x);
-	VM_ExecuteCommand(142, 3);
-	Vector *vRetVal = (Vector *)lua_newuserdata(L, sizeof(Vector));
-	StackPopVector(vRetVal);
-	luaL_getmetatable(L, VECTOR);
-  lua_setmetatable(L, -2);
+	Vector *vec = lua_nwn_pushvector(L);
+	vec->X = (float) x;
+	vec->Y = (float) y;
+	vec->Z = (float) z;
+
 	return 1;
 }
 
@@ -1799,10 +1804,10 @@ static int NWScript_AngleToVector(lua_State *L)
 
 	StackPushFloat(fAngle);
 	VM_ExecuteCommand(144, 1);
-	Vector *vRetVal = (Vector *)lua_newuserdata(L, sizeof(Vector));
-	StackPopVector(vRetVal);
-	luaL_getmetatable(L, VECTOR);
-  lua_setmetatable(L, -2);
+
+	Vector *vec = lua_nwn_pushvector(L);
+	StackPopVector(vec);
+
 	return 1;
 }
 
@@ -2751,39 +2756,32 @@ static int NWScript_GetSpellTargetLocation(lua_State *L)
 
 static int NWScript_GetPositionFromLocation(lua_State *L)
 {
-	void *lLocation = luaL_checklightnwndata(L, 1, LOCATION);
+	CScriptLocation *loc =
+		(CScriptLocation *) luaL_checklightnwndata(L, 1, LOCATION);
+	Vector *vec = lua_nwn_pushvector(L);
+	vec->X = loc->X;
+	vec->Y = loc->Y;
+	vec->Z = loc->Z;
 
-	StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lLocation);
-	VM_ExecuteCommand(223, 1);
-	Vector *vRetVal = (Vector *)lua_newuserdata(L, sizeof(Vector));
-	StackPopVector(vRetVal);
-	luaL_getmetatable(L, VECTOR);
-  lua_setmetatable(L, -2);
-  return 1;
+	return 1;
 }
 
 static int NWScript_GetAreaFromLocation(lua_State *L)
 {
-	void *lLocation = luaL_checklightnwndata(L, 1, LOCATION);
+	CScriptLocation *loc =
+		(CScriptLocation *) luaL_checklightnwndata(L, 1, LOCATION);
+	lua_pushinteger(L, loc->AreaID);
 
-	StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lLocation);
-	VM_ExecuteCommand(224, 1);
-	dword nRetVal;
-	StackPopObject(&nRetVal);
-	lua_pushinteger(L, nRetVal);
-  return 1;
+	return 1;
 }
 
 static int NWScript_GetFacingFromLocation(lua_State *L)
 {
-	void *lLocation = luaL_checklightnwndata(L, 1, LOCATION);
+	CScriptLocation *loc =
+		(CScriptLocation *) luaL_checklightnwndata(L, 1, LOCATION);
 
-	StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lLocation);
-	VM_ExecuteCommand(225, 1);
-	float fRetVal;
-	StackPopFloat(&fRetVal);
-	lua_pushnumber(L, fRetVal);
-  return 1;
+	lua_pushnumber(L, loc->OrientationX);
+	return 1;
 }
 
 static int NWScript_GetNearestCreatureToLocation(lua_State *L)
@@ -11134,6 +11132,7 @@ static int location_get_facing(lua_State *L)
 }
 
 static const struct luaL_reg locationlib [] = {
+  {"new", NWScript_Location},
   {"x", location_get_x},
   {"y", location_get_y},
   {"z", location_get_z},
