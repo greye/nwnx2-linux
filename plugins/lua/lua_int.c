@@ -11054,14 +11054,28 @@ static int vector_to_string(lua_State *L)
 static int vector_equal(lua_State *L)
 {
 	Vector *ptr = (Vector *)luaL_checkudata(L, 1, VECTOR);
-  Vector *ptr2 = (Vector *)luaL_checkudata(L, 2, VECTOR);
+	Vector *ptr2 = (Vector *)luaL_checkudata(L, 2, VECTOR);
 
-  if ((ptr->X == ptr2->X) && (ptr->Y == ptr2->Y) && (ptr->Z == ptr2->Z)){
-      lua_pushboolean(L, 1);
-      return 1;
-  }
- lua_pushboolean(L, 0);
- return 1;
+	if ((ptr->X == ptr2->X) && (ptr->Y == ptr2->Y) && (ptr->Z == ptr2->Z)){
+		lua_pushboolean(L, 1);
+		return 1;
+	}
+	lua_pushboolean(L, 0);
+	return 1;
+}
+
+static int
+vector_set(lua_State *L) {
+	Vector *vec = (Vector *) luaL_checkudata(L, 1, VECTOR);
+	double x = luaL_checknumber(L, 2);
+	double y = luaL_checknumber(L, 3);
+	double z = luaL_checknumber(L, 4);
+
+	vec->X = (float) x;
+	vec->Y = (float) y;
+	vec->Z = (float) z;
+
+	return 0;
 }
 
 static const struct luaL_reg vectorlib [] = {
@@ -11069,6 +11083,7 @@ static const struct luaL_reg vectorlib [] = {
   {"x", vector_get_x},
   {"y", vector_get_y},
   {"z", vector_get_z},
+  {"set", vector_set},
   {"magnitude", NWScript_VectorMagnitude},
   {"normalize", NWScript_VectorNormalize},
   {"toangle", NWScript_VectorToAngle},
