@@ -58,7 +58,7 @@ lua_nwn_pushvector(lua_State *L) {
 
 static CScriptLocation *
 lua_nwn_checkloc(lua_State *L, int index) {
-	return (CScriptLocation *) lua_checklightnwndata(L, index, LOCATION);
+	return (CScriptLocation *) luaL_checklightnwndata(L, index, LOCATION);
 }
 
 static int NWScript_Random(lua_State *L)
