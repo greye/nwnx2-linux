@@ -11092,7 +11092,6 @@ static const luaL_Reg vectorlib_m [] = {
 
 
 // LOCATION
-
 static int location_get_x(lua_State *L)
 {
 	CScriptLocation *ptr = lua_nwn_checkloc(L, 1);
@@ -11124,8 +11123,29 @@ static int location_get_facing(lua_State *L)
 	return 1;
 }
 
+static int location_new(lua_State *L) {
+	dword area = luaL_checkint(L, 1);
+	double x = luaL_checknumber(L, 2);
+	double y = luaL_checknumber(L, 3);
+	double z = luaL_checknumber(L, 4);
+	double facing = luaL_checknumber(L, 5);
+
+	Vector pos = { (float) x, (float) y, (float) z };
+
+	StackPushFloat(facing);
+	StackPushVector(pos);
+	StackPushObject(area);
+	VM_ExecuteCommand(215, 3);
+
+	void *ptr;
+	StackPopEngineStructure(ENGINE_STRUCTURE_LOCATION, &ptr);
+	lua_pushlightuserdata(L, ptr);
+
+	return 1;
+}
+
 static const luaL_Reg locationlib [] = {
-  {"new", NWScript_Location},
+  {"new", location_new},
   {"x", location_get_x},
   {"y", location_get_y},
   {"z", location_get_z},
