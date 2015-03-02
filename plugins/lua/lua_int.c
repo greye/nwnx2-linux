@@ -10171,858 +10171,852 @@ static int NWScript_ItemPropertyAdditional(lua_State *L)
 	return 1;
 }
 
-
-void LUA_InitNWScript(lua_State *L)
-{
-
-  lua_register(L, "Random", NWScript_Random);
-  lua_register(L, "PrintString", NWScript_PrintString);
-  lua_register(L, "PrintFloat", NWScript_PrintFloat);
-  lua_register(L, "FloatToString", NWScript_FloatToString);
-  lua_register(L, "PrintInteger", NWScript_PrintInteger);
-  lua_register(L, "PrintObject", NWScript_PrintObject);
-  //lua_register(L, "AssignCommand", NWScript_AssignCommand);
-  //lua_register(L, "DelayCommand", NWScript_DelayCommand);
-  lua_register(L, "ExecuteScript", NWScript_ExecuteScript);
-  lua_register(L, "ClearAllActions", NWScript_ClearAllActions);
-  lua_register(L, "SetFacing", NWScript_SetFacing);
-  lua_register(L, "SetCalendar", NWScript_SetCalendar);
-  lua_register(L, "SetTime", NWScript_SetTime);
-  lua_register(L, "GetCalendarYear", NWScript_GetCalendarYear);
-  lua_register(L, "GetCalendarMonth", NWScript_GetCalendarMonth);
-  lua_register(L, "GetCalendarDay", NWScript_GetCalendarDay);
-  lua_register(L, "GetTimeHour", NWScript_GetTimeHour);
-  lua_register(L, "GetTimeMinute", NWScript_GetTimeMinute);
-  lua_register(L, "GetTimeSecond", NWScript_GetTimeSecond);
-  lua_register(L, "GetTimeMillisecond", NWScript_GetTimeMillisecond);
-  lua_register(L, "ActionRandomWalk", NWScript_ActionRandomWalk);
-  lua_register(L, "ActionMoveToLocation", NWScript_ActionMoveToLocation);
-  lua_register(L, "ActionMoveToObject", NWScript_ActionMoveToObject);
-  lua_register(L, "ActionMoveAwayFromObject", NWScript_ActionMoveAwayFromObject);
-  lua_register(L, "GetArea", NWScript_GetArea);
-  lua_register(L, "GetEnteringObject", NWScript_GetEnteringObject);
-  lua_register(L, "GetExitingObject", NWScript_GetExitingObject);
-  lua_register(L, "GetPosition", NWScript_GetPosition);
-  lua_register(L, "GetFacing", NWScript_GetFacing);
-  lua_register(L, "GetItemPossessor", NWScript_GetItemPossessor);
-  lua_register(L, "GetItemPossessedBy", NWScript_GetItemPossessedBy);
-  lua_register(L, "CreateItemOnObject", NWScript_CreateItemOnObject);
-  lua_register(L, "ActionEquipItem", NWScript_ActionEquipItem);
-  lua_register(L, "ActionUnequipItem", NWScript_ActionUnequipItem);
-  lua_register(L, "ActionPickUpItem", NWScript_ActionPickUpItem);
-  lua_register(L, "ActionPutDownItem", NWScript_ActionPutDownItem);
-  lua_register(L, "GetLastAttacker", NWScript_GetLastAttacker);
-  lua_register(L, "ActionAttack", NWScript_ActionAttack);
-  lua_register(L, "GetNearestCreature", NWScript_GetNearestCreature);
-  lua_register(L, "ActionSpeakString", NWScript_ActionSpeakString);
-  lua_register(L, "ActionPlayAnimation", NWScript_ActionPlayAnimation);
-  lua_register(L, "GetDistanceToObject", NWScript_GetDistanceToObject);
-  lua_register(L, "GetIsObjectValid", NWScript_GetIsObjectValid);
-  lua_register(L, "ActionOpenDoor", NWScript_ActionOpenDoor);
-  lua_register(L, "ActionCloseDoor", NWScript_ActionCloseDoor);
-  lua_register(L, "SetCameraFacing", NWScript_SetCameraFacing);
-  lua_register(L, "PlaySound", NWScript_PlaySound);
-  lua_register(L, "GetSpellTargetObject", NWScript_GetSpellTargetObject);
-  lua_register(L, "ActionCastSpellAtObject", NWScript_ActionCastSpellAtObject);
-  lua_register(L, "GetCurrentHitPoints", NWScript_GetCurrentHitPoints);
-  lua_register(L, "GetMaxHitPoints", NWScript_GetMaxHitPoints);
-  lua_register(L, "GetLocalInt", NWScript_GetLocalInt);
-  lua_register(L, "GetLocalFloat", NWScript_GetLocalFloat);
-  lua_register(L, "GetLocalString", NWScript_GetLocalString);
-  lua_register(L, "GetLocalObject", NWScript_GetLocalObject);
-  lua_register(L, "SetLocalInt", NWScript_SetLocalInt);
-  lua_register(L, "SetLocalFloat", NWScript_SetLocalFloat);
-  lua_register(L, "SetLocalString", NWScript_SetLocalString);
-  lua_register(L, "SetLocalObject", NWScript_SetLocalObject);
-  lua_register(L, "GetStringLength", NWScript_GetStringLength);
-  lua_register(L, "GetStringUpperCase", NWScript_GetStringUpperCase);
-  lua_register(L, "GetStringLowerCase", NWScript_GetStringLowerCase);
-  lua_register(L, "GetStringRight", NWScript_GetStringRight);
-  lua_register(L, "GetStringLeft", NWScript_GetStringLeft);
-  lua_register(L, "InsertString", NWScript_InsertString);
-  lua_register(L, "GetSubString", NWScript_GetSubString);
-  lua_register(L, "FindSubString", NWScript_FindSubString);
-  lua_register(L, "fabs", NWScript_fabs);
-  lua_register(L, "cos", NWScript_cos);
-  lua_register(L, "sin", NWScript_sin);
-  lua_register(L, "tan", NWScript_tan);
-  lua_register(L, "acos", NWScript_acos);
-  lua_register(L, "asin", NWScript_asin);
-  lua_register(L, "atan", NWScript_atan);
-  lua_register(L, "log", NWScript_log);
-  lua_register(L, "pow", NWScript_pow);
-  lua_register(L, "sqrt", NWScript_sqrt);
-  lua_register(L, "abs", NWScript_abs);
-  lua_register(L, "EffectHeal", NWScript_EffectHeal);
-  lua_register(L, "EffectDamage", NWScript_EffectDamage);
-  lua_register(L, "EffectAbilityIncrease", NWScript_EffectAbilityIncrease);
-  lua_register(L, "EffectDamageResistance", NWScript_EffectDamageResistance);
-  lua_register(L, "EffectResurrection", NWScript_EffectResurrection);
-  lua_register(L, "EffectSummonCreature", NWScript_EffectSummonCreature);
-  lua_register(L, "GetCasterLevel", NWScript_GetCasterLevel);
-  lua_register(L, "GetFirstEffect", NWScript_GetFirstEffect);
-  lua_register(L, "GetNextEffect", NWScript_GetNextEffect);
-  lua_register(L, "RemoveEffect", NWScript_RemoveEffect);
-  lua_register(L, "GetIsEffectValid", NWScript_GetIsEffectValid);
-  lua_register(L, "GetEffectDurationType", NWScript_GetEffectDurationType);
-  lua_register(L, "GetEffectSubType", NWScript_GetEffectSubType);
-  lua_register(L, "GetEffectCreator", NWScript_GetEffectCreator);
-  lua_register(L, "IntToString", NWScript_IntToString);
-  lua_register(L, "GetFirstObjectInArea", NWScript_GetFirstObjectInArea);
-  lua_register(L, "GetNextObjectInArea", NWScript_GetNextObjectInArea);
-  lua_register(L, "d2", NWScript_d2);
-  lua_register(L, "d3", NWScript_d3);
-  lua_register(L, "d4", NWScript_d4);
-  lua_register(L, "d6", NWScript_d6);
-  lua_register(L, "d8", NWScript_d8);
-  lua_register(L, "d10", NWScript_d10);
-  lua_register(L, "d12", NWScript_d12);
-  lua_register(L, "d20", NWScript_d20);
-  lua_register(L, "d100", NWScript_d100);
-  lua_register(L, "VectorMagnitude", NWScript_VectorMagnitude);
-  lua_register(L, "GetMetaMagicFeat", NWScript_GetMetaMagicFeat);
-  lua_register(L, "GetObjectType", NWScript_GetObjectType);
-  lua_register(L, "GetRacialType", NWScript_GetRacialType);
-  lua_register(L, "FortitudeSave", NWScript_FortitudeSave);
-  lua_register(L, "ReflexSave", NWScript_ReflexSave);
-  lua_register(L, "WillSave", NWScript_WillSave);
-  lua_register(L, "GetSpellSaveDC", NWScript_GetSpellSaveDC);
-  lua_register(L, "MagicalEffect", NWScript_MagicalEffect);
-  lua_register(L, "SupernaturalEffect", NWScript_SupernaturalEffect);
-  lua_register(L, "ExtraordinaryEffect", NWScript_ExtraordinaryEffect);
-  lua_register(L, "EffectACIncrease", NWScript_EffectACIncrease);
-  lua_register(L, "GetAC", NWScript_GetAC);
-  lua_register(L, "EffectSavingThrowIncrease", NWScript_EffectSavingThrowIncrease);
-  lua_register(L, "EffectAttackIncrease", NWScript_EffectAttackIncrease);
-  lua_register(L, "EffectDamageReduction", NWScript_EffectDamageReduction);
-  lua_register(L, "EffectDamageIncrease", NWScript_EffectDamageIncrease);
-  lua_register(L, "RoundsToSeconds", NWScript_RoundsToSeconds);
-  lua_register(L, "HoursToSeconds", NWScript_HoursToSeconds);
-  lua_register(L, "TurnsToSeconds", NWScript_TurnsToSeconds);
-  lua_register(L, "GetLawChaosValue", NWScript_GetLawChaosValue);
-  lua_register(L, "GetGoodEvilValue", NWScript_GetGoodEvilValue);
-  lua_register(L, "GetAlignmentLawChaos", NWScript_GetAlignmentLawChaos);
-  lua_register(L, "GetAlignmentGoodEvil", NWScript_GetAlignmentGoodEvil);
-  lua_register(L, "EffectEntangle", NWScript_EffectEntangle);
-  lua_register(L, "SignalEvent", NWScript_SignalEvent);
-  lua_register(L, "EventUserDefined", NWScript_EventUserDefined);
-  lua_register(L, "EffectDeath", NWScript_EffectDeath);
-  lua_register(L, "EffectKnockdown", NWScript_EffectKnockdown);
-  lua_register(L, "ActionGiveItem", NWScript_ActionGiveItem);
-  lua_register(L, "ActionTakeItem", NWScript_ActionTakeItem);
-  lua_register(L, "VectorNormalize", NWScript_VectorNormalize);
-  lua_register(L, "EffectCurse", NWScript_EffectCurse);
-  lua_register(L, "GetAbilityScore", NWScript_GetAbilityScore);
-  lua_register(L, "GetIsDead", NWScript_GetIsDead);
-  lua_register(L, "PrintVector", NWScript_PrintVector);
-  lua_register(L, "Vector", NWScript_Vector);
-  lua_register(L, "SetFacingPoint", NWScript_SetFacingPoint);
-  lua_register(L, "AngleToVector", NWScript_AngleToVector);
-  lua_register(L, "VectorToAngle", NWScript_VectorToAngle);
-  lua_register(L, "TouchAttackMelee", NWScript_TouchAttackMelee);
-  lua_register(L, "TouchAttackRanged", NWScript_TouchAttackRanged);
-  lua_register(L, "EffectParalyze", NWScript_EffectParalyze);
-  lua_register(L, "EffectSpellImmunity", NWScript_EffectSpellImmunity);
-  lua_register(L, "EffectDeaf", NWScript_EffectDeaf);
-  lua_register(L, "GetDistanceBetween", NWScript_GetDistanceBetween);
-  lua_register(L, "SetLocalLocation", NWScript_SetLocalLocation);
-  lua_register(L, "GetLocalLocation", NWScript_GetLocalLocation);
-  lua_register(L, "EffectSleep", NWScript_EffectSleep);
-  lua_register(L, "GetItemInSlot", NWScript_GetItemInSlot);
-  lua_register(L, "EffectCharmed", NWScript_EffectCharmed);
-  lua_register(L, "EffectConfused", NWScript_EffectConfused);
-  lua_register(L, "EffectFrightened", NWScript_EffectFrightened);
-  lua_register(L, "EffectDominated", NWScript_EffectDominated);
-  lua_register(L, "EffectDazed", NWScript_EffectDazed);
-  lua_register(L, "EffectStunned", NWScript_EffectStunned);
-  lua_register(L, "SetCommandable", NWScript_SetCommandable);
-  lua_register(L, "GetCommandable", NWScript_GetCommandable);
-  lua_register(L, "EffectRegenerate", NWScript_EffectRegenerate);
-  lua_register(L, "EffectMovementSpeedIncrease", NWScript_EffectMovementSpeedIncrease);
-  lua_register(L, "GetHitDice", NWScript_GetHitDice);
-  lua_register(L, "ActionForceFollowObject", NWScript_ActionForceFollowObject);
-  lua_register(L, "GetTag", NWScript_GetTag);
-  lua_register(L, "ResistSpell", NWScript_ResistSpell);
-  lua_register(L, "GetEffectType", NWScript_GetEffectType);
-  lua_register(L, "EffectAreaOfEffect", NWScript_EffectAreaOfEffect);
-  lua_register(L, "GetFactionEqual", NWScript_GetFactionEqual);
-  lua_register(L, "ChangeFaction", NWScript_ChangeFaction);
-  lua_register(L, "GetIsListening", NWScript_GetIsListening);
-  lua_register(L, "SetListening", NWScript_SetListening);
-  lua_register(L, "SetListenPattern", NWScript_SetListenPattern);
-  lua_register(L, "TestStringAgainstPattern", NWScript_TestStringAgainstPattern);
-  lua_register(L, "GetMatchedSubstring", NWScript_GetMatchedSubstring);
-  lua_register(L, "GetMatchedSubstringsCount", NWScript_GetMatchedSubstringsCount);
-  lua_register(L, "EffectVisualEffect", NWScript_EffectVisualEffect);
-  lua_register(L, "GetFactionWeakestMember", NWScript_GetFactionWeakestMember);
-  lua_register(L, "GetFactionStrongestMember", NWScript_GetFactionStrongestMember);
-  lua_register(L, "GetFactionMostDamagedMember", NWScript_GetFactionMostDamagedMember);
-  lua_register(L, "GetFactionLeastDamagedMember", NWScript_GetFactionLeastDamagedMember);
-  lua_register(L, "GetFactionGold", NWScript_GetFactionGold);
-  lua_register(L, "GetFactionAverageReputation", NWScript_GetFactionAverageReputation);
-  lua_register(L, "GetFactionAverageGoodEvilAlignment", NWScript_GetFactionAverageGoodEvilAlignment);
-  lua_register(L, "GetFactionAverageLawChaosAlignment", NWScript_GetFactionAverageLawChaosAlignment);
-  lua_register(L, "GetFactionAverageLevel", NWScript_GetFactionAverageLevel);
-  lua_register(L, "GetFactionAverageXP", NWScript_GetFactionAverageXP);
-  lua_register(L, "GetFactionMostFrequentClass", NWScript_GetFactionMostFrequentClass);
-  lua_register(L, "GetFactionWorstAC", NWScript_GetFactionWorstAC);
-  lua_register(L, "GetFactionBestAC", NWScript_GetFactionBestAC);
-  lua_register(L, "ActionSit", NWScript_ActionSit);
-  lua_register(L, "GetListenPatternNumber", NWScript_GetListenPatternNumber);
-  lua_register(L, "ActionJumpToObject", NWScript_ActionJumpToObject);
-  lua_register(L, "GetWaypointByTag", NWScript_GetWaypointByTag);
-  lua_register(L, "GetTransitionTarget", NWScript_GetTransitionTarget);
-  lua_register(L, "EffectLinkEffects", NWScript_EffectLinkEffects);
-  lua_register(L, "GetObjectByTag", NWScript_GetObjectByTag);
-  lua_register(L, "AdjustAlignment", NWScript_AdjustAlignment);
-  lua_register(L, "ActionWait", NWScript_ActionWait);
-  lua_register(L, "SetAreaTransitionBMP", NWScript_SetAreaTransitionBMP);
-  lua_register(L, "ActionStartConversation", NWScript_ActionStartConversation);
-  lua_register(L, "ActionPauseConversation", NWScript_ActionPauseConversation);
-  lua_register(L, "ActionResumeConversation", NWScript_ActionResumeConversation);
-  lua_register(L, "EffectBeam", NWScript_EffectBeam);
-  lua_register(L, "GetReputation", NWScript_GetReputation);
-  lua_register(L, "AdjustReputation", NWScript_AdjustReputation);
-  lua_register(L, "GetSittingCreature", NWScript_GetSittingCreature);
-  lua_register(L, "GetGoingToBeAttackedBy", NWScript_GetGoingToBeAttackedBy);
-  lua_register(L, "EffectSpellResistanceIncrease", NWScript_EffectSpellResistanceIncrease);
-  lua_register(L, "GetLocation", NWScript_GetLocation);
-  lua_register(L, "ActionJumpToLocation", NWScript_ActionJumpToLocation);
-  lua_register(L, "Location", NWScript_Location);
-  lua_register(L, "ApplyEffectAtLocation", NWScript_ApplyEffectAtLocation);
-  lua_register(L, "GetIsPC", NWScript_GetIsPC);
-  lua_register(L, "FeetToMeters", NWScript_FeetToMeters);
-  lua_register(L, "YardsToMeters", NWScript_YardsToMeters);
-  lua_register(L, "ApplyEffectToObject", NWScript_ApplyEffectToObject);
-  lua_register(L, "SpeakString", NWScript_SpeakString);
-  lua_register(L, "GetSpellTargetLocation", NWScript_GetSpellTargetLocation);
-  lua_register(L, "GetPositionFromLocation", NWScript_GetPositionFromLocation);
-  lua_register(L, "GetAreaFromLocation", NWScript_GetAreaFromLocation);
-  lua_register(L, "GetFacingFromLocation", NWScript_GetFacingFromLocation);
-  lua_register(L, "GetNearestCreatureToLocation", NWScript_GetNearestCreatureToLocation);
-  lua_register(L, "GetNearestObject", NWScript_GetNearestObject);
-  lua_register(L, "GetNearestObjectToLocation", NWScript_GetNearestObjectToLocation);
-  lua_register(L, "GetNearestObjectByTag", NWScript_GetNearestObjectByTag);
-  lua_register(L, "IntToFloat", NWScript_IntToFloat);
-  lua_register(L, "FloatToInt", NWScript_FloatToInt);
-  lua_register(L, "StringToInt", NWScript_StringToInt);
-  lua_register(L, "StringToFloat", NWScript_StringToFloat);
-  lua_register(L, "ActionCastSpellAtLocation", NWScript_ActionCastSpellAtLocation);
-  lua_register(L, "GetIsEnemy", NWScript_GetIsEnemy);
-  lua_register(L, "GetIsFriend", NWScript_GetIsFriend);
-  lua_register(L, "GetIsNeutral", NWScript_GetIsNeutral);
-  lua_register(L, "GetPCSpeaker", NWScript_GetPCSpeaker);
-  lua_register(L, "GetStringByStrRef", NWScript_GetStringByStrRef);
-  lua_register(L, "ActionSpeakStringByStrRef", NWScript_ActionSpeakStringByStrRef);
-  lua_register(L, "DestroyObject", NWScript_DestroyObject);
-  lua_register(L, "GetModule", NWScript_GetModule);
-  lua_register(L, "CreateObject", NWScript_CreateObject);
-  lua_register(L, "EventSpellCastAt", NWScript_EventSpellCastAt);
-  lua_register(L, "GetLastSpellCaster", NWScript_GetLastSpellCaster);
-  lua_register(L, "GetLastSpell", NWScript_GetLastSpell);
-  lua_register(L, "GetUserDefinedEventNumber", NWScript_GetUserDefinedEventNumber);
-  lua_register(L, "GetSpellId", NWScript_GetSpellId);
-  lua_register(L, "RandomName", NWScript_RandomName);
-  lua_register(L, "EffectPoison", NWScript_EffectPoison);
-  lua_register(L, "EffectDisease", NWScript_EffectDisease);
-  lua_register(L, "EffectSilence", NWScript_EffectSilence);
-  lua_register(L, "GetName", NWScript_GetName);
-  lua_register(L, "GetLastSpeaker", NWScript_GetLastSpeaker);
-  lua_register(L, "BeginConversation", NWScript_BeginConversation);
-  lua_register(L, "GetLastPerceived", NWScript_GetLastPerceived);
-  lua_register(L, "GetLastPerceptionHeard", NWScript_GetLastPerceptionHeard);
-  lua_register(L, "GetLastPerceptionInaudible", NWScript_GetLastPerceptionInaudible);
-  lua_register(L, "GetLastPerceptionSeen", NWScript_GetLastPerceptionSeen);
-  lua_register(L, "GetLastClosedBy", NWScript_GetLastClosedBy);
-  lua_register(L, "GetLastPerceptionVanished", NWScript_GetLastPerceptionVanished);
-  lua_register(L, "GetFirstInPersistentObject", NWScript_GetFirstInPersistentObject);
-  lua_register(L, "GetNextInPersistentObject", NWScript_GetNextInPersistentObject);
-  lua_register(L, "GetAreaOfEffectCreator", NWScript_GetAreaOfEffectCreator);
-  lua_register(L, "DeleteLocalInt", NWScript_DeleteLocalInt);
-  lua_register(L, "DeleteLocalFloat", NWScript_DeleteLocalFloat);
-  lua_register(L, "DeleteLocalString", NWScript_DeleteLocalString);
-  lua_register(L, "DeleteLocalObject", NWScript_DeleteLocalObject);
-  lua_register(L, "DeleteLocalLocation", NWScript_DeleteLocalLocation);
-  lua_register(L, "EffectHaste", NWScript_EffectHaste);
-  lua_register(L, "EffectSlow", NWScript_EffectSlow);
-  lua_register(L, "ObjectToString", NWScript_ObjectToString);
-  lua_register(L, "EffectImmunity", NWScript_EffectImmunity);
-  lua_register(L, "GetIsImmune", NWScript_GetIsImmune);
-  lua_register(L, "EffectDamageImmunityIncrease", NWScript_EffectDamageImmunityIncrease);
-  lua_register(L, "GetEncounterActive", NWScript_GetEncounterActive);
-  lua_register(L, "SetEncounterActive", NWScript_SetEncounterActive);
-  lua_register(L, "GetEncounterSpawnsMax", NWScript_GetEncounterSpawnsMax);
-  lua_register(L, "SetEncounterSpawnsMax", NWScript_SetEncounterSpawnsMax);
-  lua_register(L, "GetEncounterSpawnsCurrent", NWScript_GetEncounterSpawnsCurrent);
-  lua_register(L, "SetEncounterSpawnsCurrent", NWScript_SetEncounterSpawnsCurrent);
-  lua_register(L, "GetModuleItemAcquired", NWScript_GetModuleItemAcquired);
-  lua_register(L, "GetModuleItemAcquiredFrom", NWScript_GetModuleItemAcquiredFrom);
-  lua_register(L, "SetCustomToken", NWScript_SetCustomToken);
-  lua_register(L, "GetHasFeat", NWScript_GetHasFeat);
-  lua_register(L, "GetHasSkill", NWScript_GetHasSkill);
-  lua_register(L, "ActionUseFeat", NWScript_ActionUseFeat);
-  lua_register(L, "ActionUseSkill", NWScript_ActionUseSkill);
-  lua_register(L, "GetObjectSeen", NWScript_GetObjectSeen);
-  lua_register(L, "GetObjectHeard", NWScript_GetObjectHeard);
-  lua_register(L, "GetLastPlayerDied", NWScript_GetLastPlayerDied);
-  lua_register(L, "GetModuleItemLost", NWScript_GetModuleItemLost);
-  lua_register(L, "GetModuleItemLostBy", NWScript_GetModuleItemLostBy);
-  //lua_register(L, "ActionDoCommand", NWScript_ActionDoCommand);
-  lua_register(L, "EventConversation", NWScript_EventConversation);
-  lua_register(L, "SetEncounterDifficulty", NWScript_SetEncounterDifficulty);
-  lua_register(L, "GetEncounterDifficulty", NWScript_GetEncounterDifficulty);
-  lua_register(L, "GetDistanceBetweenLocations", NWScript_GetDistanceBetweenLocations);
-  lua_register(L, "GetReflexAdjustedDamage", NWScript_GetReflexAdjustedDamage);
-  lua_register(L, "PlayAnimation", NWScript_PlayAnimation);
-  lua_register(L, "TalentSpell", NWScript_TalentSpell);
-  lua_register(L, "TalentFeat", NWScript_TalentFeat);
-  lua_register(L, "TalentSkill", NWScript_TalentSkill);
-  lua_register(L, "GetHasSpellEffect", NWScript_GetHasSpellEffect);
-  lua_register(L, "GetEffectSpellId", NWScript_GetEffectSpellId);
-  lua_register(L, "GetCreatureHasTalent", NWScript_GetCreatureHasTalent);
-  lua_register(L, "GetCreatureTalentRandom", NWScript_GetCreatureTalentRandom);
-  lua_register(L, "GetCreatureTalentBest", NWScript_GetCreatureTalentBest);
-  lua_register(L, "ActionUseTalentOnObject", NWScript_ActionUseTalentOnObject);
-  lua_register(L, "ActionUseTalentAtLocation", NWScript_ActionUseTalentAtLocation);
-  lua_register(L, "GetGoldPieceValue", NWScript_GetGoldPieceValue);
-  lua_register(L, "GetIsPlayableRacialType", NWScript_GetIsPlayableRacialType);
-  lua_register(L, "JumpToLocation", NWScript_JumpToLocation);
-  lua_register(L, "EffectTemporaryHitpoints", NWScript_EffectTemporaryHitpoints);
-  lua_register(L, "GetSkillRank", NWScript_GetSkillRank);
-  lua_register(L, "GetAttackTarget", NWScript_GetAttackTarget);
-  lua_register(L, "GetLastAttackType", NWScript_GetLastAttackType);
-  lua_register(L, "GetLastAttackMode", NWScript_GetLastAttackMode);
-  lua_register(L, "GetMaster", NWScript_GetMaster);
-  lua_register(L, "GetIsInCombat", NWScript_GetIsInCombat);
-  lua_register(L, "GetLastAssociateCommand", NWScript_GetLastAssociateCommand);
-  lua_register(L, "GiveGoldToCreature", NWScript_GiveGoldToCreature);
-  lua_register(L, "SetIsDestroyable", NWScript_SetIsDestroyable);
-  lua_register(L, "SetLocked", NWScript_SetLocked);
-  lua_register(L, "GetLocked", NWScript_GetLocked);
-  lua_register(L, "GetClickingObject", NWScript_GetClickingObject);
-  lua_register(L, "SetAssociateListenPatterns", NWScript_SetAssociateListenPatterns);
-  lua_register(L, "GetLastWeaponUsed", NWScript_GetLastWeaponUsed);
-  lua_register(L, "ActionInteractObject", NWScript_ActionInteractObject);
-  lua_register(L, "GetLastUsedBy", NWScript_GetLastUsedBy);
-  lua_register(L, "GetAbilityModifier", NWScript_GetAbilityModifier);
-  lua_register(L, "GetIdentified", NWScript_GetIdentified);
-  lua_register(L, "SetIdentified", NWScript_SetIdentified);
-  lua_register(L, "SummonAnimalCompanion", NWScript_SummonAnimalCompanion);
-  lua_register(L, "SummonFamiliar", NWScript_SummonFamiliar);
-  lua_register(L, "GetBlockingDoor", NWScript_GetBlockingDoor);
-  lua_register(L, "GetIsDoorActionPossible", NWScript_GetIsDoorActionPossible);
-  lua_register(L, "DoDoorAction", NWScript_DoDoorAction);
-  lua_register(L, "GetFirstItemInInventory", NWScript_GetFirstItemInInventory);
-  lua_register(L, "GetNextItemInInventory", NWScript_GetNextItemInInventory);
-  lua_register(L, "GetClassByPosition", NWScript_GetClassByPosition);
-  lua_register(L, "GetLevelByPosition", NWScript_GetLevelByPosition);
-  lua_register(L, "GetLevelByClass", NWScript_GetLevelByClass);
-  lua_register(L, "GetDamageDealtByType", NWScript_GetDamageDealtByType);
-  lua_register(L, "GetTotalDamageDealt", NWScript_GetTotalDamageDealt);
-  lua_register(L, "GetLastDamager", NWScript_GetLastDamager);
-  lua_register(L, "GetLastDisarmed", NWScript_GetLastDisarmed);
-  lua_register(L, "GetLastDisturbed", NWScript_GetLastDisturbed);
-  lua_register(L, "GetLastLocked", NWScript_GetLastLocked);
-  lua_register(L, "GetLastUnlocked", NWScript_GetLastUnlocked);
-  lua_register(L, "EffectSkillIncrease", NWScript_EffectSkillIncrease);
-  lua_register(L, "GetInventoryDisturbType", NWScript_GetInventoryDisturbType);
-  lua_register(L, "GetInventoryDisturbItem", NWScript_GetInventoryDisturbItem);
-  lua_register(L, "GetHenchman", NWScript_GetHenchman);
-  lua_register(L, "VersusAlignmentEffect", NWScript_VersusAlignmentEffect);
-  lua_register(L, "VersusRacialTypeEffect", NWScript_VersusRacialTypeEffect);
-  lua_register(L, "VersusTrapEffect", NWScript_VersusTrapEffect);
-  lua_register(L, "GetGender", NWScript_GetGender);
-  lua_register(L, "GetIsTalentValid", NWScript_GetIsTalentValid);
-  lua_register(L, "ActionMoveAwayFromLocation", NWScript_ActionMoveAwayFromLocation);
-  lua_register(L, "GetAttemptedAttackTarget", NWScript_GetAttemptedAttackTarget);
-  lua_register(L, "GetTypeFromTalent", NWScript_GetTypeFromTalent);
-  lua_register(L, "GetIdFromTalent", NWScript_GetIdFromTalent);
-  lua_register(L, "GetAssociate", NWScript_GetAssociate);
-  lua_register(L, "AddHenchman", NWScript_AddHenchman);
-  lua_register(L, "RemoveHenchman", NWScript_RemoveHenchman);
-  lua_register(L, "AddJournalQuestEntry", NWScript_AddJournalQuestEntry);
-  lua_register(L, "RemoveJournalQuestEntry", NWScript_RemoveJournalQuestEntry);
-  lua_register(L, "GetPCPublicCDKey", NWScript_GetPCPublicCDKey);
-  lua_register(L, "GetPCIPAddress", NWScript_GetPCIPAddress);
-  lua_register(L, "GetPCPlayerName", NWScript_GetPCPlayerName);
-  lua_register(L, "SetPCLike", NWScript_SetPCLike);
-  lua_register(L, "SetPCDislike", NWScript_SetPCDislike);
-  lua_register(L, "SendMessageToPC", NWScript_SendMessageToPC);
-  lua_register(L, "GetAttemptedSpellTarget", NWScript_GetAttemptedSpellTarget);
-  lua_register(L, "GetLastOpenedBy", NWScript_GetLastOpenedBy);
-  lua_register(L, "GetHasSpell", NWScript_GetHasSpell);
-  lua_register(L, "OpenStore", NWScript_OpenStore);
-  lua_register(L, "EffectTurned", NWScript_EffectTurned);
-  lua_register(L, "GetFirstFactionMember", NWScript_GetFirstFactionMember);
-  lua_register(L, "GetNextFactionMember", NWScript_GetNextFactionMember);
-  lua_register(L, "ActionForceMoveToLocation", NWScript_ActionForceMoveToLocation);
-  lua_register(L, "ActionForceMoveToObject", NWScript_ActionForceMoveToObject);
-  lua_register(L, "GetJournalQuestExperience", NWScript_GetJournalQuestExperience);
-  lua_register(L, "JumpToObject", NWScript_JumpToObject);
-  lua_register(L, "SetMapPinEnabled", NWScript_SetMapPinEnabled);
-  lua_register(L, "EffectHitPointChangeWhenDying", NWScript_EffectHitPointChangeWhenDying);
-  lua_register(L, "PopUpGUIPanel", NWScript_PopUpGUIPanel);
-  lua_register(L, "ClearPersonalReputation", NWScript_ClearPersonalReputation);
-  lua_register(L, "SetIsTemporaryFriend", NWScript_SetIsTemporaryFriend);
-  lua_register(L, "SetIsTemporaryEnemy", NWScript_SetIsTemporaryEnemy);
-  lua_register(L, "SetIsTemporaryNeutral", NWScript_SetIsTemporaryNeutral);
-  lua_register(L, "GiveXPToCreature", NWScript_GiveXPToCreature);
-  lua_register(L, "SetXP", NWScript_SetXP);
-  lua_register(L, "GetXP", NWScript_GetXP);
-  lua_register(L, "IntToHexString", NWScript_IntToHexString);
-  lua_register(L, "GetBaseItemType", NWScript_GetBaseItemType);
-  lua_register(L, "GetItemHasItemProperty", NWScript_GetItemHasItemProperty);
-  lua_register(L, "ActionEquipMostDamagingMelee", NWScript_ActionEquipMostDamagingMelee);
-  lua_register(L, "ActionEquipMostDamagingRanged", NWScript_ActionEquipMostDamagingRanged);
-  lua_register(L, "GetItemACValue", NWScript_GetItemACValue);
-  lua_register(L, "ActionRest", NWScript_ActionRest);
-  lua_register(L, "ExploreAreaForPlayer", NWScript_ExploreAreaForPlayer);
-  lua_register(L, "ActionEquipMostEffectiveArmor", NWScript_ActionEquipMostEffectiveArmor);
-  lua_register(L, "GetIsDay", NWScript_GetIsDay);
-  lua_register(L, "GetIsNight", NWScript_GetIsNight);
-  lua_register(L, "GetIsDawn", NWScript_GetIsDawn);
-  lua_register(L, "GetIsDusk", NWScript_GetIsDusk);
-  lua_register(L, "GetIsEncounterCreature", NWScript_GetIsEncounterCreature);
-  lua_register(L, "GetLastPlayerDying", NWScript_GetLastPlayerDying);
-  lua_register(L, "GetStartingLocation", NWScript_GetStartingLocation);
-  lua_register(L, "ChangeToStandardFaction", NWScript_ChangeToStandardFaction);
-  lua_register(L, "SoundObjectPlay", NWScript_SoundObjectPlay);
-  lua_register(L, "SoundObjectStop", NWScript_SoundObjectStop);
-  lua_register(L, "SoundObjectSetVolume", NWScript_SoundObjectSetVolume);
-  lua_register(L, "SoundObjectSetPosition", NWScript_SoundObjectSetPosition);
-  lua_register(L, "SpeakOneLinerConversation", NWScript_SpeakOneLinerConversation);
-  lua_register(L, "GetGold", NWScript_GetGold);
-  lua_register(L, "GetLastRespawnButtonPresser", NWScript_GetLastRespawnButtonPresser);
-  lua_register(L, "GetIsDM", NWScript_GetIsDM);
-  lua_register(L, "PlayVoiceChat", NWScript_PlayVoiceChat);
-  lua_register(L, "GetIsWeaponEffective", NWScript_GetIsWeaponEffective);
-  lua_register(L, "GetLastSpellHarmful", NWScript_GetLastSpellHarmful);
-  lua_register(L, "EventActivateItem", NWScript_EventActivateItem);
-  lua_register(L, "MusicBackgroundPlay", NWScript_MusicBackgroundPlay);
-  lua_register(L, "MusicBackgroundStop", NWScript_MusicBackgroundStop);
-  lua_register(L, "MusicBackgroundSetDelay", NWScript_MusicBackgroundSetDelay);
-  lua_register(L, "MusicBackgroundChangeDay", NWScript_MusicBackgroundChangeDay);
-  lua_register(L, "MusicBackgroundChangeNight", NWScript_MusicBackgroundChangeNight);
-  lua_register(L, "MusicBattlePlay", NWScript_MusicBattlePlay);
-  lua_register(L, "MusicBattleStop", NWScript_MusicBattleStop);
-  lua_register(L, "MusicBattleChange", NWScript_MusicBattleChange);
-  lua_register(L, "AmbientSoundPlay", NWScript_AmbientSoundPlay);
-  lua_register(L, "AmbientSoundStop", NWScript_AmbientSoundStop);
-  lua_register(L, "AmbientSoundChangeDay", NWScript_AmbientSoundChangeDay);
-  lua_register(L, "AmbientSoundChangeNight", NWScript_AmbientSoundChangeNight);
-  lua_register(L, "GetLastKiller", NWScript_GetLastKiller);
-  lua_register(L, "GetSpellCastItem", NWScript_GetSpellCastItem);
-  lua_register(L, "GetItemActivated", NWScript_GetItemActivated);
-  lua_register(L, "GetItemActivator", NWScript_GetItemActivator);
-  lua_register(L, "GetItemActivatedTargetLocation", NWScript_GetItemActivatedTargetLocation);
-  lua_register(L, "GetItemActivatedTarget", NWScript_GetItemActivatedTarget);
-  lua_register(L, "GetIsOpen", NWScript_GetIsOpen);
-  lua_register(L, "TakeGoldFromCreature", NWScript_TakeGoldFromCreature);
-  lua_register(L, "IsInConversation", NWScript_IsInConversation);
-  lua_register(L, "EffectAbilityDecrease", NWScript_EffectAbilityDecrease);
-  lua_register(L, "EffectAttackDecrease", NWScript_EffectAttackDecrease);
-  lua_register(L, "EffectDamageDecrease", NWScript_EffectDamageDecrease);
-  lua_register(L, "EffectDamageImmunityDecrease", NWScript_EffectDamageImmunityDecrease);
-  lua_register(L, "EffectACDecrease", NWScript_EffectACDecrease);
-  lua_register(L, "EffectMovementSpeedDecrease", NWScript_EffectMovementSpeedDecrease);
-  lua_register(L, "EffectSavingThrowDecrease", NWScript_EffectSavingThrowDecrease);
-  lua_register(L, "EffectSkillDecrease", NWScript_EffectSkillDecrease);
-  lua_register(L, "EffectSpellResistanceDecrease", NWScript_EffectSpellResistanceDecrease);
-  lua_register(L, "GetPlotFlag", NWScript_GetPlotFlag);
-  lua_register(L, "SetPlotFlag", NWScript_SetPlotFlag);
-  lua_register(L, "EffectInvisibility", NWScript_EffectInvisibility);
-  lua_register(L, "EffectConcealment", NWScript_EffectConcealment);
-  lua_register(L, "EffectDarkness", NWScript_EffectDarkness);
-  lua_register(L, "EffectDispelMagicAll", NWScript_EffectDispelMagicAll);
-  lua_register(L, "EffectUltravision", NWScript_EffectUltravision);
-  lua_register(L, "EffectNegativeLevel", NWScript_EffectNegativeLevel);
-  lua_register(L, "EffectPolymorph", NWScript_EffectPolymorph);
-  lua_register(L, "EffectSanctuary", NWScript_EffectSanctuary);
-  lua_register(L, "EffectTrueSeeing", NWScript_EffectTrueSeeing);
-  lua_register(L, "EffectSeeInvisible", NWScript_EffectSeeInvisible);
-  lua_register(L, "EffectTimeStop", NWScript_EffectTimeStop);
-  lua_register(L, "EffectBlindness", NWScript_EffectBlindness);
-  lua_register(L, "GetIsReactionTypeFriendly", NWScript_GetIsReactionTypeFriendly);
-  lua_register(L, "GetIsReactionTypeNeutral", NWScript_GetIsReactionTypeNeutral);
-  lua_register(L, "GetIsReactionTypeHostile", NWScript_GetIsReactionTypeHostile);
-  lua_register(L, "EffectSpellLevelAbsorption", NWScript_EffectSpellLevelAbsorption);
-  lua_register(L, "EffectDispelMagicBest", NWScript_EffectDispelMagicBest);
-  lua_register(L, "ActivatePortal", NWScript_ActivatePortal);
-  lua_register(L, "GetNumStackedItems", NWScript_GetNumStackedItems);
-  lua_register(L, "SurrenderToEnemies", NWScript_SurrenderToEnemies);
-  lua_register(L, "EffectMissChance", NWScript_EffectMissChance);
-  lua_register(L, "GetTurnResistanceHD", NWScript_GetTurnResistanceHD);
-  lua_register(L, "GetCreatureSize", NWScript_GetCreatureSize);
-  lua_register(L, "EffectDisappearAppear", NWScript_EffectDisappearAppear);
-  lua_register(L, "EffectDisappear", NWScript_EffectDisappear);
-  lua_register(L, "EffectAppear", NWScript_EffectAppear);
-  lua_register(L, "ActionUnlockObject", NWScript_ActionUnlockObject);
-  lua_register(L, "ActionLockObject", NWScript_ActionLockObject);
-  lua_register(L, "EffectModifyAttacks", NWScript_EffectModifyAttacks);
-  lua_register(L, "GetLastTrapDetected", NWScript_GetLastTrapDetected);
-  lua_register(L, "EffectDamageShield", NWScript_EffectDamageShield);
-  lua_register(L, "GetNearestTrapToObject", NWScript_GetNearestTrapToObject);
-  lua_register(L, "GetDeity", NWScript_GetDeity);
-  lua_register(L, "GetSubRace", NWScript_GetSubRace);
-  lua_register(L, "GetFortitudeSavingThrow", NWScript_GetFortitudeSavingThrow);
-  lua_register(L, "GetWillSavingThrow", NWScript_GetWillSavingThrow);
-  lua_register(L, "GetReflexSavingThrow", NWScript_GetReflexSavingThrow);
-  lua_register(L, "GetChallengeRating", NWScript_GetChallengeRating);
-  lua_register(L, "GetAge", NWScript_GetAge);
-  lua_register(L, "GetMovementRate", NWScript_GetMovementRate);
-  lua_register(L, "GetFamiliarCreatureType", NWScript_GetFamiliarCreatureType);
-  lua_register(L, "GetAnimalCompanionCreatureType", NWScript_GetAnimalCompanionCreatureType);
-  lua_register(L, "GetFamiliarName", NWScript_GetFamiliarName);
-  lua_register(L, "GetAnimalCompanionName", NWScript_GetAnimalCompanionName);
-  lua_register(L, "ActionCastFakeSpellAtObject", NWScript_ActionCastFakeSpellAtObject);
-  lua_register(L, "ActionCastFakeSpellAtLocation", NWScript_ActionCastFakeSpellAtLocation);
-  lua_register(L, "RemoveSummonedAssociate", NWScript_RemoveSummonedAssociate);
-  lua_register(L, "SetCameraMode", NWScript_SetCameraMode);
-  lua_register(L, "GetIsResting", NWScript_GetIsResting);
-  lua_register(L, "GetLastPCRested", NWScript_GetLastPCRested);
-  lua_register(L, "SetWeather", NWScript_SetWeather);
-  lua_register(L, "GetLastRestEventType", NWScript_GetLastRestEventType);
-  lua_register(L, "StartNewModule", NWScript_StartNewModule);
-  lua_register(L, "EffectSwarm", NWScript_EffectSwarm);
-  lua_register(L, "GetWeaponRanged", NWScript_GetWeaponRanged);
-  lua_register(L, "DoSinglePlayerAutoSave", NWScript_DoSinglePlayerAutoSave);
-  lua_register(L, "GetGameDifficulty", NWScript_GetGameDifficulty);
-  lua_register(L, "SetTileMainLightColor", NWScript_SetTileMainLightColor);
-  lua_register(L, "SetTileSourceLightColor", NWScript_SetTileSourceLightColor);
-  lua_register(L, "RecomputeStaticLighting", NWScript_RecomputeStaticLighting);
-  lua_register(L, "GetTileMainLight1Color", NWScript_GetTileMainLight1Color);
-  lua_register(L, "GetTileMainLight2Color", NWScript_GetTileMainLight2Color);
-  lua_register(L, "GetTileSourceLight1Color", NWScript_GetTileSourceLight1Color);
-  lua_register(L, "GetTileSourceLight2Color", NWScript_GetTileSourceLight2Color);
-  lua_register(L, "SetPanelButtonFlash", NWScript_SetPanelButtonFlash);
-  lua_register(L, "GetCurrentAction", NWScript_GetCurrentAction);
-  lua_register(L, "SetStandardFactionReputation", NWScript_SetStandardFactionReputation);
-  lua_register(L, "GetStandardFactionReputation", NWScript_GetStandardFactionReputation);
-  lua_register(L, "FloatingTextStrRefOnCreature", NWScript_FloatingTextStrRefOnCreature);
-  lua_register(L, "FloatingTextStringOnCreature", NWScript_FloatingTextStringOnCreature);
-  lua_register(L, "GetTrapDisarmable", NWScript_GetTrapDisarmable);
-  lua_register(L, "GetTrapDetectable", NWScript_GetTrapDetectable);
-  lua_register(L, "GetTrapDetectedBy", NWScript_GetTrapDetectedBy);
-  lua_register(L, "GetTrapFlagged", NWScript_GetTrapFlagged);
-  lua_register(L, "GetTrapBaseType", NWScript_GetTrapBaseType);
-  lua_register(L, "GetTrapOneShot", NWScript_GetTrapOneShot);
-  lua_register(L, "GetTrapCreator", NWScript_GetTrapCreator);
-  lua_register(L, "GetTrapKeyTag", NWScript_GetTrapKeyTag);
-  lua_register(L, "GetTrapDisarmDC", NWScript_GetTrapDisarmDC);
-  lua_register(L, "GetTrapDetectDC", NWScript_GetTrapDetectDC);
-  lua_register(L, "GetLockKeyRequired", NWScript_GetLockKeyRequired);
-  lua_register(L, "GetLockKeyTag", NWScript_GetLockKeyTag);
-  lua_register(L, "GetLockLockable", NWScript_GetLockLockable);
-  lua_register(L, "GetLockUnlockDC", NWScript_GetLockUnlockDC);
-  lua_register(L, "GetLockLockDC", NWScript_GetLockLockDC);
-  lua_register(L, "GetPCLevellingUp", NWScript_GetPCLevellingUp);
-  lua_register(L, "GetHasFeatEffect", NWScript_GetHasFeatEffect);
-  lua_register(L, "SetPlaceableIllumination", NWScript_SetPlaceableIllumination);
-  lua_register(L, "GetPlaceableIllumination", NWScript_GetPlaceableIllumination);
-  lua_register(L, "GetIsPlaceableObjectActionPossible", NWScript_GetIsPlaceableObjectActionPossible);
-  lua_register(L, "DoPlaceableObjectAction", NWScript_DoPlaceableObjectAction);
-  lua_register(L, "GetFirstPC", NWScript_GetFirstPC);
-  lua_register(L, "GetNextPC", NWScript_GetNextPC);
-  lua_register(L, "SetTrapDetectedBy", NWScript_SetTrapDetectedBy);
-  lua_register(L, "GetIsTrapped", NWScript_GetIsTrapped);
-  lua_register(L, "EffectTurnResistanceDecrease", NWScript_EffectTurnResistanceDecrease);
-  lua_register(L, "EffectTurnResistanceIncrease", NWScript_EffectTurnResistanceIncrease);
-  lua_register(L, "PopUpDeathGUIPanel", NWScript_PopUpDeathGUIPanel);
-  lua_register(L, "SetTrapDisabled", NWScript_SetTrapDisabled);
-  lua_register(L, "GetLastHostileActor", NWScript_GetLastHostileActor);
-  lua_register(L, "ExportAllCharacters", NWScript_ExportAllCharacters);
-  lua_register(L, "MusicBackgroundGetDayTrack", NWScript_MusicBackgroundGetDayTrack);
-  lua_register(L, "MusicBackgroundGetNightTrack", NWScript_MusicBackgroundGetNightTrack);
-  lua_register(L, "WriteTimestampedLogEntry", NWScript_WriteTimestampedLogEntry);
-  lua_register(L, "GetModuleName", NWScript_GetModuleName);
-  lua_register(L, "GetFactionLeader", NWScript_GetFactionLeader);
-  lua_register(L, "SendMessageToAllDMs", NWScript_SendMessageToAllDMs);
-  lua_register(L, "EndGame", NWScript_EndGame);
-  lua_register(L, "BootPC", NWScript_BootPC);
-  lua_register(L, "ActionCounterSpell", NWScript_ActionCounterSpell);
-  lua_register(L, "AmbientSoundSetDayVolume", NWScript_AmbientSoundSetDayVolume);
-  lua_register(L, "AmbientSoundSetNightVolume", NWScript_AmbientSoundSetNightVolume);
-  lua_register(L, "MusicBackgroundGetBattleTrack", NWScript_MusicBackgroundGetBattleTrack);
-  lua_register(L, "GetHasInventory", NWScript_GetHasInventory);
-  lua_register(L, "GetStrRefSoundDuration", NWScript_GetStrRefSoundDuration);
-  lua_register(L, "AddToParty", NWScript_AddToParty);
-  lua_register(L, "RemoveFromParty", NWScript_RemoveFromParty);
-  lua_register(L, "GetStealthMode", NWScript_GetStealthMode);
-  lua_register(L, "GetDetectMode", NWScript_GetDetectMode);
-  lua_register(L, "GetDefensiveCastingMode", NWScript_GetDefensiveCastingMode);
-  lua_register(L, "GetAppearanceType", NWScript_GetAppearanceType);
-  lua_register(L, "SpawnScriptDebugger", NWScript_SpawnScriptDebugger);
-  lua_register(L, "GetModuleItemAcquiredStackSize", NWScript_GetModuleItemAcquiredStackSize);
-  lua_register(L, "DecrementRemainingFeatUses", NWScript_DecrementRemainingFeatUses);
-  lua_register(L, "DecrementRemainingSpellUses", NWScript_DecrementRemainingSpellUses);
-  lua_register(L, "GetResRef", NWScript_GetResRef);
-  lua_register(L, "EffectPetrify", NWScript_EffectPetrify);
-  lua_register(L, "CopyItem", NWScript_CopyItem);
-  lua_register(L, "EffectCutsceneParalyze", NWScript_EffectCutsceneParalyze);
-  lua_register(L, "GetDroppableFlag", NWScript_GetDroppableFlag);
-  lua_register(L, "GetUseableFlag", NWScript_GetUseableFlag);
-  lua_register(L, "GetStolenFlag", NWScript_GetStolenFlag);
-  lua_register(L, "SetCampaignFloat", NWScript_SetCampaignFloat);
-  lua_register(L, "SetCampaignInt", NWScript_SetCampaignInt);
-  lua_register(L, "SetCampaignVector", NWScript_SetCampaignVector);
-  lua_register(L, "SetCampaignLocation", NWScript_SetCampaignLocation);
-  lua_register(L, "SetCampaignString", NWScript_SetCampaignString);
-  lua_register(L, "DestroyCampaignDatabase", NWScript_DestroyCampaignDatabase);
-  lua_register(L, "GetCampaignFloat", NWScript_GetCampaignFloat);
-  lua_register(L, "GetCampaignInt", NWScript_GetCampaignInt);
-  lua_register(L, "GetCampaignVector", NWScript_GetCampaignVector);
-  lua_register(L, "GetCampaignLocation", NWScript_GetCampaignLocation);
-  lua_register(L, "GetCampaignString", NWScript_GetCampaignString);
-  lua_register(L, "CopyObject", NWScript_CopyObject);
-  lua_register(L, "DeleteCampaignVariable", NWScript_DeleteCampaignVariable);
-  lua_register(L, "StoreCampaignObject", NWScript_StoreCampaignObject);
-  lua_register(L, "RetrieveCampaignObject", NWScript_RetrieveCampaignObject);
-  lua_register(L, "EffectCutsceneDominated", NWScript_EffectCutsceneDominated);
-  lua_register(L, "GetItemStackSize", NWScript_GetItemStackSize);
-  lua_register(L, "SetItemStackSize", NWScript_SetItemStackSize);
-  lua_register(L, "GetItemCharges", NWScript_GetItemCharges);
-  lua_register(L, "SetItemCharges", NWScript_SetItemCharges);
-  lua_register(L, "AddItemProperty", NWScript_AddItemProperty);
-  lua_register(L, "RemoveItemProperty", NWScript_RemoveItemProperty);
-  lua_register(L, "GetIsItemPropertyValid", NWScript_GetIsItemPropertyValid);
-  lua_register(L, "GetFirstItemProperty", NWScript_GetFirstItemProperty);
-  lua_register(L, "GetNextItemProperty", NWScript_GetNextItemProperty);
-  lua_register(L, "GetItemPropertyType", NWScript_GetItemPropertyType);
-  lua_register(L, "GetItemPropertyDurationType", NWScript_GetItemPropertyDurationType);
-  lua_register(L, "ItemPropertyAbilityBonus", NWScript_ItemPropertyAbilityBonus);
-  lua_register(L, "ItemPropertyACBonus", NWScript_ItemPropertyACBonus);
-  lua_register(L, "ItemPropertyACBonusVsAlign", NWScript_ItemPropertyACBonusVsAlign);
-  lua_register(L, "ItemPropertyACBonusVsDmgType", NWScript_ItemPropertyACBonusVsDmgType);
-  lua_register(L, "ItemPropertyACBonusVsRace", NWScript_ItemPropertyACBonusVsRace);
-  lua_register(L, "ItemPropertyACBonusVsSAlign", NWScript_ItemPropertyACBonusVsSAlign);
-  lua_register(L, "ItemPropertyEnhancementBonus", NWScript_ItemPropertyEnhancementBonus);
-  lua_register(L, "ItemPropertyEnhancementBonusVsAlign", NWScript_ItemPropertyEnhancementBonusVsAlign);
-  lua_register(L, "ItemPropertyEnhancementBonusVsRace", NWScript_ItemPropertyEnhancementBonusVsRace);
-  lua_register(L, "ItemPropertyEnhancementBonusVsSAlign", NWScript_ItemPropertyEnhancementBonusVsSAlign);
-  lua_register(L, "ItemPropertyEnhancementPenalty", NWScript_ItemPropertyEnhancementPenalty);
-  lua_register(L, "ItemPropertyWeightReduction", NWScript_ItemPropertyWeightReduction);
-  lua_register(L, "ItemPropertyBonusFeat", NWScript_ItemPropertyBonusFeat);
-  lua_register(L, "ItemPropertyBonusLevelSpell", NWScript_ItemPropertyBonusLevelSpell);
-  lua_register(L, "ItemPropertyCastSpell", NWScript_ItemPropertyCastSpell);
-  lua_register(L, "ItemPropertyDamageBonus", NWScript_ItemPropertyDamageBonus);
-  lua_register(L, "ItemPropertyDamageBonusVsAlign", NWScript_ItemPropertyDamageBonusVsAlign);
-  lua_register(L, "ItemPropertyDamageBonusVsRace", NWScript_ItemPropertyDamageBonusVsRace);
-  lua_register(L, "ItemPropertyDamageBonusVsSAlign", NWScript_ItemPropertyDamageBonusVsSAlign);
-  lua_register(L, "ItemPropertyDamageImmunity", NWScript_ItemPropertyDamageImmunity);
-  lua_register(L, "ItemPropertyDamagePenalty", NWScript_ItemPropertyDamagePenalty);
-  lua_register(L, "ItemPropertyDamageReduction", NWScript_ItemPropertyDamageReduction);
-  lua_register(L, "ItemPropertyDamageResistance", NWScript_ItemPropertyDamageResistance);
-  lua_register(L, "ItemPropertyDamageVulnerability", NWScript_ItemPropertyDamageVulnerability);
-  lua_register(L, "ItemPropertyDarkvision", NWScript_ItemPropertyDarkvision);
-  lua_register(L, "ItemPropertyDecreaseAbility", NWScript_ItemPropertyDecreaseAbility);
-  lua_register(L, "ItemPropertyDecreaseAC", NWScript_ItemPropertyDecreaseAC);
-  lua_register(L, "ItemPropertyDecreaseSkill", NWScript_ItemPropertyDecreaseSkill);
-  lua_register(L, "ItemPropertyContainerReducedWeight", NWScript_ItemPropertyContainerReducedWeight);
-  lua_register(L, "ItemPropertyExtraMeleeDamageType", NWScript_ItemPropertyExtraMeleeDamageType);
-  lua_register(L, "ItemPropertyExtraRangeDamageType", NWScript_ItemPropertyExtraRangeDamageType);
-  lua_register(L, "ItemPropertyHaste", NWScript_ItemPropertyHaste);
-  lua_register(L, "ItemPropertyHolyAvenger", NWScript_ItemPropertyHolyAvenger);
-  lua_register(L, "ItemPropertyImmunityMisc", NWScript_ItemPropertyImmunityMisc);
-  lua_register(L, "ItemPropertyImprovedEvasion", NWScript_ItemPropertyImprovedEvasion);
-  lua_register(L, "ItemPropertyBonusSpellResistance", NWScript_ItemPropertyBonusSpellResistance);
-  lua_register(L, "ItemPropertyBonusSavingThrowVsX", NWScript_ItemPropertyBonusSavingThrowVsX);
-  lua_register(L, "ItemPropertyBonusSavingThrow", NWScript_ItemPropertyBonusSavingThrow);
-  lua_register(L, "ItemPropertyKeen", NWScript_ItemPropertyKeen);
-  lua_register(L, "ItemPropertyLight", NWScript_ItemPropertyLight);
-  lua_register(L, "ItemPropertyMaxRangeStrengthMod", NWScript_ItemPropertyMaxRangeStrengthMod);
-  lua_register(L, "ItemPropertyNoDamage", NWScript_ItemPropertyNoDamage);
-  lua_register(L, "ItemPropertyOnHitProps", NWScript_ItemPropertyOnHitProps);
-  lua_register(L, "ItemPropertyReducedSavingThrowVsX", NWScript_ItemPropertyReducedSavingThrowVsX);
-  lua_register(L, "ItemPropertyReducedSavingThrow", NWScript_ItemPropertyReducedSavingThrow);
-  lua_register(L, "ItemPropertyRegeneration", NWScript_ItemPropertyRegeneration);
-  lua_register(L, "ItemPropertySkillBonus", NWScript_ItemPropertySkillBonus);
-  lua_register(L, "ItemPropertySpellImmunitySpecific", NWScript_ItemPropertySpellImmunitySpecific);
-  lua_register(L, "ItemPropertySpellImmunitySchool", NWScript_ItemPropertySpellImmunitySchool);
-  lua_register(L, "ItemPropertyThievesTools", NWScript_ItemPropertyThievesTools);
-  lua_register(L, "ItemPropertyAttackBonus", NWScript_ItemPropertyAttackBonus);
-  lua_register(L, "ItemPropertyAttackBonusVsAlign", NWScript_ItemPropertyAttackBonusVsAlign);
-  lua_register(L, "ItemPropertyAttackBonusVsRace", NWScript_ItemPropertyAttackBonusVsRace);
-  lua_register(L, "ItemPropertyAttackBonusVsSAlign", NWScript_ItemPropertyAttackBonusVsSAlign);
-  lua_register(L, "ItemPropertyAttackPenalty", NWScript_ItemPropertyAttackPenalty);
-  lua_register(L, "ItemPropertyUnlimitedAmmo", NWScript_ItemPropertyUnlimitedAmmo);
-  lua_register(L, "ItemPropertyLimitUseByAlign", NWScript_ItemPropertyLimitUseByAlign);
-  lua_register(L, "ItemPropertyLimitUseByClass", NWScript_ItemPropertyLimitUseByClass);
-  lua_register(L, "ItemPropertyLimitUseByRace", NWScript_ItemPropertyLimitUseByRace);
-  lua_register(L, "ItemPropertyLimitUseBySAlign", NWScript_ItemPropertyLimitUseBySAlign);
-  lua_register(L, "BadBadReplaceMeThisDoesNothing", NWScript_BadBadReplaceMeThisDoesNothing);
-  lua_register(L, "ItemPropertyVampiricRegeneration", NWScript_ItemPropertyVampiricRegeneration);
-  lua_register(L, "ItemPropertyTrap", NWScript_ItemPropertyTrap);
-  lua_register(L, "ItemPropertyTrueSeeing", NWScript_ItemPropertyTrueSeeing);
-  lua_register(L, "ItemPropertyOnMonsterHitProperties", NWScript_ItemPropertyOnMonsterHitProperties);
-  lua_register(L, "ItemPropertyTurnResistance", NWScript_ItemPropertyTurnResistance);
-  lua_register(L, "ItemPropertyMassiveCritical", NWScript_ItemPropertyMassiveCritical);
-  lua_register(L, "ItemPropertyFreeAction", NWScript_ItemPropertyFreeAction);
-  lua_register(L, "ItemPropertyMonsterDamage", NWScript_ItemPropertyMonsterDamage);
-  lua_register(L, "ItemPropertyImmunityToSpellLevel", NWScript_ItemPropertyImmunityToSpellLevel);
-  lua_register(L, "ItemPropertySpecialWalk", NWScript_ItemPropertySpecialWalk);
-  lua_register(L, "ItemPropertyHealersKit", NWScript_ItemPropertyHealersKit);
-  lua_register(L, "ItemPropertyWeightIncrease", NWScript_ItemPropertyWeightIncrease);
-  lua_register(L, "GetIsSkillSuccessful", NWScript_GetIsSkillSuccessful);
-  lua_register(L, "EffectSpellFailure", NWScript_EffectSpellFailure);
-  lua_register(L, "SpeakStringByStrRef", NWScript_SpeakStringByStrRef);
-  lua_register(L, "SetCutsceneMode", NWScript_SetCutsceneMode);
-  lua_register(L, "GetLastPCToCancelCutscene", NWScript_GetLastPCToCancelCutscene);
-  lua_register(L, "GetDialogSoundLength", NWScript_GetDialogSoundLength);
-  lua_register(L, "FadeFromBlack", NWScript_FadeFromBlack);
-  lua_register(L, "FadeToBlack", NWScript_FadeToBlack);
-  lua_register(L, "StopFade", NWScript_StopFade);
-  lua_register(L, "BlackScreen", NWScript_BlackScreen);
-  lua_register(L, "GetBaseAttackBonus", NWScript_GetBaseAttackBonus);
-  lua_register(L, "SetImmortal", NWScript_SetImmortal);
-  lua_register(L, "OpenInventory", NWScript_OpenInventory);
-  lua_register(L, "StoreCameraFacing", NWScript_StoreCameraFacing);
-  lua_register(L, "RestoreCameraFacing", NWScript_RestoreCameraFacing);
-  lua_register(L, "LevelUpHenchman", NWScript_LevelUpHenchman);
-  lua_register(L, "SetDroppableFlag", NWScript_SetDroppableFlag);
-  lua_register(L, "GetWeight", NWScript_GetWeight);
-  lua_register(L, "GetModuleItemAcquiredBy", NWScript_GetModuleItemAcquiredBy);
-  lua_register(L, "GetImmortal", NWScript_GetImmortal);
-  lua_register(L, "DoWhirlwindAttack", NWScript_DoWhirlwindAttack);
-  lua_register(L, "Get2DAString", NWScript_Get2DAString);
-  lua_register(L, "EffectEthereal", NWScript_EffectEthereal);
-  lua_register(L, "GetAILevel", NWScript_GetAILevel);
-  lua_register(L, "SetAILevel", NWScript_SetAILevel);
-  lua_register(L, "GetIsPossessedFamiliar", NWScript_GetIsPossessedFamiliar);
-  lua_register(L, "UnpossessFamiliar", NWScript_UnpossessFamiliar);
-  lua_register(L, "GetIsAreaInterior", NWScript_GetIsAreaInterior);
-  lua_register(L, "SendMessageToPCByStrRef", NWScript_SendMessageToPCByStrRef);
-  lua_register(L, "IncrementRemainingFeatUses", NWScript_IncrementRemainingFeatUses);
-  lua_register(L, "ExportSingleCharacter", NWScript_ExportSingleCharacter);
-  lua_register(L, "PlaySoundByStrRef", NWScript_PlaySoundByStrRef);
-  lua_register(L, "SetSubRace", NWScript_SetSubRace);
-  lua_register(L, "SetDeity", NWScript_SetDeity);
-  lua_register(L, "GetIsDMPossessed", NWScript_GetIsDMPossessed);
-  lua_register(L, "GetWeather", NWScript_GetWeather);
-  lua_register(L, "GetIsAreaNatural", NWScript_GetIsAreaNatural);
-  lua_register(L, "GetIsAreaAboveGround", NWScript_GetIsAreaAboveGround);
-  lua_register(L, "GetPCItemLastEquipped", NWScript_GetPCItemLastEquipped);
-  lua_register(L, "GetPCItemLastEquippedBy", NWScript_GetPCItemLastEquippedBy);
-  lua_register(L, "GetPCItemLastUnequipped", NWScript_GetPCItemLastUnequipped);
-  lua_register(L, "GetPCItemLastUnequippedBy", NWScript_GetPCItemLastUnequippedBy);
-  lua_register(L, "CopyItemAndModify", NWScript_CopyItemAndModify);
-  lua_register(L, "GetItemAppearance", NWScript_GetItemAppearance);
-  lua_register(L, "ItemPropertyOnHitCastSpell", NWScript_ItemPropertyOnHitCastSpell);
-  lua_register(L, "GetItemPropertySubType", NWScript_GetItemPropertySubType);
-  lua_register(L, "GetActionMode", NWScript_GetActionMode);
-  lua_register(L, "SetActionMode", NWScript_SetActionMode);
-  lua_register(L, "GetArcaneSpellFailure", NWScript_GetArcaneSpellFailure);
-  lua_register(L, "ActionExamine", NWScript_ActionExamine);
-  lua_register(L, "ItemPropertyVisualEffect", NWScript_ItemPropertyVisualEffect);
-  lua_register(L, "SetLootable", NWScript_SetLootable);
-  lua_register(L, "GetLootable", NWScript_GetLootable);
-  lua_register(L, "GetCutsceneCameraMoveRate", NWScript_GetCutsceneCameraMoveRate);
-  lua_register(L, "SetCutsceneCameraMoveRate", NWScript_SetCutsceneCameraMoveRate);
-  lua_register(L, "GetItemCursedFlag", NWScript_GetItemCursedFlag);
-  lua_register(L, "SetItemCursedFlag", NWScript_SetItemCursedFlag);
-  lua_register(L, "SetMaxHenchmen", NWScript_SetMaxHenchmen);
-  lua_register(L, "GetMaxHenchmen", NWScript_GetMaxHenchmen);
-  lua_register(L, "GetAssociateType", NWScript_GetAssociateType);
-  lua_register(L, "GetSpellResistance", NWScript_GetSpellResistance);
-  lua_register(L, "DayToNight", NWScript_DayToNight);
-  lua_register(L, "NightToDay", NWScript_NightToDay);
-  lua_register(L, "LineOfSightObject", NWScript_LineOfSightObject);
-  lua_register(L, "LineOfSightVector", NWScript_LineOfSightVector);
-  lua_register(L, "GetLastSpellCastClass", NWScript_GetLastSpellCastClass);
-  lua_register(L, "SetBaseAttackBonus", NWScript_SetBaseAttackBonus);
-  lua_register(L, "RestoreBaseAttackBonus", NWScript_RestoreBaseAttackBonus);
-  lua_register(L, "EffectCutsceneGhost", NWScript_EffectCutsceneGhost);
-  lua_register(L, "ItemPropertyArcaneSpellFailure", NWScript_ItemPropertyArcaneSpellFailure);
-  lua_register(L, "GetStoreGold", NWScript_GetStoreGold);
-  lua_register(L, "SetStoreGold", NWScript_SetStoreGold);
-  lua_register(L, "GetStoreMaxBuyPrice", NWScript_GetStoreMaxBuyPrice);
-  lua_register(L, "SetStoreMaxBuyPrice", NWScript_SetStoreMaxBuyPrice);
-  lua_register(L, "GetStoreIdentifyCost", NWScript_GetStoreIdentifyCost);
-  lua_register(L, "SetStoreIdentifyCost", NWScript_SetStoreIdentifyCost);
-  lua_register(L, "SetCreatureAppearanceType", NWScript_SetCreatureAppearanceType);
-  lua_register(L, "GetCreatureStartingPackage", NWScript_GetCreatureStartingPackage);
-  lua_register(L, "EffectCutsceneImmobilize", NWScript_EffectCutsceneImmobilize);
-  lua_register(L, "GetIsInSubArea", NWScript_GetIsInSubArea);
-  lua_register(L, "GetItemPropertyCostTable", NWScript_GetItemPropertyCostTable);
-  lua_register(L, "GetItemPropertyCostTableValue", NWScript_GetItemPropertyCostTableValue);
-  lua_register(L, "GetItemPropertyParam1", NWScript_GetItemPropertyParam1);
-  lua_register(L, "GetItemPropertyParam1Value", NWScript_GetItemPropertyParam1Value);
-  lua_register(L, "GetIsCreatureDisarmable", NWScript_GetIsCreatureDisarmable);
-  lua_register(L, "SetStolenFlag", NWScript_SetStolenFlag);
-  lua_register(L, "ForceRest", NWScript_ForceRest);
-  lua_register(L, "SetCameraHeight", NWScript_SetCameraHeight);
-  lua_register(L, "SetSkyBox", NWScript_SetSkyBox);
-  lua_register(L, "GetPhenoType", NWScript_GetPhenoType);
-  lua_register(L, "SetPhenoType", NWScript_SetPhenoType);
-  lua_register(L, "SetFogColor", NWScript_SetFogColor);
-  lua_register(L, "GetCutsceneMode", NWScript_GetCutsceneMode);
-  lua_register(L, "GetSkyBox", NWScript_GetSkyBox);
-  lua_register(L, "GetFogColor", NWScript_GetFogColor);
-  lua_register(L, "SetFogAmount", NWScript_SetFogAmount);
-  lua_register(L, "GetFogAmount", NWScript_GetFogAmount);
-  lua_register(L, "GetPickpocketableFlag", NWScript_GetPickpocketableFlag);
-  lua_register(L, "SetPickpocketableFlag", NWScript_SetPickpocketableFlag);
-  lua_register(L, "GetFootstepType", NWScript_GetFootstepType);
-  lua_register(L, "SetFootstepType", NWScript_SetFootstepType);
-  lua_register(L, "GetCreatureWingType", NWScript_GetCreatureWingType);
-  lua_register(L, "SetCreatureWingType", NWScript_SetCreatureWingType);
-  lua_register(L, "GetCreatureBodyPart", NWScript_GetCreatureBodyPart);
-  lua_register(L, "SetCreatureBodyPart", NWScript_SetCreatureBodyPart);
-  lua_register(L, "GetCreatureTailType", NWScript_GetCreatureTailType);
-  lua_register(L, "SetCreatureTailType", NWScript_SetCreatureTailType);
-  lua_register(L, "GetHardness", NWScript_GetHardness);
-  lua_register(L, "SetHardness", NWScript_SetHardness);
-  lua_register(L, "SetLockKeyRequired", NWScript_SetLockKeyRequired);
-  lua_register(L, "SetLockKeyTag", NWScript_SetLockKeyTag);
-  lua_register(L, "SetLockLockable", NWScript_SetLockLockable);
-  lua_register(L, "SetLockUnlockDC", NWScript_SetLockUnlockDC);
-  lua_register(L, "SetLockLockDC", NWScript_SetLockLockDC);
-  lua_register(L, "SetTrapDisarmable", NWScript_SetTrapDisarmable);
-  lua_register(L, "SetTrapDetectable", NWScript_SetTrapDetectable);
-  lua_register(L, "SetTrapOneShot", NWScript_SetTrapOneShot);
-  lua_register(L, "SetTrapKeyTag", NWScript_SetTrapKeyTag);
-  lua_register(L, "SetTrapDisarmDC", NWScript_SetTrapDisarmDC);
-  lua_register(L, "SetTrapDetectDC", NWScript_SetTrapDetectDC);
-  lua_register(L, "CreateTrapAtLocation", NWScript_CreateTrapAtLocation);
-  lua_register(L, "CreateTrapOnObject", NWScript_CreateTrapOnObject);
-  lua_register(L, "SetWillSavingThrow", NWScript_SetWillSavingThrow);
-  lua_register(L, "SetReflexSavingThrow", NWScript_SetReflexSavingThrow);
-  lua_register(L, "SetFortitudeSavingThrow", NWScript_SetFortitudeSavingThrow);
-  lua_register(L, "GetTilesetResRef", NWScript_GetTilesetResRef);
-  lua_register(L, "GetTrapRecoverable", NWScript_GetTrapRecoverable);
-  lua_register(L, "SetTrapRecoverable", NWScript_SetTrapRecoverable);
-  lua_register(L, "GetModuleXPScale", NWScript_GetModuleXPScale);
-  lua_register(L, "SetModuleXPScale", NWScript_SetModuleXPScale);
-  lua_register(L, "GetKeyRequiredFeedback", NWScript_GetKeyRequiredFeedback);
-  lua_register(L, "SetKeyRequiredFeedback", NWScript_SetKeyRequiredFeedback);
-  lua_register(L, "GetTrapActive", NWScript_GetTrapActive);
-  lua_register(L, "SetTrapActive", NWScript_SetTrapActive);
-  lua_register(L, "LockCameraPitch", NWScript_LockCameraPitch);
-  lua_register(L, "LockCameraDistance", NWScript_LockCameraDistance);
-  lua_register(L, "LockCameraDirection", NWScript_LockCameraDirection);
-  lua_register(L, "GetPlaceableLastClickedBy", NWScript_GetPlaceableLastClickedBy);
-  lua_register(L, "GetInfiniteFlag", NWScript_GetInfiniteFlag);
-  lua_register(L, "SetInfiniteFlag", NWScript_SetInfiniteFlag);
-  lua_register(L, "GetAreaSize", NWScript_GetAreaSize);
-  lua_register(L, "SetName", NWScript_SetName);
-  lua_register(L, "GetPortraitId", NWScript_GetPortraitId);
-  lua_register(L, "SetPortraitId", NWScript_SetPortraitId);
-  lua_register(L, "GetPortraitResRef", NWScript_GetPortraitResRef);
-  lua_register(L, "SetPortraitResRef", NWScript_SetPortraitResRef);
-  lua_register(L, "SetUseableFlag", NWScript_SetUseableFlag);
-  lua_register(L, "GetDescription", NWScript_GetDescription);
-  lua_register(L, "SetDescription", NWScript_SetDescription);
-  lua_register(L, "GetPCChatSpeaker", NWScript_GetPCChatSpeaker);
-  lua_register(L, "GetPCChatMessage", NWScript_GetPCChatMessage);
-  lua_register(L, "GetPCChatVolume", NWScript_GetPCChatVolume);
-  lua_register(L, "SetPCChatMessage", NWScript_SetPCChatMessage);
-  lua_register(L, "SetPCChatVolume", NWScript_SetPCChatVolume);
-  lua_register(L, "GetColor", NWScript_GetColor);
-  lua_register(L, "SetColor", NWScript_SetColor);
-  lua_register(L, "ItemPropertyMaterial", NWScript_ItemPropertyMaterial);
-  lua_register(L, "ItemPropertyQuality", NWScript_ItemPropertyQuality);
-  lua_register(L, "ItemPropertyAdditional", NWScript_ItemPropertyAdditional);
-
-}
+static const luaL_Reg nwscriptlib[] = {
+	{ "Random", NWScript_Random },
+	{ "PrintString", NWScript_PrintString },
+	{ "PrintFloat", NWScript_PrintFloat },
+	{ "FloatToString", NWScript_FloatToString },
+	{ "PrintInteger", NWScript_PrintInteger },
+	{ "PrintObject", NWScript_PrintObject },
+	{ "ExecuteScript", NWScript_ExecuteScript },
+	{ "ClearAllActions", NWScript_ClearAllActions },
+	{ "SetFacing", NWScript_SetFacing },
+	{ "SetCalendar", NWScript_SetCalendar },
+	{ "SetTime", NWScript_SetTime },
+	{ "GetCalendarYear", NWScript_GetCalendarYear },
+	{ "GetCalendarMonth", NWScript_GetCalendarMonth },
+	{ "GetCalendarDay", NWScript_GetCalendarDay },
+	{ "GetTimeHour", NWScript_GetTimeHour },
+	{ "GetTimeMinute", NWScript_GetTimeMinute },
+	{ "GetTimeSecond", NWScript_GetTimeSecond },
+	{ "GetTimeMillisecond", NWScript_GetTimeMillisecond },
+	{ "ActionRandomWalk", NWScript_ActionRandomWalk },
+	{ "ActionMoveToLocation", NWScript_ActionMoveToLocation },
+	{ "ActionMoveToObject", NWScript_ActionMoveToObject },
+	{ "ActionMoveAwayFromObject", NWScript_ActionMoveAwayFromObject },
+	{ "GetArea", NWScript_GetArea },
+	{ "GetEnteringObject", NWScript_GetEnteringObject },
+	{ "GetExitingObject", NWScript_GetExitingObject },
+	{ "GetPosition", NWScript_GetPosition },
+	{ "GetFacing", NWScript_GetFacing },
+	{ "GetItemPossessor", NWScript_GetItemPossessor },
+	{ "GetItemPossessedBy", NWScript_GetItemPossessedBy },
+	{ "CreateItemOnObject", NWScript_CreateItemOnObject },
+	{ "ActionEquipItem", NWScript_ActionEquipItem },
+	{ "ActionUnequipItem", NWScript_ActionUnequipItem },
+	{ "ActionPickUpItem", NWScript_ActionPickUpItem },
+	{ "ActionPutDownItem", NWScript_ActionPutDownItem },
+	{ "GetLastAttacker", NWScript_GetLastAttacker },
+	{ "ActionAttack", NWScript_ActionAttack },
+	{ "GetNearestCreature", NWScript_GetNearestCreature },
+	{ "ActionSpeakString", NWScript_ActionSpeakString },
+	{ "ActionPlayAnimation", NWScript_ActionPlayAnimation },
+	{ "GetDistanceToObject", NWScript_GetDistanceToObject },
+	{ "GetIsObjectValid", NWScript_GetIsObjectValid },
+	{ "ActionOpenDoor", NWScript_ActionOpenDoor },
+	{ "ActionCloseDoor", NWScript_ActionCloseDoor },
+	{ "SetCameraFacing", NWScript_SetCameraFacing },
+	{ "PlaySound", NWScript_PlaySound },
+	{ "GetSpellTargetObject", NWScript_GetSpellTargetObject },
+	{ "ActionCastSpellAtObject", NWScript_ActionCastSpellAtObject },
+	{ "GetCurrentHitPoints", NWScript_GetCurrentHitPoints },
+	{ "GetMaxHitPoints", NWScript_GetMaxHitPoints },
+	{ "GetLocalInt", NWScript_GetLocalInt },
+	{ "GetLocalFloat", NWScript_GetLocalFloat },
+	{ "GetLocalString", NWScript_GetLocalString },
+	{ "GetLocalObject", NWScript_GetLocalObject },
+	{ "SetLocalInt", NWScript_SetLocalInt },
+	{ "SetLocalFloat", NWScript_SetLocalFloat },
+	{ "SetLocalString", NWScript_SetLocalString },
+	{ "SetLocalObject", NWScript_SetLocalObject },
+	{ "GetStringLength", NWScript_GetStringLength },
+	{ "GetStringUpperCase", NWScript_GetStringUpperCase },
+	{ "GetStringLowerCase", NWScript_GetStringLowerCase },
+	{ "GetStringRight", NWScript_GetStringRight },
+	{ "GetStringLeft", NWScript_GetStringLeft },
+	{ "InsertString", NWScript_InsertString },
+	{ "GetSubString", NWScript_GetSubString },
+	{ "FindSubString", NWScript_FindSubString },
+	{ "fabs", NWScript_fabs },
+	{ "cos", NWScript_cos },
+	{ "sin", NWScript_sin },
+	{ "tan", NWScript_tan },
+	{ "acos", NWScript_acos },
+	{ "asin", NWScript_asin },
+	{ "atan", NWScript_atan },
+	{ "log", NWScript_log },
+	{ "pow", NWScript_pow },
+	{ "sqrt", NWScript_sqrt },
+	{ "abs", NWScript_abs },
+	{ "EffectHeal", NWScript_EffectHeal },
+	{ "EffectDamage", NWScript_EffectDamage },
+	{ "EffectAbilityIncrease", NWScript_EffectAbilityIncrease },
+	{ "EffectDamageResistance", NWScript_EffectDamageResistance },
+	{ "EffectResurrection", NWScript_EffectResurrection },
+	{ "EffectSummonCreature", NWScript_EffectSummonCreature },
+	{ "GetCasterLevel", NWScript_GetCasterLevel },
+	{ "GetFirstEffect", NWScript_GetFirstEffect },
+	{ "GetNextEffect", NWScript_GetNextEffect },
+	{ "RemoveEffect", NWScript_RemoveEffect },
+	{ "GetIsEffectValid", NWScript_GetIsEffectValid },
+	{ "GetEffectDurationType", NWScript_GetEffectDurationType },
+	{ "GetEffectSubType", NWScript_GetEffectSubType },
+	{ "GetEffectCreator", NWScript_GetEffectCreator },
+	{ "IntToString", NWScript_IntToString },
+	{ "GetFirstObjectInArea", NWScript_GetFirstObjectInArea },
+	{ "GetNextObjectInArea", NWScript_GetNextObjectInArea },
+	{ "d2", NWScript_d2 },
+	{ "d3", NWScript_d3 },
+	{ "d4", NWScript_d4 },
+	{ "d6", NWScript_d6 },
+	{ "d8", NWScript_d8 },
+	{ "d10", NWScript_d10 },
+	{ "d12", NWScript_d12 },
+	{ "d20", NWScript_d20 },
+	{ "d100", NWScript_d100 },
+	{ "VectorMagnitude", NWScript_VectorMagnitude },
+	{ "GetMetaMagicFeat", NWScript_GetMetaMagicFeat },
+	{ "GetObjectType", NWScript_GetObjectType },
+	{ "GetRacialType", NWScript_GetRacialType },
+	{ "FortitudeSave", NWScript_FortitudeSave },
+	{ "ReflexSave", NWScript_ReflexSave },
+	{ "WillSave", NWScript_WillSave },
+	{ "GetSpellSaveDC", NWScript_GetSpellSaveDC },
+	{ "MagicalEffect", NWScript_MagicalEffect },
+	{ "SupernaturalEffect", NWScript_SupernaturalEffect },
+	{ "ExtraordinaryEffect", NWScript_ExtraordinaryEffect },
+	{ "EffectACIncrease", NWScript_EffectACIncrease },
+	{ "GetAC", NWScript_GetAC },
+	{ "EffectSavingThrowIncrease", NWScript_EffectSavingThrowIncrease },
+	{ "EffectAttackIncrease", NWScript_EffectAttackIncrease },
+	{ "EffectDamageReduction", NWScript_EffectDamageReduction },
+	{ "EffectDamageIncrease", NWScript_EffectDamageIncrease },
+	{ "RoundsToSeconds", NWScript_RoundsToSeconds },
+	{ "HoursToSeconds", NWScript_HoursToSeconds },
+	{ "TurnsToSeconds", NWScript_TurnsToSeconds },
+	{ "GetLawChaosValue", NWScript_GetLawChaosValue },
+	{ "GetGoodEvilValue", NWScript_GetGoodEvilValue },
+	{ "GetAlignmentLawChaos", NWScript_GetAlignmentLawChaos },
+	{ "GetAlignmentGoodEvil", NWScript_GetAlignmentGoodEvil },
+	{ "EffectEntangle", NWScript_EffectEntangle },
+	{ "SignalEvent", NWScript_SignalEvent },
+	{ "EventUserDefined", NWScript_EventUserDefined },
+	{ "EffectDeath", NWScript_EffectDeath },
+	{ "EffectKnockdown", NWScript_EffectKnockdown },
+	{ "ActionGiveItem", NWScript_ActionGiveItem },
+	{ "ActionTakeItem", NWScript_ActionTakeItem },
+	{ "VectorNormalize", NWScript_VectorNormalize },
+	{ "EffectCurse", NWScript_EffectCurse },
+	{ "GetAbilityScore", NWScript_GetAbilityScore },
+	{ "GetIsDead", NWScript_GetIsDead },
+	{ "PrintVector", NWScript_PrintVector },
+	{ "Vector", NWScript_Vector },
+	{ "SetFacingPoint", NWScript_SetFacingPoint },
+	{ "AngleToVector", NWScript_AngleToVector },
+	{ "VectorToAngle", NWScript_VectorToAngle },
+	{ "TouchAttackMelee", NWScript_TouchAttackMelee },
+	{ "TouchAttackRanged", NWScript_TouchAttackRanged },
+	{ "EffectParalyze", NWScript_EffectParalyze },
+	{ "EffectSpellImmunity", NWScript_EffectSpellImmunity },
+	{ "EffectDeaf", NWScript_EffectDeaf },
+	{ "GetDistanceBetween", NWScript_GetDistanceBetween },
+	{ "SetLocalLocation", NWScript_SetLocalLocation },
+	{ "GetLocalLocation", NWScript_GetLocalLocation },
+	{ "EffectSleep", NWScript_EffectSleep },
+	{ "GetItemInSlot", NWScript_GetItemInSlot },
+	{ "EffectCharmed", NWScript_EffectCharmed },
+	{ "EffectConfused", NWScript_EffectConfused },
+	{ "EffectFrightened", NWScript_EffectFrightened },
+	{ "EffectDominated", NWScript_EffectDominated },
+	{ "EffectDazed", NWScript_EffectDazed },
+	{ "EffectStunned", NWScript_EffectStunned },
+	{ "SetCommandable", NWScript_SetCommandable },
+	{ "GetCommandable", NWScript_GetCommandable },
+	{ "EffectRegenerate", NWScript_EffectRegenerate },
+	{ "EffectMovementSpeedIncrease", NWScript_EffectMovementSpeedIncrease },
+	{ "GetHitDice", NWScript_GetHitDice },
+	{ "ActionForceFollowObject", NWScript_ActionForceFollowObject },
+	{ "GetTag", NWScript_GetTag },
+	{ "ResistSpell", NWScript_ResistSpell },
+	{ "GetEffectType", NWScript_GetEffectType },
+	{ "EffectAreaOfEffect", NWScript_EffectAreaOfEffect },
+	{ "GetFactionEqual", NWScript_GetFactionEqual },
+	{ "ChangeFaction", NWScript_ChangeFaction },
+	{ "GetIsListening", NWScript_GetIsListening },
+	{ "SetListening", NWScript_SetListening },
+	{ "SetListenPattern", NWScript_SetListenPattern },
+	{ "TestStringAgainstPattern", NWScript_TestStringAgainstPattern },
+	{ "GetMatchedSubstring", NWScript_GetMatchedSubstring },
+	{ "GetMatchedSubstringsCount", NWScript_GetMatchedSubstringsCount },
+	{ "EffectVisualEffect", NWScript_EffectVisualEffect },
+	{ "GetFactionWeakestMember", NWScript_GetFactionWeakestMember },
+	{ "GetFactionStrongestMember", NWScript_GetFactionStrongestMember },
+	{ "GetFactionMostDamagedMember", NWScript_GetFactionMostDamagedMember },
+	{ "GetFactionLeastDamagedMember", NWScript_GetFactionLeastDamagedMember },
+	{ "GetFactionGold", NWScript_GetFactionGold },
+	{ "GetFactionAverageReputation", NWScript_GetFactionAverageReputation },
+	{ "GetFactionAverageGoodEvilAlignment", NWScript_GetFactionAverageGoodEvilAlignment },
+	{ "GetFactionAverageLawChaosAlignment", NWScript_GetFactionAverageLawChaosAlignment },
+	{ "GetFactionAverageLevel", NWScript_GetFactionAverageLevel },
+	{ "GetFactionAverageXP", NWScript_GetFactionAverageXP },
+	{ "GetFactionMostFrequentClass", NWScript_GetFactionMostFrequentClass },
+	{ "GetFactionWorstAC", NWScript_GetFactionWorstAC },
+	{ "GetFactionBestAC", NWScript_GetFactionBestAC },
+	{ "ActionSit", NWScript_ActionSit },
+	{ "GetListenPatternNumber", NWScript_GetListenPatternNumber },
+	{ "ActionJumpToObject", NWScript_ActionJumpToObject },
+	{ "GetWaypointByTag", NWScript_GetWaypointByTag },
+	{ "GetTransitionTarget", NWScript_GetTransitionTarget },
+	{ "EffectLinkEffects", NWScript_EffectLinkEffects },
+	{ "GetObjectByTag", NWScript_GetObjectByTag },
+	{ "AdjustAlignment", NWScript_AdjustAlignment },
+	{ "ActionWait", NWScript_ActionWait },
+	{ "SetAreaTransitionBMP", NWScript_SetAreaTransitionBMP },
+	{ "ActionStartConversation", NWScript_ActionStartConversation },
+	{ "ActionPauseConversation", NWScript_ActionPauseConversation },
+	{ "ActionResumeConversation", NWScript_ActionResumeConversation },
+	{ "EffectBeam", NWScript_EffectBeam },
+	{ "GetReputation", NWScript_GetReputation },
+	{ "AdjustReputation", NWScript_AdjustReputation },
+	{ "GetSittingCreature", NWScript_GetSittingCreature },
+	{ "GetGoingToBeAttackedBy", NWScript_GetGoingToBeAttackedBy },
+	{ "EffectSpellResistanceIncrease", NWScript_EffectSpellResistanceIncrease },
+	{ "GetLocation", NWScript_GetLocation },
+	{ "ActionJumpToLocation", NWScript_ActionJumpToLocation },
+	{ "Location", NWScript_Location },
+	{ "ApplyEffectAtLocation", NWScript_ApplyEffectAtLocation },
+	{ "GetIsPC", NWScript_GetIsPC },
+	{ "FeetToMeters", NWScript_FeetToMeters },
+	{ "YardsToMeters", NWScript_YardsToMeters },
+	{ "ApplyEffectToObject", NWScript_ApplyEffectToObject },
+	{ "SpeakString", NWScript_SpeakString },
+	{ "GetSpellTargetLocation", NWScript_GetSpellTargetLocation },
+	{ "GetPositionFromLocation", NWScript_GetPositionFromLocation },
+	{ "GetAreaFromLocation", NWScript_GetAreaFromLocation },
+	{ "GetFacingFromLocation", NWScript_GetFacingFromLocation },
+	{ "GetNearestCreatureToLocation", NWScript_GetNearestCreatureToLocation },
+	{ "GetNearestObject", NWScript_GetNearestObject },
+	{ "GetNearestObjectToLocation", NWScript_GetNearestObjectToLocation },
+	{ "GetNearestObjectByTag", NWScript_GetNearestObjectByTag },
+	{ "IntToFloat", NWScript_IntToFloat },
+	{ "FloatToInt", NWScript_FloatToInt },
+	{ "StringToInt", NWScript_StringToInt },
+	{ "StringToFloat", NWScript_StringToFloat },
+	{ "ActionCastSpellAtLocation", NWScript_ActionCastSpellAtLocation },
+	{ "GetIsEnemy", NWScript_GetIsEnemy },
+	{ "GetIsFriend", NWScript_GetIsFriend },
+	{ "GetIsNeutral", NWScript_GetIsNeutral },
+	{ "GetPCSpeaker", NWScript_GetPCSpeaker },
+	{ "GetStringByStrRef", NWScript_GetStringByStrRef },
+	{ "ActionSpeakStringByStrRef", NWScript_ActionSpeakStringByStrRef },
+	{ "DestroyObject", NWScript_DestroyObject },
+	{ "GetModule", NWScript_GetModule },
+	{ "CreateObject", NWScript_CreateObject },
+	{ "EventSpellCastAt", NWScript_EventSpellCastAt },
+	{ "GetLastSpellCaster", NWScript_GetLastSpellCaster },
+	{ "GetLastSpell", NWScript_GetLastSpell },
+	{ "GetUserDefinedEventNumber", NWScript_GetUserDefinedEventNumber },
+	{ "GetSpellId", NWScript_GetSpellId },
+	{ "RandomName", NWScript_RandomName },
+	{ "EffectPoison", NWScript_EffectPoison },
+	{ "EffectDisease", NWScript_EffectDisease },
+	{ "EffectSilence", NWScript_EffectSilence },
+	{ "GetName", NWScript_GetName },
+	{ "GetLastSpeaker", NWScript_GetLastSpeaker },
+	{ "BeginConversation", NWScript_BeginConversation },
+	{ "GetLastPerceived", NWScript_GetLastPerceived },
+	{ "GetLastPerceptionHeard", NWScript_GetLastPerceptionHeard },
+	{ "GetLastPerceptionInaudible", NWScript_GetLastPerceptionInaudible },
+	{ "GetLastPerceptionSeen", NWScript_GetLastPerceptionSeen },
+	{ "GetLastClosedBy", NWScript_GetLastClosedBy },
+	{ "GetLastPerceptionVanished", NWScript_GetLastPerceptionVanished },
+	{ "GetFirstInPersistentObject", NWScript_GetFirstInPersistentObject },
+	{ "GetNextInPersistentObject", NWScript_GetNextInPersistentObject },
+	{ "GetAreaOfEffectCreator", NWScript_GetAreaOfEffectCreator },
+	{ "DeleteLocalInt", NWScript_DeleteLocalInt },
+	{ "DeleteLocalFloat", NWScript_DeleteLocalFloat },
+	{ "DeleteLocalString", NWScript_DeleteLocalString },
+	{ "DeleteLocalObject", NWScript_DeleteLocalObject },
+	{ "DeleteLocalLocation", NWScript_DeleteLocalLocation },
+	{ "EffectHaste", NWScript_EffectHaste },
+	{ "EffectSlow", NWScript_EffectSlow },
+	{ "ObjectToString", NWScript_ObjectToString },
+	{ "EffectImmunity", NWScript_EffectImmunity },
+	{ "GetIsImmune", NWScript_GetIsImmune },
+	{ "EffectDamageImmunityIncrease", NWScript_EffectDamageImmunityIncrease },
+	{ "GetEncounterActive", NWScript_GetEncounterActive },
+	{ "SetEncounterActive", NWScript_SetEncounterActive },
+	{ "GetEncounterSpawnsMax", NWScript_GetEncounterSpawnsMax },
+	{ "SetEncounterSpawnsMax", NWScript_SetEncounterSpawnsMax },
+	{ "GetEncounterSpawnsCurrent", NWScript_GetEncounterSpawnsCurrent },
+	{ "SetEncounterSpawnsCurrent", NWScript_SetEncounterSpawnsCurrent },
+	{ "GetModuleItemAcquired", NWScript_GetModuleItemAcquired },
+	{ "GetModuleItemAcquiredFrom", NWScript_GetModuleItemAcquiredFrom },
+	{ "SetCustomToken", NWScript_SetCustomToken },
+	{ "GetHasFeat", NWScript_GetHasFeat },
+	{ "GetHasSkill", NWScript_GetHasSkill },
+	{ "ActionUseFeat", NWScript_ActionUseFeat },
+	{ "ActionUseSkill", NWScript_ActionUseSkill },
+	{ "GetObjectSeen", NWScript_GetObjectSeen },
+	{ "GetObjectHeard", NWScript_GetObjectHeard },
+	{ "GetLastPlayerDied", NWScript_GetLastPlayerDied },
+	{ "GetModuleItemLost", NWScript_GetModuleItemLost },
+	{ "GetModuleItemLostBy", NWScript_GetModuleItemLostBy },
+	{ "EventConversation", NWScript_EventConversation },
+	{ "SetEncounterDifficulty", NWScript_SetEncounterDifficulty },
+	{ "GetEncounterDifficulty", NWScript_GetEncounterDifficulty },
+	{ "GetDistanceBetweenLocations", NWScript_GetDistanceBetweenLocations },
+	{ "GetReflexAdjustedDamage", NWScript_GetReflexAdjustedDamage },
+	{ "PlayAnimation", NWScript_PlayAnimation },
+	{ "TalentSpell", NWScript_TalentSpell },
+	{ "TalentFeat", NWScript_TalentFeat },
+	{ "TalentSkill", NWScript_TalentSkill },
+	{ "GetHasSpellEffect", NWScript_GetHasSpellEffect },
+	{ "GetEffectSpellId", NWScript_GetEffectSpellId },
+	{ "GetCreatureHasTalent", NWScript_GetCreatureHasTalent },
+	{ "GetCreatureTalentRandom", NWScript_GetCreatureTalentRandom },
+	{ "GetCreatureTalentBest", NWScript_GetCreatureTalentBest },
+	{ "ActionUseTalentOnObject", NWScript_ActionUseTalentOnObject },
+	{ "ActionUseTalentAtLocation", NWScript_ActionUseTalentAtLocation },
+	{ "GetGoldPieceValue", NWScript_GetGoldPieceValue },
+	{ "GetIsPlayableRacialType", NWScript_GetIsPlayableRacialType },
+	{ "JumpToLocation", NWScript_JumpToLocation },
+	{ "EffectTemporaryHitpoints", NWScript_EffectTemporaryHitpoints },
+	{ "GetSkillRank", NWScript_GetSkillRank },
+	{ "GetAttackTarget", NWScript_GetAttackTarget },
+	{ "GetLastAttackType", NWScript_GetLastAttackType },
+	{ "GetLastAttackMode", NWScript_GetLastAttackMode },
+	{ "GetMaster", NWScript_GetMaster },
+	{ "GetIsInCombat", NWScript_GetIsInCombat },
+	{ "GetLastAssociateCommand", NWScript_GetLastAssociateCommand },
+	{ "GiveGoldToCreature", NWScript_GiveGoldToCreature },
+	{ "SetIsDestroyable", NWScript_SetIsDestroyable },
+	{ "SetLocked", NWScript_SetLocked },
+	{ "GetLocked", NWScript_GetLocked },
+	{ "GetClickingObject", NWScript_GetClickingObject },
+	{ "SetAssociateListenPatterns", NWScript_SetAssociateListenPatterns },
+	{ "GetLastWeaponUsed", NWScript_GetLastWeaponUsed },
+	{ "ActionInteractObject", NWScript_ActionInteractObject },
+	{ "GetLastUsedBy", NWScript_GetLastUsedBy },
+	{ "GetAbilityModifier", NWScript_GetAbilityModifier },
+	{ "GetIdentified", NWScript_GetIdentified },
+	{ "SetIdentified", NWScript_SetIdentified },
+	{ "SummonAnimalCompanion", NWScript_SummonAnimalCompanion },
+	{ "SummonFamiliar", NWScript_SummonFamiliar },
+	{ "GetBlockingDoor", NWScript_GetBlockingDoor },
+	{ "GetIsDoorActionPossible", NWScript_GetIsDoorActionPossible },
+	{ "DoDoorAction", NWScript_DoDoorAction },
+	{ "GetFirstItemInInventory", NWScript_GetFirstItemInInventory },
+	{ "GetNextItemInInventory", NWScript_GetNextItemInInventory },
+	{ "GetClassByPosition", NWScript_GetClassByPosition },
+	{ "GetLevelByPosition", NWScript_GetLevelByPosition },
+	{ "GetLevelByClass", NWScript_GetLevelByClass },
+	{ "GetDamageDealtByType", NWScript_GetDamageDealtByType },
+	{ "GetTotalDamageDealt", NWScript_GetTotalDamageDealt },
+	{ "GetLastDamager", NWScript_GetLastDamager },
+	{ "GetLastDisarmed", NWScript_GetLastDisarmed },
+	{ "GetLastDisturbed", NWScript_GetLastDisturbed },
+	{ "GetLastLocked", NWScript_GetLastLocked },
+	{ "GetLastUnlocked", NWScript_GetLastUnlocked },
+	{ "EffectSkillIncrease", NWScript_EffectSkillIncrease },
+	{ "GetInventoryDisturbType", NWScript_GetInventoryDisturbType },
+	{ "GetInventoryDisturbItem", NWScript_GetInventoryDisturbItem },
+	{ "GetHenchman", NWScript_GetHenchman },
+	{ "VersusAlignmentEffect", NWScript_VersusAlignmentEffect },
+	{ "VersusRacialTypeEffect", NWScript_VersusRacialTypeEffect },
+	{ "VersusTrapEffect", NWScript_VersusTrapEffect },
+	{ "GetGender", NWScript_GetGender },
+	{ "GetIsTalentValid", NWScript_GetIsTalentValid },
+	{ "ActionMoveAwayFromLocation", NWScript_ActionMoveAwayFromLocation },
+	{ "GetAttemptedAttackTarget", NWScript_GetAttemptedAttackTarget },
+	{ "GetTypeFromTalent", NWScript_GetTypeFromTalent },
+	{ "GetIdFromTalent", NWScript_GetIdFromTalent },
+	{ "GetAssociate", NWScript_GetAssociate },
+	{ "AddHenchman", NWScript_AddHenchman },
+	{ "RemoveHenchman", NWScript_RemoveHenchman },
+	{ "AddJournalQuestEntry", NWScript_AddJournalQuestEntry },
+	{ "RemoveJournalQuestEntry", NWScript_RemoveJournalQuestEntry },
+	{ "GetPCPublicCDKey", NWScript_GetPCPublicCDKey },
+	{ "GetPCIPAddress", NWScript_GetPCIPAddress },
+	{ "GetPCPlayerName", NWScript_GetPCPlayerName },
+	{ "SetPCLike", NWScript_SetPCLike },
+	{ "SetPCDislike", NWScript_SetPCDislike },
+	{ "SendMessageToPC", NWScript_SendMessageToPC },
+	{ "GetAttemptedSpellTarget", NWScript_GetAttemptedSpellTarget },
+	{ "GetLastOpenedBy", NWScript_GetLastOpenedBy },
+	{ "GetHasSpell", NWScript_GetHasSpell },
+	{ "OpenStore", NWScript_OpenStore },
+	{ "EffectTurned", NWScript_EffectTurned },
+	{ "GetFirstFactionMember", NWScript_GetFirstFactionMember },
+	{ "GetNextFactionMember", NWScript_GetNextFactionMember },
+	{ "ActionForceMoveToLocation", NWScript_ActionForceMoveToLocation },
+	{ "ActionForceMoveToObject", NWScript_ActionForceMoveToObject },
+	{ "GetJournalQuestExperience", NWScript_GetJournalQuestExperience },
+	{ "JumpToObject", NWScript_JumpToObject },
+	{ "SetMapPinEnabled", NWScript_SetMapPinEnabled },
+	{ "EffectHitPointChangeWhenDying", NWScript_EffectHitPointChangeWhenDying },
+	{ "PopUpGUIPanel", NWScript_PopUpGUIPanel },
+	{ "ClearPersonalReputation", NWScript_ClearPersonalReputation },
+	{ "SetIsTemporaryFriend", NWScript_SetIsTemporaryFriend },
+	{ "SetIsTemporaryEnemy", NWScript_SetIsTemporaryEnemy },
+	{ "SetIsTemporaryNeutral", NWScript_SetIsTemporaryNeutral },
+	{ "GiveXPToCreature", NWScript_GiveXPToCreature },
+	{ "SetXP", NWScript_SetXP },
+	{ "GetXP", NWScript_GetXP },
+	{ "IntToHexString", NWScript_IntToHexString },
+	{ "GetBaseItemType", NWScript_GetBaseItemType },
+	{ "GetItemHasItemProperty", NWScript_GetItemHasItemProperty },
+	{ "ActionEquipMostDamagingMelee", NWScript_ActionEquipMostDamagingMelee },
+	{ "ActionEquipMostDamagingRanged", NWScript_ActionEquipMostDamagingRanged },
+	{ "GetItemACValue", NWScript_GetItemACValue },
+	{ "ActionRest", NWScript_ActionRest },
+	{ "ExploreAreaForPlayer", NWScript_ExploreAreaForPlayer },
+	{ "ActionEquipMostEffectiveArmor", NWScript_ActionEquipMostEffectiveArmor },
+	{ "GetIsDay", NWScript_GetIsDay },
+	{ "GetIsNight", NWScript_GetIsNight },
+	{ "GetIsDawn", NWScript_GetIsDawn },
+	{ "GetIsDusk", NWScript_GetIsDusk },
+	{ "GetIsEncounterCreature", NWScript_GetIsEncounterCreature },
+	{ "GetLastPlayerDying", NWScript_GetLastPlayerDying },
+	{ "GetStartingLocation", NWScript_GetStartingLocation },
+	{ "ChangeToStandardFaction", NWScript_ChangeToStandardFaction },
+	{ "SoundObjectPlay", NWScript_SoundObjectPlay },
+	{ "SoundObjectStop", NWScript_SoundObjectStop },
+	{ "SoundObjectSetVolume", NWScript_SoundObjectSetVolume },
+	{ "SoundObjectSetPosition", NWScript_SoundObjectSetPosition },
+	{ "SpeakOneLinerConversation", NWScript_SpeakOneLinerConversation },
+	{ "GetGold", NWScript_GetGold },
+	{ "GetLastRespawnButtonPresser", NWScript_GetLastRespawnButtonPresser },
+	{ "GetIsDM", NWScript_GetIsDM },
+	{ "PlayVoiceChat", NWScript_PlayVoiceChat },
+	{ "GetIsWeaponEffective", NWScript_GetIsWeaponEffective },
+	{ "GetLastSpellHarmful", NWScript_GetLastSpellHarmful },
+	{ "EventActivateItem", NWScript_EventActivateItem },
+	{ "MusicBackgroundPlay", NWScript_MusicBackgroundPlay },
+	{ "MusicBackgroundStop", NWScript_MusicBackgroundStop },
+	{ "MusicBackgroundSetDelay", NWScript_MusicBackgroundSetDelay },
+	{ "MusicBackgroundChangeDay", NWScript_MusicBackgroundChangeDay },
+	{ "MusicBackgroundChangeNight", NWScript_MusicBackgroundChangeNight },
+	{ "MusicBattlePlay", NWScript_MusicBattlePlay },
+	{ "MusicBattleStop", NWScript_MusicBattleStop },
+	{ "MusicBattleChange", NWScript_MusicBattleChange },
+	{ "AmbientSoundPlay", NWScript_AmbientSoundPlay },
+	{ "AmbientSoundStop", NWScript_AmbientSoundStop },
+	{ "AmbientSoundChangeDay", NWScript_AmbientSoundChangeDay },
+	{ "AmbientSoundChangeNight", NWScript_AmbientSoundChangeNight },
+	{ "GetLastKiller", NWScript_GetLastKiller },
+	{ "GetSpellCastItem", NWScript_GetSpellCastItem },
+	{ "GetItemActivated", NWScript_GetItemActivated },
+	{ "GetItemActivator", NWScript_GetItemActivator },
+	{ "GetItemActivatedTargetLocation", NWScript_GetItemActivatedTargetLocation },
+	{ "GetItemActivatedTarget", NWScript_GetItemActivatedTarget },
+	{ "GetIsOpen", NWScript_GetIsOpen },
+	{ "TakeGoldFromCreature", NWScript_TakeGoldFromCreature },
+	{ "IsInConversation", NWScript_IsInConversation },
+	{ "EffectAbilityDecrease", NWScript_EffectAbilityDecrease },
+	{ "EffectAttackDecrease", NWScript_EffectAttackDecrease },
+	{ "EffectDamageDecrease", NWScript_EffectDamageDecrease },
+	{ "EffectDamageImmunityDecrease", NWScript_EffectDamageImmunityDecrease },
+	{ "EffectACDecrease", NWScript_EffectACDecrease },
+	{ "EffectMovementSpeedDecrease", NWScript_EffectMovementSpeedDecrease },
+	{ "EffectSavingThrowDecrease", NWScript_EffectSavingThrowDecrease },
+	{ "EffectSkillDecrease", NWScript_EffectSkillDecrease },
+	{ "EffectSpellResistanceDecrease", NWScript_EffectSpellResistanceDecrease },
+	{ "GetPlotFlag", NWScript_GetPlotFlag },
+	{ "SetPlotFlag", NWScript_SetPlotFlag },
+	{ "EffectInvisibility", NWScript_EffectInvisibility },
+	{ "EffectConcealment", NWScript_EffectConcealment },
+	{ "EffectDarkness", NWScript_EffectDarkness },
+	{ "EffectDispelMagicAll", NWScript_EffectDispelMagicAll },
+	{ "EffectUltravision", NWScript_EffectUltravision },
+	{ "EffectNegativeLevel", NWScript_EffectNegativeLevel },
+	{ "EffectPolymorph", NWScript_EffectPolymorph },
+	{ "EffectSanctuary", NWScript_EffectSanctuary },
+	{ "EffectTrueSeeing", NWScript_EffectTrueSeeing },
+	{ "EffectSeeInvisible", NWScript_EffectSeeInvisible },
+	{ "EffectTimeStop", NWScript_EffectTimeStop },
+	{ "EffectBlindness", NWScript_EffectBlindness },
+	{ "GetIsReactionTypeFriendly", NWScript_GetIsReactionTypeFriendly },
+	{ "GetIsReactionTypeNeutral", NWScript_GetIsReactionTypeNeutral },
+	{ "GetIsReactionTypeHostile", NWScript_GetIsReactionTypeHostile },
+	{ "EffectSpellLevelAbsorption", NWScript_EffectSpellLevelAbsorption },
+	{ "EffectDispelMagicBest", NWScript_EffectDispelMagicBest },
+	{ "ActivatePortal", NWScript_ActivatePortal },
+	{ "GetNumStackedItems", NWScript_GetNumStackedItems },
+	{ "SurrenderToEnemies", NWScript_SurrenderToEnemies },
+	{ "EffectMissChance", NWScript_EffectMissChance },
+	{ "GetTurnResistanceHD", NWScript_GetTurnResistanceHD },
+	{ "GetCreatureSize", NWScript_GetCreatureSize },
+	{ "EffectDisappearAppear", NWScript_EffectDisappearAppear },
+	{ "EffectDisappear", NWScript_EffectDisappear },
+	{ "EffectAppear", NWScript_EffectAppear },
+	{ "ActionUnlockObject", NWScript_ActionUnlockObject },
+	{ "ActionLockObject", NWScript_ActionLockObject },
+	{ "EffectModifyAttacks", NWScript_EffectModifyAttacks },
+	{ "GetLastTrapDetected", NWScript_GetLastTrapDetected },
+	{ "EffectDamageShield", NWScript_EffectDamageShield },
+	{ "GetNearestTrapToObject", NWScript_GetNearestTrapToObject },
+	{ "GetDeity", NWScript_GetDeity },
+	{ "GetSubRace", NWScript_GetSubRace },
+	{ "GetFortitudeSavingThrow", NWScript_GetFortitudeSavingThrow },
+	{ "GetWillSavingThrow", NWScript_GetWillSavingThrow },
+	{ "GetReflexSavingThrow", NWScript_GetReflexSavingThrow },
+	{ "GetChallengeRating", NWScript_GetChallengeRating },
+	{ "GetAge", NWScript_GetAge },
+	{ "GetMovementRate", NWScript_GetMovementRate },
+	{ "GetFamiliarCreatureType", NWScript_GetFamiliarCreatureType },
+	{ "GetAnimalCompanionCreatureType", NWScript_GetAnimalCompanionCreatureType },
+	{ "GetFamiliarName", NWScript_GetFamiliarName },
+	{ "GetAnimalCompanionName", NWScript_GetAnimalCompanionName },
+	{ "ActionCastFakeSpellAtObject", NWScript_ActionCastFakeSpellAtObject },
+	{ "ActionCastFakeSpellAtLocation", NWScript_ActionCastFakeSpellAtLocation },
+	{ "RemoveSummonedAssociate", NWScript_RemoveSummonedAssociate },
+	{ "SetCameraMode", NWScript_SetCameraMode },
+	{ "GetIsResting", NWScript_GetIsResting },
+	{ "GetLastPCRested", NWScript_GetLastPCRested },
+	{ "SetWeather", NWScript_SetWeather },
+	{ "GetLastRestEventType", NWScript_GetLastRestEventType },
+	{ "StartNewModule", NWScript_StartNewModule },
+	{ "EffectSwarm", NWScript_EffectSwarm },
+	{ "GetWeaponRanged", NWScript_GetWeaponRanged },
+	{ "DoSinglePlayerAutoSave", NWScript_DoSinglePlayerAutoSave },
+	{ "GetGameDifficulty", NWScript_GetGameDifficulty },
+	{ "SetTileMainLightColor", NWScript_SetTileMainLightColor },
+	{ "SetTileSourceLightColor", NWScript_SetTileSourceLightColor },
+	{ "RecomputeStaticLighting", NWScript_RecomputeStaticLighting },
+	{ "GetTileMainLight1Color", NWScript_GetTileMainLight1Color },
+	{ "GetTileMainLight2Color", NWScript_GetTileMainLight2Color },
+	{ "GetTileSourceLight1Color", NWScript_GetTileSourceLight1Color },
+	{ "GetTileSourceLight2Color", NWScript_GetTileSourceLight2Color },
+	{ "SetPanelButtonFlash", NWScript_SetPanelButtonFlash },
+	{ "GetCurrentAction", NWScript_GetCurrentAction },
+	{ "SetStandardFactionReputation", NWScript_SetStandardFactionReputation },
+	{ "GetStandardFactionReputation", NWScript_GetStandardFactionReputation },
+	{ "FloatingTextStrRefOnCreature", NWScript_FloatingTextStrRefOnCreature },
+	{ "FloatingTextStringOnCreature", NWScript_FloatingTextStringOnCreature },
+	{ "GetTrapDisarmable", NWScript_GetTrapDisarmable },
+	{ "GetTrapDetectable", NWScript_GetTrapDetectable },
+	{ "GetTrapDetectedBy", NWScript_GetTrapDetectedBy },
+	{ "GetTrapFlagged", NWScript_GetTrapFlagged },
+	{ "GetTrapBaseType", NWScript_GetTrapBaseType },
+	{ "GetTrapOneShot", NWScript_GetTrapOneShot },
+	{ "GetTrapCreator", NWScript_GetTrapCreator },
+	{ "GetTrapKeyTag", NWScript_GetTrapKeyTag },
+	{ "GetTrapDisarmDC", NWScript_GetTrapDisarmDC },
+	{ "GetTrapDetectDC", NWScript_GetTrapDetectDC },
+	{ "GetLockKeyRequired", NWScript_GetLockKeyRequired },
+	{ "GetLockKeyTag", NWScript_GetLockKeyTag },
+	{ "GetLockLockable", NWScript_GetLockLockable },
+	{ "GetLockUnlockDC", NWScript_GetLockUnlockDC },
+	{ "GetLockLockDC", NWScript_GetLockLockDC },
+	{ "GetPCLevellingUp", NWScript_GetPCLevellingUp },
+	{ "GetHasFeatEffect", NWScript_GetHasFeatEffect },
+	{ "SetPlaceableIllumination", NWScript_SetPlaceableIllumination },
+	{ "GetPlaceableIllumination", NWScript_GetPlaceableIllumination },
+	{ "GetIsPlaceableObjectActionPossible", NWScript_GetIsPlaceableObjectActionPossible },
+	{ "DoPlaceableObjectAction", NWScript_DoPlaceableObjectAction },
+	{ "GetFirstPC", NWScript_GetFirstPC },
+	{ "GetNextPC", NWScript_GetNextPC },
+	{ "SetTrapDetectedBy", NWScript_SetTrapDetectedBy },
+	{ "GetIsTrapped", NWScript_GetIsTrapped },
+	{ "EffectTurnResistanceDecrease", NWScript_EffectTurnResistanceDecrease },
+	{ "EffectTurnResistanceIncrease", NWScript_EffectTurnResistanceIncrease },
+	{ "PopUpDeathGUIPanel", NWScript_PopUpDeathGUIPanel },
+	{ "SetTrapDisabled", NWScript_SetTrapDisabled },
+	{ "GetLastHostileActor", NWScript_GetLastHostileActor },
+	{ "ExportAllCharacters", NWScript_ExportAllCharacters },
+	{ "MusicBackgroundGetDayTrack", NWScript_MusicBackgroundGetDayTrack },
+	{ "MusicBackgroundGetNightTrack", NWScript_MusicBackgroundGetNightTrack },
+	{ "WriteTimestampedLogEntry", NWScript_WriteTimestampedLogEntry },
+	{ "GetModuleName", NWScript_GetModuleName },
+	{ "GetFactionLeader", NWScript_GetFactionLeader },
+	{ "SendMessageToAllDMs", NWScript_SendMessageToAllDMs },
+	{ "EndGame", NWScript_EndGame },
+	{ "BootPC", NWScript_BootPC },
+	{ "ActionCounterSpell", NWScript_ActionCounterSpell },
+	{ "AmbientSoundSetDayVolume", NWScript_AmbientSoundSetDayVolume },
+	{ "AmbientSoundSetNightVolume", NWScript_AmbientSoundSetNightVolume },
+	{ "MusicBackgroundGetBattleTrack", NWScript_MusicBackgroundGetBattleTrack },
+	{ "GetHasInventory", NWScript_GetHasInventory },
+	{ "GetStrRefSoundDuration", NWScript_GetStrRefSoundDuration },
+	{ "AddToParty", NWScript_AddToParty },
+	{ "RemoveFromParty", NWScript_RemoveFromParty },
+	{ "GetStealthMode", NWScript_GetStealthMode },
+	{ "GetDetectMode", NWScript_GetDetectMode },
+	{ "GetDefensiveCastingMode", NWScript_GetDefensiveCastingMode },
+	{ "GetAppearanceType", NWScript_GetAppearanceType },
+	{ "SpawnScriptDebugger", NWScript_SpawnScriptDebugger },
+	{ "GetModuleItemAcquiredStackSize", NWScript_GetModuleItemAcquiredStackSize },
+	{ "DecrementRemainingFeatUses", NWScript_DecrementRemainingFeatUses },
+	{ "DecrementRemainingSpellUses", NWScript_DecrementRemainingSpellUses },
+	{ "GetResRef", NWScript_GetResRef },
+	{ "EffectPetrify", NWScript_EffectPetrify },
+	{ "CopyItem", NWScript_CopyItem },
+	{ "EffectCutsceneParalyze", NWScript_EffectCutsceneParalyze },
+	{ "GetDroppableFlag", NWScript_GetDroppableFlag },
+	{ "GetUseableFlag", NWScript_GetUseableFlag },
+	{ "GetStolenFlag", NWScript_GetStolenFlag },
+	{ "SetCampaignFloat", NWScript_SetCampaignFloat },
+	{ "SetCampaignInt", NWScript_SetCampaignInt },
+	{ "SetCampaignVector", NWScript_SetCampaignVector },
+	{ "SetCampaignLocation", NWScript_SetCampaignLocation },
+	{ "SetCampaignString", NWScript_SetCampaignString },
+	{ "DestroyCampaignDatabase", NWScript_DestroyCampaignDatabase },
+	{ "GetCampaignFloat", NWScript_GetCampaignFloat },
+	{ "GetCampaignInt", NWScript_GetCampaignInt },
+	{ "GetCampaignVector", NWScript_GetCampaignVector },
+	{ "GetCampaignLocation", NWScript_GetCampaignLocation },
+	{ "GetCampaignString", NWScript_GetCampaignString },
+	{ "CopyObject", NWScript_CopyObject },
+	{ "DeleteCampaignVariable", NWScript_DeleteCampaignVariable },
+	{ "StoreCampaignObject", NWScript_StoreCampaignObject },
+	{ "RetrieveCampaignObject", NWScript_RetrieveCampaignObject },
+	{ "EffectCutsceneDominated", NWScript_EffectCutsceneDominated },
+	{ "GetItemStackSize", NWScript_GetItemStackSize },
+	{ "SetItemStackSize", NWScript_SetItemStackSize },
+	{ "GetItemCharges", NWScript_GetItemCharges },
+	{ "SetItemCharges", NWScript_SetItemCharges },
+	{ "AddItemProperty", NWScript_AddItemProperty },
+	{ "RemoveItemProperty", NWScript_RemoveItemProperty },
+	{ "GetIsItemPropertyValid", NWScript_GetIsItemPropertyValid },
+	{ "GetFirstItemProperty", NWScript_GetFirstItemProperty },
+	{ "GetNextItemProperty", NWScript_GetNextItemProperty },
+	{ "GetItemPropertyType", NWScript_GetItemPropertyType },
+	{ "GetItemPropertyDurationType", NWScript_GetItemPropertyDurationType },
+	{ "ItemPropertyAbilityBonus", NWScript_ItemPropertyAbilityBonus },
+	{ "ItemPropertyACBonus", NWScript_ItemPropertyACBonus },
+	{ "ItemPropertyACBonusVsAlign", NWScript_ItemPropertyACBonusVsAlign },
+	{ "ItemPropertyACBonusVsDmgType", NWScript_ItemPropertyACBonusVsDmgType },
+	{ "ItemPropertyACBonusVsRace", NWScript_ItemPropertyACBonusVsRace },
+	{ "ItemPropertyACBonusVsSAlign", NWScript_ItemPropertyACBonusVsSAlign },
+	{ "ItemPropertyEnhancementBonus", NWScript_ItemPropertyEnhancementBonus },
+	{ "ItemPropertyEnhancementBonusVsAlign", NWScript_ItemPropertyEnhancementBonusVsAlign },
+	{ "ItemPropertyEnhancementBonusVsRace", NWScript_ItemPropertyEnhancementBonusVsRace },
+	{ "ItemPropertyEnhancementBonusVsSAlign", NWScript_ItemPropertyEnhancementBonusVsSAlign },
+	{ "ItemPropertyEnhancementPenalty", NWScript_ItemPropertyEnhancementPenalty },
+	{ "ItemPropertyWeightReduction", NWScript_ItemPropertyWeightReduction },
+	{ "ItemPropertyBonusFeat", NWScript_ItemPropertyBonusFeat },
+	{ "ItemPropertyBonusLevelSpell", NWScript_ItemPropertyBonusLevelSpell },
+	{ "ItemPropertyCastSpell", NWScript_ItemPropertyCastSpell },
+	{ "ItemPropertyDamageBonus", NWScript_ItemPropertyDamageBonus },
+	{ "ItemPropertyDamageBonusVsAlign", NWScript_ItemPropertyDamageBonusVsAlign },
+	{ "ItemPropertyDamageBonusVsRace", NWScript_ItemPropertyDamageBonusVsRace },
+	{ "ItemPropertyDamageBonusVsSAlign", NWScript_ItemPropertyDamageBonusVsSAlign },
+	{ "ItemPropertyDamageImmunity", NWScript_ItemPropertyDamageImmunity },
+	{ "ItemPropertyDamagePenalty", NWScript_ItemPropertyDamagePenalty },
+	{ "ItemPropertyDamageReduction", NWScript_ItemPropertyDamageReduction },
+	{ "ItemPropertyDamageResistance", NWScript_ItemPropertyDamageResistance },
+	{ "ItemPropertyDamageVulnerability", NWScript_ItemPropertyDamageVulnerability },
+	{ "ItemPropertyDarkvision", NWScript_ItemPropertyDarkvision },
+	{ "ItemPropertyDecreaseAbility", NWScript_ItemPropertyDecreaseAbility },
+	{ "ItemPropertyDecreaseAC", NWScript_ItemPropertyDecreaseAC },
+	{ "ItemPropertyDecreaseSkill", NWScript_ItemPropertyDecreaseSkill },
+	{ "ItemPropertyContainerReducedWeight", NWScript_ItemPropertyContainerReducedWeight },
+	{ "ItemPropertyExtraMeleeDamageType", NWScript_ItemPropertyExtraMeleeDamageType },
+	{ "ItemPropertyExtraRangeDamageType", NWScript_ItemPropertyExtraRangeDamageType },
+	{ "ItemPropertyHaste", NWScript_ItemPropertyHaste },
+	{ "ItemPropertyHolyAvenger", NWScript_ItemPropertyHolyAvenger },
+	{ "ItemPropertyImmunityMisc", NWScript_ItemPropertyImmunityMisc },
+	{ "ItemPropertyImprovedEvasion", NWScript_ItemPropertyImprovedEvasion },
+	{ "ItemPropertyBonusSpellResistance", NWScript_ItemPropertyBonusSpellResistance },
+	{ "ItemPropertyBonusSavingThrowVsX", NWScript_ItemPropertyBonusSavingThrowVsX },
+	{ "ItemPropertyBonusSavingThrow", NWScript_ItemPropertyBonusSavingThrow },
+	{ "ItemPropertyKeen", NWScript_ItemPropertyKeen },
+	{ "ItemPropertyLight", NWScript_ItemPropertyLight },
+	{ "ItemPropertyMaxRangeStrengthMod", NWScript_ItemPropertyMaxRangeStrengthMod },
+	{ "ItemPropertyNoDamage", NWScript_ItemPropertyNoDamage },
+	{ "ItemPropertyOnHitProps", NWScript_ItemPropertyOnHitProps },
+	{ "ItemPropertyReducedSavingThrowVsX", NWScript_ItemPropertyReducedSavingThrowVsX },
+	{ "ItemPropertyReducedSavingThrow", NWScript_ItemPropertyReducedSavingThrow },
+	{ "ItemPropertyRegeneration", NWScript_ItemPropertyRegeneration },
+	{ "ItemPropertySkillBonus", NWScript_ItemPropertySkillBonus },
+	{ "ItemPropertySpellImmunitySpecific", NWScript_ItemPropertySpellImmunitySpecific },
+	{ "ItemPropertySpellImmunitySchool", NWScript_ItemPropertySpellImmunitySchool },
+	{ "ItemPropertyThievesTools", NWScript_ItemPropertyThievesTools },
+	{ "ItemPropertyAttackBonus", NWScript_ItemPropertyAttackBonus },
+	{ "ItemPropertyAttackBonusVsAlign", NWScript_ItemPropertyAttackBonusVsAlign },
+	{ "ItemPropertyAttackBonusVsRace", NWScript_ItemPropertyAttackBonusVsRace },
+	{ "ItemPropertyAttackBonusVsSAlign", NWScript_ItemPropertyAttackBonusVsSAlign },
+	{ "ItemPropertyAttackPenalty", NWScript_ItemPropertyAttackPenalty },
+	{ "ItemPropertyUnlimitedAmmo", NWScript_ItemPropertyUnlimitedAmmo },
+	{ "ItemPropertyLimitUseByAlign", NWScript_ItemPropertyLimitUseByAlign },
+	{ "ItemPropertyLimitUseByClass", NWScript_ItemPropertyLimitUseByClass },
+	{ "ItemPropertyLimitUseByRace", NWScript_ItemPropertyLimitUseByRace },
+	{ "ItemPropertyLimitUseBySAlign", NWScript_ItemPropertyLimitUseBySAlign },
+	{ "BadBadReplaceMeThisDoesNothing", NWScript_BadBadReplaceMeThisDoesNothing },
+	{ "ItemPropertyVampiricRegeneration", NWScript_ItemPropertyVampiricRegeneration },
+	{ "ItemPropertyTrap", NWScript_ItemPropertyTrap },
+	{ "ItemPropertyTrueSeeing", NWScript_ItemPropertyTrueSeeing },
+	{ "ItemPropertyOnMonsterHitProperties", NWScript_ItemPropertyOnMonsterHitProperties },
+	{ "ItemPropertyTurnResistance", NWScript_ItemPropertyTurnResistance },
+	{ "ItemPropertyMassiveCritical", NWScript_ItemPropertyMassiveCritical },
+	{ "ItemPropertyFreeAction", NWScript_ItemPropertyFreeAction },
+	{ "ItemPropertyMonsterDamage", NWScript_ItemPropertyMonsterDamage },
+	{ "ItemPropertyImmunityToSpellLevel", NWScript_ItemPropertyImmunityToSpellLevel },
+	{ "ItemPropertySpecialWalk", NWScript_ItemPropertySpecialWalk },
+	{ "ItemPropertyHealersKit", NWScript_ItemPropertyHealersKit },
+	{ "ItemPropertyWeightIncrease", NWScript_ItemPropertyWeightIncrease },
+	{ "GetIsSkillSuccessful", NWScript_GetIsSkillSuccessful },
+	{ "EffectSpellFailure", NWScript_EffectSpellFailure },
+	{ "SpeakStringByStrRef", NWScript_SpeakStringByStrRef },
+	{ "SetCutsceneMode", NWScript_SetCutsceneMode },
+	{ "GetLastPCToCancelCutscene", NWScript_GetLastPCToCancelCutscene },
+	{ "GetDialogSoundLength", NWScript_GetDialogSoundLength },
+	{ "FadeFromBlack", NWScript_FadeFromBlack },
+	{ "FadeToBlack", NWScript_FadeToBlack },
+	{ "StopFade", NWScript_StopFade },
+	{ "BlackScreen", NWScript_BlackScreen },
+	{ "GetBaseAttackBonus", NWScript_GetBaseAttackBonus },
+	{ "SetImmortal", NWScript_SetImmortal },
+	{ "OpenInventory", NWScript_OpenInventory },
+	{ "StoreCameraFacing", NWScript_StoreCameraFacing },
+	{ "RestoreCameraFacing", NWScript_RestoreCameraFacing },
+	{ "LevelUpHenchman", NWScript_LevelUpHenchman },
+	{ "SetDroppableFlag", NWScript_SetDroppableFlag },
+	{ "GetWeight", NWScript_GetWeight },
+	{ "GetModuleItemAcquiredBy", NWScript_GetModuleItemAcquiredBy },
+	{ "GetImmortal", NWScript_GetImmortal },
+	{ "DoWhirlwindAttack", NWScript_DoWhirlwindAttack },
+	{ "Get2DAString", NWScript_Get2DAString },
+	{ "EffectEthereal", NWScript_EffectEthereal },
+	{ "GetAILevel", NWScript_GetAILevel },
+	{ "SetAILevel", NWScript_SetAILevel },
+	{ "GetIsPossessedFamiliar", NWScript_GetIsPossessedFamiliar },
+	{ "UnpossessFamiliar", NWScript_UnpossessFamiliar },
+	{ "GetIsAreaInterior", NWScript_GetIsAreaInterior },
+	{ "SendMessageToPCByStrRef", NWScript_SendMessageToPCByStrRef },
+	{ "IncrementRemainingFeatUses", NWScript_IncrementRemainingFeatUses },
+	{ "ExportSingleCharacter", NWScript_ExportSingleCharacter },
+	{ "PlaySoundByStrRef", NWScript_PlaySoundByStrRef },
+	{ "SetSubRace", NWScript_SetSubRace },
+	{ "SetDeity", NWScript_SetDeity },
+	{ "GetIsDMPossessed", NWScript_GetIsDMPossessed },
+	{ "GetWeather", NWScript_GetWeather },
+	{ "GetIsAreaNatural", NWScript_GetIsAreaNatural },
+	{ "GetIsAreaAboveGround", NWScript_GetIsAreaAboveGround },
+	{ "GetPCItemLastEquipped", NWScript_GetPCItemLastEquipped },
+	{ "GetPCItemLastEquippedBy", NWScript_GetPCItemLastEquippedBy },
+	{ "GetPCItemLastUnequipped", NWScript_GetPCItemLastUnequipped },
+	{ "GetPCItemLastUnequippedBy", NWScript_GetPCItemLastUnequippedBy },
+	{ "CopyItemAndModify", NWScript_CopyItemAndModify },
+	{ "GetItemAppearance", NWScript_GetItemAppearance },
+	{ "ItemPropertyOnHitCastSpell", NWScript_ItemPropertyOnHitCastSpell },
+	{ "GetItemPropertySubType", NWScript_GetItemPropertySubType },
+	{ "GetActionMode", NWScript_GetActionMode },
+	{ "SetActionMode", NWScript_SetActionMode },
+	{ "GetArcaneSpellFailure", NWScript_GetArcaneSpellFailure },
+	{ "ActionExamine", NWScript_ActionExamine },
+	{ "ItemPropertyVisualEffect", NWScript_ItemPropertyVisualEffect },
+	{ "SetLootable", NWScript_SetLootable },
+	{ "GetLootable", NWScript_GetLootable },
+	{ "GetCutsceneCameraMoveRate", NWScript_GetCutsceneCameraMoveRate },
+	{ "SetCutsceneCameraMoveRate", NWScript_SetCutsceneCameraMoveRate },
+	{ "GetItemCursedFlag", NWScript_GetItemCursedFlag },
+	{ "SetItemCursedFlag", NWScript_SetItemCursedFlag },
+	{ "SetMaxHenchmen", NWScript_SetMaxHenchmen },
+	{ "GetMaxHenchmen", NWScript_GetMaxHenchmen },
+	{ "GetAssociateType", NWScript_GetAssociateType },
+	{ "GetSpellResistance", NWScript_GetSpellResistance },
+	{ "DayToNight", NWScript_DayToNight },
+	{ "NightToDay", NWScript_NightToDay },
+	{ "LineOfSightObject", NWScript_LineOfSightObject },
+	{ "LineOfSightVector", NWScript_LineOfSightVector },
+	{ "GetLastSpellCastClass", NWScript_GetLastSpellCastClass },
+	{ "SetBaseAttackBonus", NWScript_SetBaseAttackBonus },
+	{ "RestoreBaseAttackBonus", NWScript_RestoreBaseAttackBonus },
+	{ "EffectCutsceneGhost", NWScript_EffectCutsceneGhost },
+	{ "ItemPropertyArcaneSpellFailure", NWScript_ItemPropertyArcaneSpellFailure },
+	{ "GetStoreGold", NWScript_GetStoreGold },
+	{ "SetStoreGold", NWScript_SetStoreGold },
+	{ "GetStoreMaxBuyPrice", NWScript_GetStoreMaxBuyPrice },
+	{ "SetStoreMaxBuyPrice", NWScript_SetStoreMaxBuyPrice },
+	{ "GetStoreIdentifyCost", NWScript_GetStoreIdentifyCost },
+	{ "SetStoreIdentifyCost", NWScript_SetStoreIdentifyCost },
+	{ "SetCreatureAppearanceType", NWScript_SetCreatureAppearanceType },
+	{ "GetCreatureStartingPackage", NWScript_GetCreatureStartingPackage },
+	{ "EffectCutsceneImmobilize", NWScript_EffectCutsceneImmobilize },
+	{ "GetIsInSubArea", NWScript_GetIsInSubArea },
+	{ "GetItemPropertyCostTable", NWScript_GetItemPropertyCostTable },
+	{ "GetItemPropertyCostTableValue", NWScript_GetItemPropertyCostTableValue },
+	{ "GetItemPropertyParam1", NWScript_GetItemPropertyParam1 },
+	{ "GetItemPropertyParam1Value", NWScript_GetItemPropertyParam1Value },
+	{ "GetIsCreatureDisarmable", NWScript_GetIsCreatureDisarmable },
+	{ "SetStolenFlag", NWScript_SetStolenFlag },
+	{ "ForceRest", NWScript_ForceRest },
+	{ "SetCameraHeight", NWScript_SetCameraHeight },
+	{ "SetSkyBox", NWScript_SetSkyBox },
+	{ "GetPhenoType", NWScript_GetPhenoType },
+	{ "SetPhenoType", NWScript_SetPhenoType },
+	{ "SetFogColor", NWScript_SetFogColor },
+	{ "GetCutsceneMode", NWScript_GetCutsceneMode },
+	{ "GetSkyBox", NWScript_GetSkyBox },
+	{ "GetFogColor", NWScript_GetFogColor },
+	{ "SetFogAmount", NWScript_SetFogAmount },
+	{ "GetFogAmount", NWScript_GetFogAmount },
+	{ "GetPickpocketableFlag", NWScript_GetPickpocketableFlag },
+	{ "SetPickpocketableFlag", NWScript_SetPickpocketableFlag },
+	{ "GetFootstepType", NWScript_GetFootstepType },
+	{ "SetFootstepType", NWScript_SetFootstepType },
+	{ "GetCreatureWingType", NWScript_GetCreatureWingType },
+	{ "SetCreatureWingType", NWScript_SetCreatureWingType },
+	{ "GetCreatureBodyPart", NWScript_GetCreatureBodyPart },
+	{ "SetCreatureBodyPart", NWScript_SetCreatureBodyPart },
+	{ "GetCreatureTailType", NWScript_GetCreatureTailType },
+	{ "SetCreatureTailType", NWScript_SetCreatureTailType },
+	{ "GetHardness", NWScript_GetHardness },
+	{ "SetHardness", NWScript_SetHardness },
+	{ "SetLockKeyRequired", NWScript_SetLockKeyRequired },
+	{ "SetLockKeyTag", NWScript_SetLockKeyTag },
+	{ "SetLockLockable", NWScript_SetLockLockable },
+	{ "SetLockUnlockDC", NWScript_SetLockUnlockDC },
+	{ "SetLockLockDC", NWScript_SetLockLockDC },
+	{ "SetTrapDisarmable", NWScript_SetTrapDisarmable },
+	{ "SetTrapDetectable", NWScript_SetTrapDetectable },
+	{ "SetTrapOneShot", NWScript_SetTrapOneShot },
+	{ "SetTrapKeyTag", NWScript_SetTrapKeyTag },
+	{ "SetTrapDisarmDC", NWScript_SetTrapDisarmDC },
+	{ "SetTrapDetectDC", NWScript_SetTrapDetectDC },
+	{ "CreateTrapAtLocation", NWScript_CreateTrapAtLocation },
+	{ "CreateTrapOnObject", NWScript_CreateTrapOnObject },
+	{ "SetWillSavingThrow", NWScript_SetWillSavingThrow },
+	{ "SetReflexSavingThrow", NWScript_SetReflexSavingThrow },
+	{ "SetFortitudeSavingThrow", NWScript_SetFortitudeSavingThrow },
+	{ "GetTilesetResRef", NWScript_GetTilesetResRef },
+	{ "GetTrapRecoverable", NWScript_GetTrapRecoverable },
+	{ "SetTrapRecoverable", NWScript_SetTrapRecoverable },
+	{ "GetModuleXPScale", NWScript_GetModuleXPScale },
+	{ "SetModuleXPScale", NWScript_SetModuleXPScale },
+	{ "GetKeyRequiredFeedback", NWScript_GetKeyRequiredFeedback },
+	{ "SetKeyRequiredFeedback", NWScript_SetKeyRequiredFeedback },
+	{ "GetTrapActive", NWScript_GetTrapActive },
+	{ "SetTrapActive", NWScript_SetTrapActive },
+	{ "LockCameraPitch", NWScript_LockCameraPitch },
+	{ "LockCameraDistance", NWScript_LockCameraDistance },
+	{ "LockCameraDirection", NWScript_LockCameraDirection },
+	{ "GetPlaceableLastClickedBy", NWScript_GetPlaceableLastClickedBy },
+	{ "GetInfiniteFlag", NWScript_GetInfiniteFlag },
+	{ "SetInfiniteFlag", NWScript_SetInfiniteFlag },
+	{ "GetAreaSize", NWScript_GetAreaSize },
+	{ "SetName", NWScript_SetName },
+	{ "GetPortraitId", NWScript_GetPortraitId },
+	{ "SetPortraitId", NWScript_SetPortraitId },
+	{ "GetPortraitResRef", NWScript_GetPortraitResRef },
+	{ "SetPortraitResRef", NWScript_SetPortraitResRef },
+	{ "SetUseableFlag", NWScript_SetUseableFlag },
+	{ "GetDescription", NWScript_GetDescription },
+	{ "SetDescription", NWScript_SetDescription },
+	{ "GetPCChatSpeaker", NWScript_GetPCChatSpeaker },
+	{ "GetPCChatMessage", NWScript_GetPCChatMessage },
+	{ "GetPCChatVolume", NWScript_GetPCChatVolume },
+	{ "SetPCChatMessage", NWScript_SetPCChatMessage },
+	{ "SetPCChatVolume", NWScript_SetPCChatVolume },
+	{ "GetColor", NWScript_GetColor },
+	{ "SetColor", NWScript_SetColor },
+	{ "ItemPropertyMaterial", NWScript_ItemPropertyMaterial },
+	{ "ItemPropertyQuality", NWScript_ItemPropertyQuality },
+	{ "ItemPropertyAdditional", NWScript_ItemPropertyAdditional },
+        { NULL, NULL }
+};
 // VECTOR
 
 static int vector_get_x(lua_State *L)
@@ -11078,7 +11072,7 @@ vector_set(lua_State *L) {
 	return 0;
 }
 
-static const struct luaL_reg vectorlib [] = {
+static const luaL_Reg vectorlib [] = {
   {"new", NWScript_Vector},
   {"x", vector_get_x},
   {"y", vector_get_y},
@@ -11090,29 +11084,11 @@ static const struct luaL_reg vectorlib [] = {
   {NULL, NULL}
 };
 
-static const struct luaL_reg vectorlib_m [] = {
+static const luaL_Reg vectorlib_m [] = {
   {"__tostring", vector_to_string},
   {"__eq", vector_equal},
   {NULL, NULL}
 };
-
-int luaopen_vector(lua_State *L)
-{
-  luaL_register(L, VECTOR, vectorlib);  // create methods table,
-                                        //  add it to the globals
-  luaL_newmetatable(L, VECTOR);         // create metatable for Foo,
-                                        //  and add it to the Lua registry
-  luaL_register(L, NULL, vectorlib_m);   //    fill metatable
-  lua_pushliteral(L, "__index");
-  lua_pushvalue(L, -3);                 // dup methods table
-  lua_rawset(L, -3);                    // metatable.__index = methods
-  lua_pushliteral(L, "__metatable");
-  lua_pushvalue(L, -3);                 // dup methods table
-  lua_rawset(L, -3);                    // hide metatable:
-                                        //metatable.__metatable = methods
-  lua_pop(L, 1);                        // drop metatable
-  return 1;                             // return methods on the stack
-}
 
 
 // LOCATION
@@ -11148,7 +11124,7 @@ static int location_get_facing(lua_State *L)
 	return 1;
 }
 
-static const struct luaL_reg locationlib [] = {
+static const luaL_Reg locationlib [] = {
   {"new", NWScript_Location},
   {"x", location_get_x},
   {"y", location_get_y},
@@ -11158,22 +11134,48 @@ static const struct luaL_reg locationlib [] = {
   {NULL, NULL}
 };
 
-int luaopen_location(lua_State *L)
-{
-  luaL_register(L, LOCATION, locationlib);
-  return 1;
+#define ARRAY_LEN(x) (sizeof(x) / sizeof(x[0]))
+int
+luaopen_nwn_vector(lua_State *L) {
+	lua_createtable(L, 0, ARRAY_LEN(vectorlib) - 1);
+	luaL_register(L, NULL, vectorlib);
+
+	luaL_newmetatable(L, VECTOR);
+	luaL_register(L, NULL, vectorlib_m);
+
+	lua_pushliteral(L, "__index");
+	lua_pushvalue(L, -3);   // dup methods table
+	lua_rawset(L, -3);      // metatable.__index = methods
+
+	lua_pushliteral(L, "__metatable");
+	lua_pushvalue(L, -3);   // dup methods table
+	lua_rawset(L, -3);      // hide metatable: mt.__metatable = methods
+	lua_pop(L, 1);          // drop metatable
+	return 1;               // return methods on the stack
 }
 
-void lua_setIntConst(lua_State *L, const char *name, int nValue)
-{
+int
+luaopen_nwn_location(lua_State *L) {
+	lua_createtable(L, 0, ARRAY_LEN(locationlib) - 1);
+	luaL_register(L, NULL, locationlib);
+	return 1;
+}
+
+int
+luaopen_nwn_script(lua_State *L) {
+	lua_createtable(L, 0, ARRAY_LEN(nwscriptlib) - 1);
+	luaL_register(L, NULL, nwscriptlib);
+	return 1;
+}
+
+void
+lua_setIntConst(lua_State *L, const char *name, int nValue) {
 	lua_pushinteger(L, nValue);
 	lua_setglobal(L, name);
 }
 
-void LuaInt_DefineConstants(lua_State *L)
-{
-	luaopen_vector(L);
-	luaopen_location(L);
+void
+LuaInt_DefineConstants(lua_State *L) {
 	lua_setIntConst(L, "OBJECT_INVALID", OBJECT_INVALID);
-  lua_setIntConst(L, "OBJECT_SELF", OBJECT_INVALID);
+	lua_setIntConst(L, "OBJECT_SELF", OBJECT_INVALID);
 }
