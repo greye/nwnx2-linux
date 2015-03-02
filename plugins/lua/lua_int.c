@@ -47,7 +47,7 @@ static void *luaL_checklightnwndata(lua_State *L, int index, const char *tname)
 }
 
 static Vector *
-lua_nwn_pushvector(lua_State *L) {
+lua_nwnx_pushvector(lua_State *L) {
 	Vector *vec = (Vector *) lua_newuserdata(L, sizeof(*vec));
 
 	luaL_getmetatable(L, VECTOR);
@@ -345,7 +345,7 @@ static int NWScript_GetPosition(lua_State *L)
 	StackPushObject(oTarget);
 	VM_ExecuteCommand(27, 1);
 
-	Vector *vec = lua_nwn_pushvector(L);
+	Vector *vec = lua_nwnx_pushvector(L);
 	StackPopVector(vec);
 
 	return 1;
@@ -1711,7 +1711,7 @@ static int NWScript_VectorNormalize(lua_State *L)
 {
 	Vector *vec = (Vector *) luaL_checkudata(L, 1, VECTOR);
 	double invLen = 1 / sqrt(vec->X * vec->X + vec->Y * vec->Y + vec->Z * vec->Z);
-	Vector *norm = lua_nwn_pushvector(L);
+	Vector *norm = lua_nwnx_pushvector(L);
 	norm->X = vec->X * invLen;
 	norm->Y = vec->Y * invLen;
 	norm->Z = vec->Z * invLen;
@@ -1786,7 +1786,7 @@ static int NWScript_Vector(lua_State *L)
 	double y = luaL_optnumber(L, 2, 0.0);
 	double z = luaL_optnumber(L, 3, 0.0);
 
-	Vector *vec = lua_nwn_pushvector(L);
+	Vector *vec = lua_nwnx_pushvector(L);
 	vec->X = (float) x;
 	vec->Y = (float) y;
 	vec->Z = (float) z;
@@ -1810,7 +1810,7 @@ static int NWScript_AngleToVector(lua_State *L)
 	StackPushFloat(fAngle);
 	VM_ExecuteCommand(144, 1);
 
-	Vector *vec = lua_nwn_pushvector(L);
+	Vector *vec = lua_nwnx_pushvector(L);
 	StackPopVector(vec);
 
 	return 1;
@@ -2762,7 +2762,7 @@ static int NWScript_GetSpellTargetLocation(lua_State *L)
 static int NWScript_GetPositionFromLocation(lua_State *L)
 {
 	CScriptLocation *loc = lua_nwn_checkloc(L, 1);
-	Vector *vec = lua_nwn_pushvector(L);
+	Vector *vec = lua_nwnx_pushvector(L);
 	vec->X = loc->X;
 	vec->Y = loc->Y;
 	vec->Z = loc->Z;
@@ -11166,16 +11166,4 @@ luaopen_nwn_script(lua_State *L) {
 	lua_createtable(L, 0, ARRAY_LEN(nwscriptlib) - 1);
 	luaL_register(L, NULL, nwscriptlib);
 	return 1;
-}
-
-void
-lua_setIntConst(lua_State *L, const char *name, int nValue) {
-	lua_pushinteger(L, nValue);
-	lua_setglobal(L, name);
-}
-
-void
-LuaInt_DefineConstants(lua_State *L) {
-	lua_setIntConst(L, "OBJECT_INVALID", OBJECT_INVALID);
-	lua_setIntConst(L, "OBJECT_SELF", OBJECT_INVALID);
 }

@@ -25,7 +25,18 @@
 
 #include "NWNXLua.h"
 #include "FunctionHooks.h"
-#include "lua_int.h"
+
+static void
+lua_nwnx_setglobalint(lua_State *L, const char *name, int nValue) {
+	lua_pushinteger(L, nValue);
+	lua_setglobal(L, name);
+}
+
+static void
+lua_nwnx_defobjectconst(lua_State *L) {
+	lua_nwnx_setglobalint(L, "OBJECT_INVALID", OBJECT_INVALID);
+	lua_nwnx_setglobalint(L, "OBJECT_SELF", OBJECT_INVALID);
+}
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -57,8 +68,7 @@ bool CNWNXLua::OnCreate(gline *config, const char *LogDir)
 	Log(0,"(c) by pardik, 2010\n");
 	LuaInstance=lua_open();
 	luaL_openlibs(LuaInstance);
-	LuaInt_DefineConstants(LuaInstance);
-	LUA_InitNWScript(LuaInstance);
+	lua_nwnx_defobjectconst(LuaInstance);
 	luaL_dostring(LuaInstance, "print(\"NWNX Lua Initialized\")\n");
 
 	char *preload = (char*)((*nwnxConfig)[confKey]["preload"].c_str());
@@ -184,8 +194,8 @@ char* CNWNXLua::OnRequest (char *gameObject, char* Request, char* Parameters)
 {
 	Log(2,"(S) Request: \"%s\"\n",Request);
 	Log(3,"(S) Params:  \"%s\"\n",Parameters);
-  // set OBJECT_SELF
-	lua_setIntConst(LuaInstance, "OBJECT_SELF", GetObjectSelf());
+
+	lua_nwnx_setglobalint(LuaInstance, "OBJECT_SELF", GetObjectSelf());
 
 	if (strncmp(Request, "TOKEN", 5) == 0)
 	{
