@@ -112,7 +112,7 @@ int StackPopFloat(float *buf)
 
 int StackPopString(char **buf)
 {
-	CExoString str = { (char *) "", 0 };
+	CExoString str = { 0, 0 };
 	int retval = CVirtualMachine_StackPopString(*g_pVirtualMachine, &str);
 	*buf = str.Text;
 	return retval;
