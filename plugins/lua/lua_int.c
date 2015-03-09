@@ -26,6 +26,7 @@
 #include <lauxlib.h>
 #include <math.h>
 #include <stdlib.h>
+#include <string.h>
 
 static int luaL_checkboolean(lua_State *L, int narg) {
   int d = lua_toboolean(L, narg);
@@ -59,6 +60,17 @@ lua_nwnx_pushvector(lua_State *L) {
 static CScriptLocation *
 lua_nwn_checkloc(lua_State *L, int index) {
 	return (CScriptLocation *) luaL_checklightnwndata(L, index, LOCATION);
+}
+
+static void
+send_exostring_to_lua(lua_State *L) {
+    size_t len;
+    char *str;
+
+    StackPopString(&str, &len);
+    lua_pushlstring(L, str, (len != 0) ? len - 1 : 0);
+
+    free(str);
 }
 
 static int NWScript_Random(lua_State *L)
@@ -105,9 +117,8 @@ static int NWScript_FloatToString(lua_State *L)
 	StackPushInteger(nWidth);
 	StackPushFloat(fFloat);
 	VM_ExecuteCommand(3, 3);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
+
+	send_exostring_to_lua(L);
 	return 1;
 }
 
@@ -674,9 +685,8 @@ static int NWScript_GetLocalString(lua_State *L)
 	StackPushString(sVarName);
 	StackPushObject(oObject);
 	VM_ExecuteCommand(53, 2);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
+
+	send_exostring_to_lua(L);
 	return 1;
 }
 
@@ -764,9 +774,8 @@ static int NWScript_GetStringUpperCase(lua_State *L)
 
 	StackPushString(sString);
 	VM_ExecuteCommand(60, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
+
+	send_exostring_to_lua(L);
 	return 1;
 }
 
@@ -776,9 +785,8 @@ static int NWScript_GetStringLowerCase(lua_State *L)
 
 	StackPushString(sString);
 	VM_ExecuteCommand(61, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
+
+	send_exostring_to_lua(L);
 	return 1;
 }
 
@@ -790,9 +798,8 @@ static int NWScript_GetStringRight(lua_State *L)
 	StackPushInteger(nCount);
 	StackPushString(sString);
 	VM_ExecuteCommand(62, 2);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
+
+	send_exostring_to_lua(L);
 	return 1;
 }
 
@@ -804,9 +811,8 @@ static int NWScript_GetStringLeft(lua_State *L)
 	StackPushInteger(nCount);
 	StackPushString(sString);
 	VM_ExecuteCommand(63, 2);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
+
+	send_exostring_to_lua(L);
 	return 1;
 }
 
@@ -820,9 +826,8 @@ static int NWScript_InsertString(lua_State *L)
 	StackPushString(sString);
 	StackPushString(sDestination);
 	VM_ExecuteCommand(64, 3);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
+
+	send_exostring_to_lua(L);
 	return 1;
 }
 
@@ -836,9 +841,8 @@ static int NWScript_GetSubString(lua_State *L)
 	StackPushInteger(nStart);
 	StackPushString(sString);
 	VM_ExecuteCommand(65, 3);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
+
+	send_exostring_to_lua(L);
 	return 1;
 }
 
@@ -1178,9 +1182,8 @@ static int NWScript_IntToString(lua_State *L)
 
 	StackPushInteger(nInteger);
 	VM_ExecuteCommand(92, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
+
+	send_exostring_to_lua(L);
 	return 1;
 }
 
@@ -2082,9 +2085,8 @@ static int NWScript_GetTag(lua_State *L)
 
 	StackPushObject(oCreature);
 	VM_ExecuteCommand(168, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
+
+	send_exostring_to_lua(L);
 	return 1;
 }
 
@@ -2211,12 +2213,11 @@ static int NWScript_GetMatchedSubstring(lua_State *L)
 {
 	int nString = luaL_checkint(L, 1);
 
-  StackPushInteger(nString);
+	StackPushInteger(nString);
 	VM_ExecuteCommand(178, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_GetMatchedSubstringsCount(lua_State *L)
@@ -2986,10 +2987,9 @@ static int NWScript_GetStringByStrRef(lua_State *L)
 	StackPushInteger(nGender);
 	StackPushInteger(nStrRef);
 	VM_ExecuteCommand(239, 2);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_ActionSpeakStringByStrRef(lua_State *L)
@@ -3101,10 +3101,9 @@ static int NWScript_RandomName(lua_State *L)
 
 	StackPushInteger(nNameType);
 	VM_ExecuteCommand(249, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_EffectPoison(lua_State *L)
@@ -3148,10 +3147,9 @@ static int NWScript_GetName(lua_State *L)
 	StackPushInteger(bOriginalName);
 	StackPushObject(oObject);
 	VM_ExecuteCommand(253, 2);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_GetLastSpeaker(lua_State *L)
@@ -3354,10 +3352,9 @@ static int NWScript_ObjectToString(lua_State *L)
 
 	StackPushObject(oObject);
 	VM_ExecuteCommand(272, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_EffectImmunity(lua_State *L)
@@ -4513,10 +4510,9 @@ static int NWScript_GetPCPublicCDKey(lua_State *L)
 	StackPushInteger(nSinglePlayerCDKey);
 	StackPushObject(oPlayer);
 	VM_ExecuteCommand(369, 2);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_GetPCIPAddress(lua_State *L)
@@ -4525,10 +4521,9 @@ static int NWScript_GetPCIPAddress(lua_State *L)
 
 	StackPushObject(oPlayer);
 	VM_ExecuteCommand(370, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_GetPCPlayerName(lua_State *L)
@@ -4537,10 +4532,9 @@ static int NWScript_GetPCPlayerName(lua_State *L)
 
 	StackPushObject(oPlayer);
 	VM_ExecuteCommand(371, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_SetPCLike(lua_State *L)
@@ -4841,10 +4835,9 @@ static int NWScript_IntToHexString(lua_State *L)
 
 	StackPushInteger(nInteger);
 	VM_ExecuteCommand(396, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_GetBaseItemType(lua_State *L)
@@ -5895,10 +5888,9 @@ static int NWScript_GetDeity(lua_State *L)
 
 	StackPushObject(oCreature);
 	VM_ExecuteCommand(489, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_GetSubRace(lua_State *L)
@@ -5907,10 +5899,9 @@ static int NWScript_GetSubRace(lua_State *L)
 
 	StackPushObject(oTarget);
 	VM_ExecuteCommand(490, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_GetFortitudeSavingThrow(lua_State *L)
@@ -6015,10 +6006,9 @@ static int NWScript_GetFamiliarName(lua_State *L)
 
 	StackPushObject(oCreature);
 	VM_ExecuteCommand(499, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_GetAnimalCompanionName(lua_State *L)
@@ -6027,10 +6017,9 @@ static int NWScript_GetAnimalCompanionName(lua_State *L)
 
 	StackPushObject(oTarget);
 	VM_ExecuteCommand(500, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_ActionCastFakeSpellAtObject(lua_State *L)
@@ -6431,10 +6420,9 @@ static int NWScript_GetTrapKeyTag(lua_State *L)
 
 	StackPushObject(oTrapObject);
 	VM_ExecuteCommand(534, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_GetTrapDisarmDC(lua_State *L)
@@ -6479,10 +6467,9 @@ static int NWScript_GetLockKeyTag(lua_State *L)
 
 	StackPushObject(oObject);
 	VM_ExecuteCommand(538, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_GetLockLockable(lua_State *L)
@@ -6742,10 +6729,8 @@ static int NWScript_WriteTimestampedLogEntry(lua_State *L)
 static int NWScript_GetModuleName(lua_State *L)
 {
 	VM_ExecuteCommand(561, 0);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_GetFactionLeader(lua_State *L)
@@ -6963,12 +6948,11 @@ static int NWScript_GetResRef(lua_State *L)
 {
 	dword oObject = luaL_checkint(L, 1);
 
-  StackPushObject(oObject);
+	StackPushObject(oObject);
 	VM_ExecuteCommand(582, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_EffectPetrify(lua_State *L)
@@ -7200,10 +7184,9 @@ static int NWScript_GetCampaignString(lua_State *L)
 	StackPushString(sVarName);
 	StackPushString(sCampaignName);
 	VM_ExecuteCommand(599, 3);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_CopyObject(lua_State *L)
@@ -8583,10 +8566,9 @@ static int NWScript_Get2DAString(lua_State *L)
 	StackPushString(sColumn);
 	StackPushString(s2DA);
 	VM_ExecuteCommand(710, 3);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_EffectEthereal(lua_State *L)
@@ -9794,10 +9776,9 @@ static int NWScript_GetTilesetResRef(lua_State *L)
 
 	StackPushObject(oArea);
 	VM_ExecuteCommand(814, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_GetTrapRecoverable(lua_State *L)
@@ -9847,10 +9828,9 @@ static int NWScript_GetKeyRequiredFeedback(lua_State *L)
 
 	StackPushObject(oObject);
 	VM_ExecuteCommand(819, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_SetKeyRequiredFeedback(lua_State *L)
@@ -10006,10 +9986,9 @@ static int NWScript_GetPortraitResRef(lua_State *L)
 
 	StackPushObject(oTarget);
 	VM_ExecuteCommand(833, 1);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_SetPortraitResRef(lua_State *L)
@@ -10044,10 +10023,9 @@ static int NWScript_GetDescription(lua_State *L)
 	StackPushInteger(bOriginalDescription);
 	StackPushObject(oObject);
 	VM_ExecuteCommand(836, 3);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_SetDescription(lua_State *L)
@@ -10075,10 +10053,8 @@ static int NWScript_GetPCChatSpeaker(lua_State *L)
 static int NWScript_GetPCChatMessage(lua_State *L)
 {
 	VM_ExecuteCommand(839, 0);
-	char *sRetVal;
-	StackPopString(&sRetVal);
-	lua_pushstring(L, sRetVal);
-  return 1;
+	send_exostring_to_lua(L);
+	return 1;
 }
 
 static int NWScript_GetPCChatVolume(lua_State *L)

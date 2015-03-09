@@ -25,6 +25,8 @@
 #include "NWNStructures.h"
 #include "CVirtualMachine.h"
 
+#include <stddef.h>
+
 #define ENGINE_STRUCTURE_EFFECT 0
 #define ENGINE_STRUCTURE_EVENT 1
 #define ENGINE_STRUCTURE_LOCATION 2
@@ -42,7 +44,7 @@ void VM_ExecuteCommand(dword nCommandID, int nArgsCount);
 
 int StackPopInteger(int *buf);
 int StackPopFloat(float *buf);
-int StackPopString(char **buf);
+int StackPopString(char **buf, size_t *len);
 int StackPopVector(Vector *buf);
 int StackPopObject(dword *buf);
 int StackPopEngineStructure(dword nStructType, void **buf);
