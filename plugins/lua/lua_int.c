@@ -39,10 +39,9 @@ static int luaL_optboolean(lua_State *L, int narg, int def) {
   return luaL_opt(L, luaL_checkboolean, narg, def);
 }
 
-static void *luaL_checklightnwndata(lua_State *L, int index, const char *tname)
-{
-  void *pt;
-  pt = lua_touserdata(L, index);
+static void *
+nwn_checkptr(lua_State *L, int index, const char *tname) {
+  void *pt = lua_touserdata(L, index);
   if (pt == NULL) luaL_typerror(L, index, tname);
   return pt;
 }
@@ -59,7 +58,7 @@ lua_nwnx_pushvector(lua_State *L) {
 
 static CScriptLocation *
 lua_nwn_checkloc(lua_State *L, int index) {
-	return (CScriptLocation *) luaL_checklightnwndata(L, index, LOCATION);
+	return (CScriptLocation *) nwn_checkptr(L, index, LOCATION);
 }
 
 static void
@@ -1120,7 +1119,7 @@ static int NWScript_GetNextEffect(lua_State *L)
 static int NWScript_RemoveEffect(lua_State *L)
 {
 	dword oCreature = luaL_checkint(L, 1);
-	void *eEffect = luaL_checklightnwndata(L, 2, EFFECT);
+	void *eEffect = nwn_checkptr(L, 2, EFFECT);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
 	StackPushObject(oCreature);
@@ -1130,7 +1129,7 @@ static int NWScript_RemoveEffect(lua_State *L)
 
 static int NWScript_GetIsEffectValid(lua_State *L)
 {
-	void *eEffect = luaL_checklightnwndata(L, 1, EFFECT);
+	void *eEffect = nwn_checkptr(L, 1, EFFECT);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
 	VM_ExecuteCommand(88, 1);
@@ -1142,7 +1141,7 @@ static int NWScript_GetIsEffectValid(lua_State *L)
 
 static int NWScript_GetEffectDurationType(lua_State *L)
 {
-	void *eEffect = luaL_checklightnwndata(L, 1, EFFECT);
+	void *eEffect = nwn_checkptr(L, 1, EFFECT);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
 	VM_ExecuteCommand(89, 1);
@@ -1154,7 +1153,7 @@ static int NWScript_GetEffectDurationType(lua_State *L)
 
 static int NWScript_GetEffectSubType(lua_State *L)
 {
-	void *eEffect = luaL_checklightnwndata(L, 1, EFFECT);
+	void *eEffect = nwn_checkptr(L, 1, EFFECT);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
 	VM_ExecuteCommand(90, 1);
@@ -1166,7 +1165,7 @@ static int NWScript_GetEffectSubType(lua_State *L)
 
 static int NWScript_GetEffectCreator(lua_State *L)
 {
-	void *eEffect = luaL_checklightnwndata(L, 1, EFFECT);
+	void *eEffect = nwn_checkptr(L, 1, EFFECT);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
 	VM_ExecuteCommand(91, 1);
@@ -1427,7 +1426,7 @@ static int NWScript_GetSpellSaveDC(lua_State *L)
 
 static int NWScript_MagicalEffect(lua_State *L)
 {
-	void *eEffect = luaL_checklightnwndata(L, 1, EFFECT);
+	void *eEffect = nwn_checkptr(L, 1, EFFECT);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
 	VM_ExecuteCommand(112, 1);
@@ -1439,7 +1438,7 @@ static int NWScript_MagicalEffect(lua_State *L)
 
 static int NWScript_SupernaturalEffect(lua_State *L)
 {
-	void *eEffect = luaL_checklightnwndata(L, 1, EFFECT);
+	void *eEffect = nwn_checkptr(L, 1, EFFECT);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
 	VM_ExecuteCommand(113, 1);
@@ -1451,7 +1450,7 @@ static int NWScript_SupernaturalEffect(lua_State *L)
 
 static int NWScript_ExtraordinaryEffect(lua_State *L)
 {
-	void *eEffect = luaL_checklightnwndata(L, 1, EFFECT);
+	void *eEffect = nwn_checkptr(L, 1, EFFECT);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
 	VM_ExecuteCommand(114, 1);
@@ -1647,7 +1646,7 @@ static int NWScript_EffectEntangle(lua_State *L)
 static int NWScript_SignalEvent(lua_State *L)
 {
 	dword oObject = luaL_checkint(L, 1);
-	void *eEvent = luaL_checklightnwndata(L, 2, EVENT);
+	void *eEvent = nwn_checkptr(L, 2, EVENT);
   StackPushEngineStructure(ENGINE_STRUCTURE_EVENT, eEvent);
 	StackPushObject(oObject);
 	VM_ExecuteCommand(131, 2);
@@ -2106,7 +2105,7 @@ static int NWScript_ResistSpell(lua_State *L)
 
 static int NWScript_GetEffectType(lua_State *L)
 {
-	void *eEffect = luaL_checklightnwndata(L, 1, EFFECT);
+	void *eEffect = nwn_checkptr(L, 1, EFFECT);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
 	VM_ExecuteCommand(170, 1);
@@ -2468,8 +2467,8 @@ static int NWScript_GetTransitionTarget(lua_State *L)
 
 static int NWScript_EffectLinkEffects(lua_State *L)
 {
-	void *eChildEffect = luaL_checklightnwndata(L, 1, EFFECT);
-  void *eParentEffect = luaL_checklightnwndata(L, 2, EFFECT);
+	void *eChildEffect = nwn_checkptr(L, 1, EFFECT);
+  void *eParentEffect = nwn_checkptr(L, 2, EFFECT);
 
   StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eParentEffect);
 	StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eChildEffect);
@@ -2677,7 +2676,7 @@ static int NWScript_Location(lua_State *L)
 static int NWScript_ApplyEffectAtLocation(lua_State *L)
 {
 	int nDurationType = luaL_checkint(L, 1);
-	void *eEffect = luaL_checklightnwndata(L, 2, EFFECT);
+	void *eEffect = nwn_checkptr(L, 2, EFFECT);
 	void *lLocation = lua_nwn_checkloc(L, 3);
 	double fDuration = luaL_optnumber(L, 4, 0.0);
 
@@ -2728,7 +2727,7 @@ static int NWScript_YardsToMeters(lua_State *L)
 static int NWScript_ApplyEffectToObject(lua_State *L)
 {
 	int nDurationType = luaL_checkint(L, 1);
-	void *eEffect = luaL_checklightnwndata(L, 2, EFFECT);
+	void *eEffect = nwn_checkptr(L, 2, EFFECT);
 	dword oTarget = luaL_checkint(L, 3);
 	double fDuration = luaL_optnumber(L, 4, 0.0);
 
@@ -3744,7 +3743,7 @@ static int NWScript_GetHasSpellEffect(lua_State *L)
 
 static int NWScript_GetEffectSpellId(lua_State *L)
 {
-	void *eSpellEffect = luaL_checklightnwndata(L, 1, EFFECT);
+	void *eSpellEffect = nwn_checkptr(L, 1, EFFECT);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eSpellEffect);
 	VM_ExecuteCommand(305, 1);
@@ -3756,7 +3755,7 @@ static int NWScript_GetEffectSpellId(lua_State *L)
 
 static int NWScript_GetCreatureHasTalent(lua_State *L)
 {
-	void *tTalent = luaL_checklightnwndata(L, 1, TALENT);
+	void *tTalent = nwn_checkptr(L, 1, TALENT);
 	dword oCreature = luaL_optint(L, 2, OBJECT_SELF);
 
 	StackPushObject(oCreature);
@@ -3800,7 +3799,7 @@ static int NWScript_GetCreatureTalentBest(lua_State *L)
 
 static int NWScript_ActionUseTalentOnObject(lua_State *L)
 {
-	void *tChosenTalent = luaL_checklightnwndata(L, 1, TALENT);
+	void *tChosenTalent = nwn_checkptr(L, 1, TALENT);
   dword oTarget = luaL_checkint(L, 2);
 
   StackPushObject(oTarget);
@@ -3811,7 +3810,7 @@ static int NWScript_ActionUseTalentOnObject(lua_State *L)
 
 static int NWScript_ActionUseTalentAtLocation(lua_State *L)
 {
-	void *tChosenTalent = luaL_checklightnwndata(L, 1, TALENT);
+	void *tChosenTalent = nwn_checkptr(L, 1, TALENT);
 	void *lTargetLocation = lua_nwn_checkloc(L, 2);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lTargetLocation);
@@ -4320,7 +4319,7 @@ static int NWScript_GetHenchman(lua_State *L)
 
 static int NWScript_VersusAlignmentEffect(lua_State *L)
 {
-	void *eEffect = luaL_checklightnwndata(L, 1, EFFECT);
+	void *eEffect = nwn_checkptr(L, 1, EFFECT);
 	int nLawChaos = luaL_optint(L, 2, ALIGNMENT_ALL);
 	int nGoodEvil = luaL_optint(L, 3, ALIGNMENT_ALL);
 
@@ -4336,7 +4335,7 @@ static int NWScript_VersusAlignmentEffect(lua_State *L)
 
 static int NWScript_VersusRacialTypeEffect(lua_State *L)
 {
-	void *eEffect = luaL_checklightnwndata(L, 1, EFFECT);
+	void *eEffect = nwn_checkptr(L, 1, EFFECT);
 	int nRacialType = luaL_checkint(L, 2);
 
 	StackPushInteger(nRacialType);
@@ -4350,7 +4349,7 @@ static int NWScript_VersusRacialTypeEffect(lua_State *L)
 
 static int NWScript_VersusTrapEffect(lua_State *L)
 {
-	void *eEffect = luaL_checklightnwndata(L, 1, EFFECT);
+	void *eEffect = nwn_checkptr(L, 1, EFFECT);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect);
 	VM_ExecuteCommand(357, 1);
@@ -4374,7 +4373,7 @@ static int NWScript_GetGender(lua_State *L)
 
 static int NWScript_GetIsTalentValid(lua_State *L)
 {
-	void *tTalent = luaL_checklightnwndata(L, 1, TALENT);
+	void *tTalent = nwn_checkptr(L, 1, TALENT);
 
   StackPushEngineStructure(ENGINE_STRUCTURE_TALENT, tTalent);
 	VM_ExecuteCommand(359, 1);
@@ -4408,7 +4407,7 @@ static int NWScript_GetAttemptedAttackTarget(lua_State *L)
 
 static int NWScript_GetTypeFromTalent(lua_State *L)
 {
-	void *tTalent = luaL_checklightnwndata(L, 1, TALENT);
+	void *tTalent = nwn_checkptr(L, 1, TALENT);
 
   StackPushEngineStructure(ENGINE_STRUCTURE_TALENT, tTalent);
 	VM_ExecuteCommand(362, 1);
@@ -4420,7 +4419,7 @@ static int NWScript_GetTypeFromTalent(lua_State *L)
 
 static int NWScript_GetIdFromTalent(lua_State *L)
 {
-	void *tTalent = luaL_checklightnwndata(L, 1, TALENT);
+	void *tTalent = nwn_checkptr(L, 1, TALENT);
 
   StackPushEngineStructure(ENGINE_STRUCTURE_TALENT, tTalent);
 	VM_ExecuteCommand(363, 1);
@@ -7316,7 +7315,7 @@ static int NWScript_SetItemCharges(lua_State *L)
 static int NWScript_AddItemProperty(lua_State *L)
 {
 	int nDurationType = luaL_checkint(L, 1);
-	void *ipProperty = luaL_checklightnwndata(L, 2, ITEMPROPERTY);
+	void *ipProperty = nwn_checkptr(L, 2, ITEMPROPERTY);
 	dword oItem = luaL_checkint(L, 3);
 	double fDuration = luaL_optnumber(L, 4, 0.0);
 
@@ -7331,7 +7330,7 @@ static int NWScript_AddItemProperty(lua_State *L)
 static int NWScript_RemoveItemProperty(lua_State *L)
 {
 	dword oItem = luaL_checkint(L, 1);
-	void *ipProperty = luaL_checklightnwndata(L, 2, ITEMPROPERTY);
+	void *ipProperty = nwn_checkptr(L, 2, ITEMPROPERTY);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ipProperty);
 	StackPushObject(oItem);
@@ -7341,7 +7340,7 @@ static int NWScript_RemoveItemProperty(lua_State *L)
 
 static int NWScript_GetIsItemPropertyValid(lua_State *L)
 {
-	void *ipProperty = luaL_checklightnwndata(L, 1, ITEMPROPERTY);
+	void *ipProperty = nwn_checkptr(L, 1, ITEMPROPERTY);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ipProperty);
 	VM_ExecuteCommand(611, 1);
@@ -7377,7 +7376,7 @@ static int NWScript_GetNextItemProperty(lua_State *L)
 
 static int NWScript_GetItemPropertyType(lua_State *L)
 {
-	void *ip = luaL_checklightnwndata(L, 1, ITEMPROPERTY);
+	void *ip = nwn_checkptr(L, 1, ITEMPROPERTY);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ip);
 	VM_ExecuteCommand(614, 1);
@@ -7389,7 +7388,7 @@ static int NWScript_GetItemPropertyType(lua_State *L)
 
 static int NWScript_GetItemPropertyDurationType(lua_State *L)
 {
-	void *ip = luaL_checklightnwndata(L, 1, ITEMPROPERTY);
+	void *ip = nwn_checkptr(L, 1, ITEMPROPERTY);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ip);
 	VM_ExecuteCommand(615, 1);
@@ -8835,7 +8834,7 @@ static int NWScript_ItemPropertyOnHitCastSpell(lua_State *L)
 
 static int NWScript_GetItemPropertySubType(lua_State *L)
 {
-	void *iProperty = luaL_checklightnwndata(L, 1, ITEMPROPERTY);
+	void *iProperty = nwn_checkptr(L, 1, ITEMPROPERTY);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, iProperty);
 	VM_ExecuteCommand(734, 1);
@@ -9232,7 +9231,7 @@ static int NWScript_GetIsInSubArea(lua_State *L)
 
 static int NWScript_GetItemPropertyCostTable(lua_State *L)
 {
-	void *iProp = luaL_checklightnwndata(L, 1, ITEMPROPERTY);
+	void *iProp = nwn_checkptr(L, 1, ITEMPROPERTY);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, iProp);
 	VM_ExecuteCommand(769, 1);
@@ -9244,7 +9243,7 @@ static int NWScript_GetItemPropertyCostTable(lua_State *L)
 
 static int NWScript_GetItemPropertyCostTableValue(lua_State *L)
 {
-	void *iProp = luaL_checklightnwndata(L, 1, ITEMPROPERTY);
+	void *iProp = nwn_checkptr(L, 1, ITEMPROPERTY);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, iProp);
 	VM_ExecuteCommand(770, 1);
@@ -9256,7 +9255,7 @@ static int NWScript_GetItemPropertyCostTableValue(lua_State *L)
 
 static int NWScript_GetItemPropertyParam1(lua_State *L)
 {
-	void *iProp = luaL_checklightnwndata(L, 1, ITEMPROPERTY);
+	void *iProp = nwn_checkptr(L, 1, ITEMPROPERTY);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, iProp);
 	VM_ExecuteCommand(771, 1);
@@ -9268,7 +9267,7 @@ static int NWScript_GetItemPropertyParam1(lua_State *L)
 
 static int NWScript_GetItemPropertyParam1Value(lua_State *L)
 {
-	void *iProp = luaL_checklightnwndata(L, 1, ITEMPROPERTY);
+	void *iProp = nwn_checkptr(L, 1, ITEMPROPERTY);
 
 	StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, iProp);
 	VM_ExecuteCommand(772, 1);
