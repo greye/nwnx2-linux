@@ -11129,20 +11129,6 @@ static const luaL_Reg locationlib [] = {
   {NULL, NULL}
 };
 
-static int
-native_getoid(lua_State *L) {
-	char *ptr = nwn_checkptr(L, 1, "CGameObject");
-	dword oid = *(dword *) (ptr + 4);
-	lua_pushinteger(L, oid);
-
-	return 1;
-}
-
-static const luaL_Reg nativelib[] = {
-	{ "getoid", native_getoid },
-	{ NULL, NULL }
-};
-
 #define ARRAY_LEN(x) (sizeof(x) / sizeof(x[0]))
 int
 luaopen_nwn_vector(lua_State *L) {
@@ -11174,12 +11160,5 @@ int
 luaopen_nwn_script(lua_State *L) {
 	lua_createtable(L, 0, ARRAY_LEN(nwscriptlib) - 1);
 	luaL_register(L, NULL, nwscriptlib);
-	return 1;
-}
-
-int
-luaopen_nwn_native(lua_State *L) {
-	lua_createtable(L, 0, ARRAY_LEN(nativelib) - 1);
-	luaL_register(L, NULL, nativelib);
 	return 1;
 }
