@@ -122,20 +122,29 @@ bool CNWNXLua::OnCreate(gline *config, const char *LogDir)
 	return true;
 }
 
-void CNWNXLua::Event(char *value)
-{
-	//Changed to call directly event listener
-	if(event_method == NULL) return;
-	const char* event = strtok(value, ":");
-	const char* oid  = strtok(NULL, ":");
+static inline dword
+getoid(const void *object) {
+    return static_cast<const dword *>(object)[1];
+}
 
-	lua_getglobal(LuaInstance, event_method);  /* function to be called */
-	lua_pushstring(LuaInstance, event);	 /* push 1st argument */
-	lua_pushinteger(LuaInstance, strtol(oid,NULL,16));	 /* push 2nd argument */
+static inline void
+clear_lua_stack(lua_State *L) {
+	lua_pop(L, lua_gettop(L));
+}
 
-	if (lua_pcall(LuaInstance, 2, 0, 0) != 0)
-		Log(0, "error running event %s on Object 0x%x : %s\n", event, oid, lua_tostring(LuaInstance, -1));
-	lua_pop(LuaInstance, lua_gettop(LuaInstance));
+void CNWNXLua::Event(char *object, const char *event) {
+	if (!this->event_method) {
+		return;
+	}
+	lua_getglobal(this->LuaInstance, this->event_method);
+	lua_pushstring(this->LuaInstance, event);
+	lua_pushlightuserdata(this->LuaInstance, object);
+
+	if (lua_pcall(this->LuaInstance, 2, 0, 0) != 0) {
+		Log(0, "error running event %s on Object 0x%x : %s\n",
+			event, getoid(object), lua_tostring(LuaInstance, -1));
+	}
+	clear_lua_stack(LuaInstance);
 }
 
 void CNWNXLua::Token(char *value)
@@ -146,7 +155,7 @@ void CNWNXLua::Token(char *value)
 	lua_pushstring(LuaInstance, (const char*)value);	 /* push 1st argument */
 	if (lua_pcall(LuaInstance, 1, 0, 0) != 0)
 		Log(0, "error running token %s : %s\n", value, lua_tostring(LuaInstance, -1));
-	lua_pop(LuaInstance, lua_gettop(LuaInstance));
+	clear_lua_stack(LuaInstance);
 }
 
 char *CNWNXLua::Eval(char *value)
@@ -165,7 +174,7 @@ char *CNWNXLua::Eval(char *value)
 			Log(0, "Error %d while evaluating a Lua expression: %s\n", nError, fLastError);
 			buf = (char *)malloc(lLen+1);
 			strcpy(buf, fLastError);
-			lua_pop(LuaInstance, lua_gettop(LuaInstance));
+			clear_lua_stack(LuaInstance);
 			return buf;
 		}
 		int nNum = lua_gettop(LuaInstance);
@@ -178,7 +187,7 @@ char *CNWNXLua::Eval(char *value)
 				strcpy(buf, sReturn);
 				Log(3, "Return %s from evaluating a Lua expression\n", buf);
 			}
-			lua_pop(LuaInstance, nNum);
+			clear_lua_stack(LuaInstance);
 		}
 		return buf;
 	}
@@ -204,7 +213,7 @@ char* CNWNXLua::OnRequest (char *gameObject, char* Request, char* Parameters)
 
 	if (strncmp(Request, "EVENT", 5) == 0)
 	{
-		Event(Parameters);
+		Event(gameObject, Parameters);
 		return NULL;
 	}
 	else if(strncmp(Request, "EVAL", 4) == 0)
