@@ -8,7 +8,6 @@
 
 typedef void (*set_script_func)(void *, int, CExoString *);
 typedef CExoString *(*get_script_func)(void *, int);
-typedef void *(*cast_func)(CGameObject *);
 
 static const struct {
     char type;
@@ -73,8 +72,8 @@ find_receiver(int type, int event) {
 }
 
 
-#define CAST(object, receiver) \
-    ((cast_func) ((char *) object->vtable) + receiver->offset)(object)
+#define CAST(obj, rcv) \
+    (*(CastFunctor *) offset_ptr((obj)->vtable, (rcv)->offset))(obj)
 
 int
 set_script(CGameObject *object, int event, const char *script) {
