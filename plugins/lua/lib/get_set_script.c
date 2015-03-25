@@ -59,7 +59,7 @@ check_receiver(int index, int event) {
 static int
 find_receiver(int type, int event) {
     int i;
-    if (event > 0) {
+    if (event >= 0) {
         for (i = 0; i < ARRAY_LENGTH(receivers); ++i) {
             if (type == headers[i].type) {
                 if (event < headers[i].nevents) {
