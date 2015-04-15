@@ -19,6 +19,7 @@ static const struct {
     { 7, 7 },
     { 9, 16 },
     { 10, 15 },
+    { 11, 4 },
     { 13, 5 },
     { 14, 2 }
 };
@@ -37,6 +38,7 @@ static const struct Reciever {
     { { 4, 5, -1, -1 },   METHODS(Trigger, 0x081fc2cdc, 0x081f2df4) },
     { { 3, 10, 14, -1 },  METHODS(Placeable, 0x081e23c8, 0x081e23e4) },
     { { 4, 9, 13, -1 },   METHODS(Door, 0x0816afb8, 0x0816af58) },
+    { { 1, -1, -1, -1 },  METHODS(AreaOfEffectObject, 0x081ece18, 0x081ece34) },
     { { -1, -1, -1, -1 }, METHODS(Encounter, 0x081845c8, 0x081845e4) },
     { { -1, -1, -1, -1 }, METHODS(Store, 0x080861b4, 0x0806814c) }
 };
