@@ -24,8 +24,33 @@
 #ifndef _NX_NWN_STRUCT_CNWSAREAOFEFFECTOBJECT_
 #define _NX_NWN_STRUCT_CNWSAREAOFEFFECTOBJECT_
 
+enum {
+    AOE_EVENT_HEARTBEAT = 0,
+    AOE_EVENT_ENTER = 2,
+    AOE_EVENT_EXIT = 3
+};
+
 struct CNWSAreaOfEffectObject_s {
-    void               *unknown;
+    CNWSObject serverObject;
+    int arrayIndex;
+    int aoeId;
+    int shape;
+    int spellId;
+    float radius;
+    float width;
+    float length;
+    Vector *corners;
+    nwn_objid_t creator;
+    nwn_objid_t target;
+    nwn_objid_t lastEntered;
+    nwn_objid_t lastLeft;
+    int saveDC;
+    int spellLevel;
+    CExoString eventScript[4];
+    uint32_t lastHeartbeatDay;
+    uint32_t lastHeartbeatTime;
+    int msecDuration;
+    int durationType;
 };
 
 #endif /* _NX_NWN_STRUCT_CNWSAREAOFEFFECTOBJECT_ */
