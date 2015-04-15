@@ -7,7 +7,8 @@ if (LUA51_FOUND)
                NWNXLua
                plugin-lua
                lua_native
-               lib/get_set_script)
+               lib/get_set_script
+               lib/area_of_effect)
     target_link_libraries(lua ${LUA_LIBRARIES})
 else (LUA51_FOUND)
     message(WARNING "Cannot find lua5.1 libraries")

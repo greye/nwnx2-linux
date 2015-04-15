@@ -18,6 +18,9 @@ get_script(CGameObject *object, int event);
 int
 set_script(CGameObject *object, int event, const char *script);
 
+int
+set_aoe_shape(CGameObject *object, int shape, float width, float length);
+
 #ifdef __cplusplus
 }
 #endif
